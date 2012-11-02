@@ -1,5 +1,4 @@
 <?php
-/** $Id: autoupdate.php 7668 2012-07-15 22:16:03Z darknoon $ **/
 /**
 * autoupdate.php Page maitresse du mod (fait les mises à jours des mods et affiche les pages demandées)
 * @package [MOD] AutoUpdate
@@ -7,17 +6,15 @@
 * @version 1.0
 * created	: 27/10/2006
 * modified	: 18/01/2007
+* $Id: autoupdate.php 7668 2012-07-15 22:16:03Z darknoon $
 */
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-/**
-*
-*/
+
 require_once("views/page_header.php");
 if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre à jour PHP(>= 5.2)");
 require_once("mod/autoupdate/functions.php");
 require_once("mod/autoupdate/lang_main.php");
-
 
 /**
 * Défini où se trouve le fichier qui contient les dernières versions des mods.

@@ -42,22 +42,6 @@ global $lang;
         return $affiche;
     }   
 }
-function io_mkdir_p($target) {
-	if (@is_dir($target)||empty($target)) return 1;
-	if (@file_exists($target) && !is_dir($target)) return 0;
-	if (io_mkdir_p(substr($target,0,strrpos($target,'/')))) {
-		$ret=false;
-		if (! file_exists($target)) $ret = @mkdir($target,0777);
-		if (is_dir($target)) chmod($target, 0777);
-		return $ret;
-	}
-	return 0;
-}	
-
-function ap_mkdir($d) {
-	$ok = io_mkdir_p($d);
-	return $ok;
-}
 
 /**
 * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
