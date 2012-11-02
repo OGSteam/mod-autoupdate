@@ -34,7 +34,7 @@ if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 ?>
 <table width='600'>
 <?php
-	if (!is__writable("./mod/")) {
+	if (!is_writable("./mod/")) {
 	echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
 	}
 
@@ -62,7 +62,7 @@ if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 			}
 		}
 		if ($install == false) {
-			$link = "<a href=\"?action=autoupdate&sub=maj&type=down&mod=".$cur_modname."&tag=".$cur_version."\">Télécharger</a>";
+			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&type=down&mod=".$cur_modname."&tag=".$cur_version."\">Télécharger</a>";
 			echo "\t<tr>\n";
 			echo "\t\t<th>".$cur_modname."</th>\n";
 			echo "\t\t<th>".$cur_version."</th>\n";

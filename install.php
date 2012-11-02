@@ -1,5 +1,4 @@
 <?php
-/** $Id: install.php 7672 2012-08-05 21:33:46Z darknoon $ **/
 /**
 * install.php Fichier d'installation
 * @package [MOD] AutoUpdate
@@ -7,6 +6,7 @@
 * @version 1.0c
 * created	: 27/10/2006
 * modified	: 18/01/2007
+* $Id: install.php 7672 2012-08-05 21:33:46Z darknoon $
 */
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");

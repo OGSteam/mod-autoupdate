@@ -27,13 +27,13 @@ if(mod_get_option("DOWNJSON")) {
 }
 
 if (!isset($pub_sub)) {
-	$sub = "tableau";
-	$pub_sub = "tableau";
+	$sub = "overview";
+	$pub_sub = "overview";
 } else $sub = $pub_sub;
 
 if ($user_data["user_admin"] == 1 OR $user_data["user_coadmin"] == 1) {
-	if ($sub != "tableau") {
-		$bouton1 = "\t\t"."<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=tableau';\">";
+	if ($sub != "overview") {
+		$bouton1 = "\t\t"."<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=overview';\">";
 
 		$bouton1 .= "<font color='lime'>".$lang['autoupdate_autoupdate_table']."</font>";
 		$bouton1 .= "</td>\n";
@@ -69,39 +69,19 @@ if ($user_data["user_admin"] == 1) {
 	$bouton3 = "";
 }
 
-/**
-*Si le chargement de la page contient la variable GET['maj'] == yes on fait une MaJ du mod et on envoie le résultat
-*/
-if(!empty($pub_maj) AND $pub_maj == 'yes') {
-	$request1 = "select id, title, root, link, version, active from ".TABLE_MOD." WHERE root='".$pub_modroot."' order by position, title";
-	$result1 = $db->sql_query($request1);
- 	list($pub_mod_id, $title, $root, $link, $version, $active) = $db->sql_fetch_row($result1);
-	if (file_exists("mod/".$pub_modroot."/update.php")) {
-		require_once("mod/".$pub_modroot."/update.php");
-		
-		$request = "SELECT title FROM ".TABLE_MOD." WHERE root = '".$pub_modroot."' LIMIT 1";
-		$result = $db->sql_query($request);
-		list($title) = $db->sql_fetch_row($result);
-		log_("mod_update", $title);
-		$maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
-	} else {
-		$maj = $lang['autoupdate_tableau_uptodateoff']."<br />\n<br />\n";
-	}
-} else $maj = "";
 
-echo $maj;
 echo "\n<table>\n";
 echo "\t<tr>\n";
 	echo $bouton1.$bouton2.$bouton3;
 echo "\t</tr><br />\n";
 echo "</table>\n<br />\n";
 
-if (!isset($pub_sub)) $sub = 'tableau'; else $sub = htmlentities($pub_sub);
+if (!isset($pub_sub)) $sub = 'overview'; else $sub = htmlentities($pub_sub);
  switch($sub)
 {
-case 'tableau': include ('tableau.php');break;
-case 'admin': include ('admin.php');break;
-case 'maj': include ('MaJ.php');break;
+case 'overview': include ('overview.php');break;
+case 'mod_upgrade': include ('mod_upgrade.php');break;
 case 'down': include ('down.php');break;
+case 'admin': include ('admin.php');break;
 }
 ?>
