@@ -75,11 +75,11 @@ $mod_names = array_keys($data); // Récupération des clés
 					
 					if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 						echo "\t\t<th>";
-						if (!is__writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
+						if (!is_writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
 						else {
 							if (version_compare($installed_mods[$i]['version'],$cur_version,"<>"))
 							{
-								$ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
+								$ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
 								echo "<font color='lime'>".$ziplink."</font>";
 							} else {
 								echo "Aucune";
@@ -88,7 +88,7 @@ $mod_names = array_keys($data); // Récupération des clés
 						echo "</th>\n";
                         if(mod_get_option("MAJ_TRUNK") == 1){
 							echo "\t\t<th>";
-							$ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
+							$ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
 							echo "<font color='lime'>".$ziplink."</font>";
 							echo "</th>\n";
 						}
