@@ -52,7 +52,7 @@ $mod_names = array_keys($data); // Récupération des clés
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
-        <?php if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
+        <?php if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
 		<?php if(mod_get_option("MAJ_TRUNK") == 1){ echo "<td class='c' width = '50'>"; echo $lang['autoupdate_tableau_versionTrunk']."</td>"; }?>
 	</tr>
 <?php	
@@ -73,7 +73,7 @@ $mod_names = array_keys($data); // Récupération des clés
 					
 					echo "\t\t<th>".$cur_version."</th>\n";
 					
-					if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
+					if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 						echo "\t\t<th>";
 						if (!is__writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
 						else {
@@ -98,7 +98,7 @@ $mod_names = array_keys($data); // Récupération des clés
 			}
 			if ($found==0) {
 				echo "\t\t<th>".$lang['autoupdate_tableau_norefered']."</th>\n";
-				if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
+				if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 					echo "\t\t<th>&nbsp;</th>\n";
 				}
 			}
@@ -106,7 +106,7 @@ $mod_names = array_keys($data); // Récupération des clés
 		}
 	}
 
- 	if ($user_data["user_admin"] == 1 OR $user_data['user_coadmin'] == 1) {
+ 	if ($user_data["user_admin"] == 1 || $user_data['user_coadmin'] == 1) {
 		// Proposer le lien vers le panneau d'administration des modules
 		
 		?>
