@@ -44,7 +44,37 @@ $mod_names = array_keys($data); // Récupération des clés
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
 <br />
 <table width='700'>
+	<tr>
+		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_toolinstall'].$affiche; ?></td>
+	</tr>
+    <tr>
+		<td class='c'><?php echo $lang['autoupdate_tableau_nametool']; ?></td>
+		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
+		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
+        <?php if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
+		<?php if(mod_get_option("MAJ_TRUNK") == 1){ echo "<td class='c' width = '50'>"; echo $lang['autoupdate_tableau_versionTrunk']."</td>"; }?>
+	</tr>
+    <tr>
+		<th>OGSpy</th><th>
+<?php 
+    echo $server_config["version"]."</th>";
+    $cur_version = @file_get_contents('http://update.ogsteam.fr/ogspy/latest.php');
+    echo "<th>".$cur_version."</th>";
+    echo "<th>";
+    if (version_compare($cur_version,$server_config["version"],"<>"))
+    {
+        $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
+        echo "<font color='lime'>".$ziplink."</font>";
+    } else {
+        echo "Aucune";
+    }
+    echo "</th>";
 
+?>
+	</tr>
+    <tr>
+		<td class='c' colspan='100'></td>
+	</tr>
 	<tr>
 		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_modinstall'].$affiche; ?></td>
 	</tr>
