@@ -60,7 +60,7 @@ if($user_data['user_admin'] == 1) {
 				echo "\t".'</tr>'."\n";
                 chdir('..');// Retour au répertoire par défaut.
 				
-				if(!unlink("./install")){
+				if(!rmdir("./install")){
 					die("Impossible de supprimer le répertoire d'installation");
 				}
 
