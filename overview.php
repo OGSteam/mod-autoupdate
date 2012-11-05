@@ -59,6 +59,7 @@ $mod_names = array_keys($data); // Récupération des clés
 <?php 
     echo $server_config["version"]."</th>";
     $cur_version = @file_get_contents('http://update.ogsteam.fr/ogspy/latest.php');
+    $cur_version = "3.0.8";
     echo "<th>".$cur_version."</th>";
     echo "<th>";
     if (version_compare($cur_version,$server_config["version"],"<>"))
