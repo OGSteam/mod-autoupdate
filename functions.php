@@ -59,9 +59,17 @@ function upgrade_ogspy_mod($mod){
         return $maj;
                 
     }
-
-
 }
+function rrmdir($dir) {
+    foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            rrmdir($file);
+        else
+            unlink($file);
+    }
+    rmdir($dir);
+}
+
 /**
 *Copie le fichier modupdate.json dans mod/modupdate.json
 */
