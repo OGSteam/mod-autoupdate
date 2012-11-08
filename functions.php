@@ -61,15 +61,18 @@ function upgrade_ogspy_mod($mod){
                 
     }
 }
-function rrmdir($dir) {
-    foreach(glob($dir . '/*') as $file) {
-        if(is_dir($file))
-            rrmdir($file);
-        else
-            unlink($file);
-    }
-    rmdir($dir);
-}
+ function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ } 
 // copies files and non-empty directories
 function rcopy($src, $dst) {
   if (is_dir($src)) {
