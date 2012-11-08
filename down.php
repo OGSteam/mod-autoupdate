@@ -1,5 +1,4 @@
 <?php
-/** $Id: down.php 7668 2012-07-15 22:16:03Z darknoon $ **/
 /**
 * down.php Télécharge de nouveaux mods sur le serveur
 * @package [MOD] AutoUpdate
@@ -7,15 +6,15 @@
 * @version 1.0
 * created	: 27/10/2006
 * modified	: 18/01/2007
+* $Id: down.php 7668 2012-07-15 22:16:03Z darknoon $
 */
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-/**
-*
-*/
+require_once("mod/autoupdate/mod_list.php");
+
 require_once("views/page_header.php");
 
-if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
+if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 	
 	// Récupérer la liste des modules installés
 	$sql = "SELECT title,root,version from ".TABLE_MOD;
@@ -27,9 +26,6 @@ if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 		$installed_mods[$a]['root'] = $modroot;
 		$installed_mods[$a++]['version'] = $modversion;
 	}
-// Recupération des Mods disponible sur l'ogsteam
-	$data = getmodlist();
-	$mod_names = array_keys($data); // Récupération des clés
 
 ?>
 <table width='600'>
@@ -44,16 +40,14 @@ if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 	</tr>
 	<tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
-		<td class='c' width="150"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
-		<?php if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
+		<?php if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
 	</tr>
 	<?php	
 	//
-	for ($i = 0 ; $i < count($mod_names) ; $i++) {
+	for ($i = 0 ; $i < count($mod_list) ; $i++) {
 		
-		$cur_modname = $mod_names[$i];
+		$cur_modname = $mod_list[$i];
 		$cur_description = "Aucune";
-		$cur_version = $data[$mod_names[$i]];
 		
 		$install = false;
 		for ($j = 0 ; $j < $a ; $j++) {
@@ -62,10 +56,9 @@ if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 			}
 		}
 		if ($install == false) {
-			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&type=down&mod=".$cur_modname."&tag=".$cur_version."\">Télécharger</a>";
+			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&type=down&mod=".$cur_modname."\">Télécharger</a>";
 			echo "\t<tr>\n";
 			echo "\t\t<th>".$cur_modname."</th>\n";
-			echo "\t\t<th>".$cur_version."</th>\n";
 			echo "\t\t<th><font color='lime'>".$link."</font></th>\n";
 			echo "\t</tr>\n";
 		}

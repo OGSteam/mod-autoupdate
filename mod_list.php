@@ -1,6 +1,6 @@
 <?php
 /**
-* ban_list.php List des Fichiers à ne pas télécharger
+* mod_list.php List des Fichiers à ne pas télécharger
 * @package [MOD] AutoUpdate
 * @author DarkNoon <darknoon@darkcity.fr>
 * @version 1.0
@@ -50,5 +50,40 @@ $ban_mod = array(
 'update',
 'refinder'
 );
-
+/*
+$mod_list = array(
+'advspy',
+'allyranking',
+'attaques',
+'autoupdate',
+'bthof',
+'cdr',
+'densite',
+'exchange',
+'expedition',
+'flottes',
+'frame',
+'gestionmod',
+'graviton',
+'hofrc',
+'leslunes',
+'majvisu',
+'pandore',
+'presentationalliance',
+'production',
+'quimsonde',
+'rechercheplus',
+'recycleurs',
+'reinette',
+'tempsvol',
+'usines',
+'vaisseaux',
+'varally',
+'xtense',
+'zonecheck'
+);*/
+$mod_list = array(
+'autoupdate',
+'xtense'
+);
 ?>

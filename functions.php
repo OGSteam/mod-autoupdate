@@ -12,7 +12,7 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-require_once("mod/autoupdate/ban_list.php");
+require_once("mod/autoupdate/mod_list.php");
 
 /**
 *Récupère la version du mod
@@ -118,7 +118,7 @@ function tableau($tableau, $type = "maj") {
 		}
 	}
 }
-
+/*
 function getmodlist(){
 	global $ban_mod;
 	// Récupérer la liste des dernières versions dans le fichier JSON
@@ -138,6 +138,46 @@ function getmodlist(){
 			unset($data[$to_ban]);
 		}
 	}
-	return $data;	
-}	
+	return $data;
+}*/
+
+
+function getRepositoryVersion($Reponame, $isMod = true ){
+
+    if($isMod){
+        $repo_link = 'https://api.bitbucket.org/1.0/repositories/ogsteam/mod-'.$Reponame.'/tags';
+    }else{
+        $repo_link = 'https://api.bitbucket.org/1.0/repositories/ogsteam/'.$Reponame.'/tags';
+    }
+    
+    //if( !ini_get('safe_mode') ) set_time_limit(30);
+    
+    if(time() > (mod_get_option('LAST_MOD-'.$Reponame.'_UPDATE') + mod_get_option('CYCLEMAJ') * 3600)){
+        copy($repo_link, './mod/autoupdate/tmp/'.$Reponame.'.json');
+        mod_set_option('LAST_MOD-'.$Reponame.'_UPDATE', time());
+    }
+     if(file_exists('./mod/autoupdate/tmp/'.$Reponame.'.json')){
+        $api_list = file_get_contents('./mod/autoupdate/tmp/'.$Reponame.'.json');	
+
+        $result = utf8_encode($api_list);
+        $data = json_decode($result, true);
+        $version_list = array_keys($data);
+        // Supression de l'étiquette tip
+        $tip_id = array_search('tip', $version_list);
+        unset($version_list[$tip_id]);
+
+        //tri de la liste de versions pour obtenir la dernière :
+        rsort($version_list);
+        if(count($version_list) > 1)
+        {
+            return $version_list[0];
+        }else
+        {
+            return "-1";
+        }
+     }else{
+         die("Impossible de récupérer le fichier de version");
+     }
+}
+
 ?>
