@@ -73,7 +73,7 @@ function rrmdir($dir) {
 // copies files and non-empty directories
 function rcopy($src, $dst) {
   if (is_dir($src)) {
-    mkdir($dst);
+    if(!is_dir($dst)) mkdir($dst);
     $files = scandir($src);
     foreach ($files as $file)
     if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
