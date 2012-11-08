@@ -22,12 +22,24 @@ if(!isset($pub_confirmed)) $pub_confirmed = "no";
 if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     
     $modroot = mysql_real_escape_string($pub_mod);
-    $version = mysql_real_escape_string($pub_tag);
+    
+    if(isset($pub_tag))
+    {
+        //Si une version est spécifiée...
+        $version = mysql_real_escape_string($pub_tag);
+    }else{
+        //Sinon on prends la dernière
+        $version= getRepositoryVersion($modroot);
+    }
 
 	if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
 
-		$modzip = "http://update.ogsteam.fr/mods/download.php?download=".$modroot."-".$version;
-
+		if( $version == 'trunk'){
+            $modzip = "https://bitbucket.org/ogsteam/".$modroot."/get/tip.zip";
+        }else{
+            $modzip = "https://bitbucket.org/ogsteam/".$modroot."/get/".$version.".zip";
+        }
+        
 		if (!is_writable("./mod/autoupdate/tmp/")) {
 			die("Erreur: Le repertoire /mod/autoupdate/tmp/ doit etre accessible en écriture (777) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
@@ -59,8 +71,9 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     }else{
             echo '<table>'."\n";
             echo "\t".'<tr>'."\n";
-            echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_wantupdate'].'</td>'."\n";
+            echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_wantupdate'].$modroot.' '.$version.' ?</td>'."\n";
             echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod='.$modroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
+            echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
             echo "\t".'</tr>'."\n";
             echo '</table>'."\n";
 	}
