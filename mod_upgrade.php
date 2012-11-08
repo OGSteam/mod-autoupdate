@@ -37,7 +37,7 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 		if( $version == 'trunk'){
             $modzip = "https://bitbucket.org/ogsteam/".$modroot."/get/tip.zip";
         }else{
-            $modzip = "https://bitbucket.org/ogsteam/".$modroot."/get/".$version.".zip";
+            $modzip = "https://bitbucket.org/ogsteam/mod-".$modroot."/get/".$version.".zip";
         }
         
 		if (!is_writable("./mod/autoupdate/tmp/")) {
@@ -51,10 +51,15 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo("./mod/".$modroot."/");
+                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/");
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/".$modroot.".zip");
+                $a = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);
+                $folder = explode('/', $a[0]);
                 
+                //print_r($a);
+                echo ($folder[5]);
+                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot);
                 echo "\t".'<tr>'."\n";
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
