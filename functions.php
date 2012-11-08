@@ -13,6 +13,7 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 require_once("mod/autoupdate/mod_list.php");
+require_once("includes/cache.php");
 
 /**
 *Récupère la version du mod
@@ -69,7 +70,16 @@ function rrmdir($dir) {
     }
     rmdir($dir);
 }
-
+// copies files and non-empty directories
+function rcopy($src, $dst) {
+  if (is_dir($src)) {
+    mkdir($dst);
+    $files = scandir($src);
+    foreach ($files as $file)
+    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
+  }
+  else if (file_exists($src)) copy($src, $dst);
+}
 /**
 *Copie le fichier modupdate.json dans mod/modupdate.json
 */
@@ -152,9 +162,9 @@ function getRepositoryVersion($Reponame, $isMod = true ){
     
     //if( !ini_get('safe_mode') ) set_time_limit(30);
     
-    if(time() > (mod_get_option('LAST_MOD-'.$Reponame.'_UPDATE') + mod_get_option('CYCLEMAJ') * 3600)){
+    if(time() > (mod_get_option('LAST_MOD_UPDATE-'.$Reponame) + mod_get_option('CYCLEMAJ') * 3600)){
         copy($repo_link, './mod/autoupdate/tmp/'.$Reponame.'.json');
-        mod_set_option('LAST_MOD-'.$Reponame.'_UPDATE', time());
+        mod_set_option('LAST_MOD_UPDATE-'.$Reponame, time());
     }
      if(file_exists('./mod/autoupdate/tmp/'.$Reponame.'.json')){
         $api_list = file_get_contents('./mod/autoupdate/tmp/'.$Reponame.'.json');	
@@ -176,7 +186,9 @@ function getRepositoryVersion($Reponame, $isMod = true ){
             return "-1";
         }
      }else{
+         mod_del_option('LAST_MOD_UPDATE-'.$Reponame);
          die("Impossible de récupérer le fichier de version");
+         
      }
 }
 
