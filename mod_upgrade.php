@@ -54,12 +54,10 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/");
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/".$modroot.".zip");
-                $a = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);
-                $folder = explode('/', $a[0]);
-                
-                //print_r($a);
-                echo ($folder[5]);
+                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);
+                $folder = explode('/', $nom_répertoire[0]);
                 rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot);
+                rrmdir("./mod/autoupdate/tmp/".$modroot);
                 echo "\t".'<tr>'."\n";
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
