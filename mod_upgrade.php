@@ -52,12 +52,12 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/");
+                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/".$modroot.".zip");
-                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);
+                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot);
+                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot); //Copie du répertoire dans le dossier des mods
                 rrmdir("./mod/autoupdate/tmp/".$modroot);
                 echo "\t".'<tr>'."\n";
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";
