@@ -56,24 +56,24 @@ while (list($modname,$modroot,$modversion) = $db->sql_fetch_row($res))
     <tr>
 		<th>OGSpy</th><th>
 <?php 
-    echo $server_config["version"]."</th>";
-    $cur_version = getRepositoryVersion('ogspy', false);
-     if($cur_version == '-1'){
-        echo "\t\t<th>".$lang['autoupdate_tableau_norefered']."</th>\n";
-        $cur_version = 0;
-     }
-     else{
-        echo "\t\t<th>".$cur_version."</th>\n";
-     }
-    echo "<th>";
-    if (version_compare($cur_version,$server_config["version"],">"))
-    {
-        $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
-        echo "<font color='lime'>".$ziplink."</font>";
-    } else {
-        echo "Aucune";
-    }
-    echo "</th>";
+echo $server_config["version"]."</th>";
+$cur_version = getRepositoryVersion('ogspy', false);
+ if($cur_version == '-1'){
+    echo "\t\t<th>".$lang['autoupdate_tableau_norefered']."</th>\n";
+    $cur_version = 0;
+ }
+ else{
+    echo "\t\t<th>".$cur_version."</th>\n";
+ }
+echo "<th>";
+if (version_compare($cur_version,$server_config["version"],">"))
+{
+    $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
+    echo "<font color='lime'>".$ziplink."</font>";
+} else {
+    echo "Aucune";
+}
+echo "</th>";
 
 ?>
 	</tr>
@@ -93,51 +93,48 @@ while (list($modname,$modroot,$modversion) = $db->sql_fetch_row($res))
 <?php	
 	
 	// 
-	for ($i=0 ; $i<count($installed_mods) ; $i++) {
-		if (substr($installed_mods[$i]['name'], 0, 5) != "Group") {
-			echo "\t<tr>\n";
-			echo "\t\t<th>".$installed_mods[$i]['name']."</th>\n";
-			echo "\t\t<th>".$installed_mods[$i]['version']."</th>\n"; 
-			$found=0;
+for ($i=0 ; $i<count($installed_mods) ; $i++) {
+    if (substr($installed_mods[$i]['name'], 0, 5) != "Group") {
+        echo "\t<tr>\n";
+        echo "\t\t<th>".$installed_mods[$i]['name']."</th>\n";
+        echo "\t\t<th>".$installed_mods[$i]['version']."</th>\n"; 
 
-            $cur_modname = $installed_mods[$i]['name'];
-            $cur_version =getRepositoryVersion($cur_modname);
-    
-            if ($installed_mods[$i]['root'] == $cur_modname) {
-                $found=1;
-             if($cur_version == '-1'){
-                echo "\t\t<th>".$lang['autoupdate_tableau_norefered']."</th>\n";
-                $cur_version = 0;
-             }
-             else{
-                echo "\t\t<th>".$cur_version."</th>\n";
-             }
-             
-                if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
-                    echo "\t\t<th>";
-                    if (!is_writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
-                    else {
-                        if (version_compare($cur_version, $installed_mods[$i]['version'],">"))
-                        {
-                            $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
-                            echo "<font color='lime'>".$ziplink."</font>";
-                        } else {
-                            echo "Aucune";
-                        }
-                    }
-                    echo "</th>\n";
-                    if(mod_get_option("MAJ_TRUNK") == 1){
-                        echo "\t\t<th>";
-                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
-                        echo "<font color='lime'>".$ziplink."</font>";
-                        echo "</th>\n";
-                    }
+        $cur_modroot = $installed_mods[$i]['root'];
+        $cur_version =getRepositoryVersion($cur_modroot);
+
+        if($cur_version == '-1'){
+           echo "\t\t<th>".$lang['autoupdate_tableau_norefered']."</th>\n";
+           $cur_version = 0;
+        }
+        else{
+           echo "\t\t<th>".$cur_version."</th>\n";
+        }
+         
+        if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+            echo "\t\t<th>";
+            if (!is_writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
+            else {
+                if (version_compare($cur_version, $installed_mods[$i]['version'],">"))
+                {
+                    $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modroot."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
+                    echo "<font color='lime'>".$ziplink."</font>";
+                } else {
+                    echo "Aucune";
                 }
-
             }
-			echo "\t</tr>\n";
-		}
-	}
+            echo "</th>\n";
+            if(mod_get_option("MAJ_TRUNK") == 1){
+                echo "\t\t<th>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modroot."&tag=trunk'>Télécharger</a>";
+                echo "<font color='lime'>".$ziplink."</font>";
+                echo "</th>\n";
+            }
+        }
+
+    }
+    echo "\t</tr>\n";
+}
+
 
  	if ($user_data["user_admin"] == 1 || $user_data['user_coadmin'] == 1) {
 		// Proposer le lien vers le panneau d'administration des modules

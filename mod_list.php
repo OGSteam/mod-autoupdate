@@ -50,9 +50,10 @@ $ban_mod = array(
 'update',
 'refinder'
 );
-/*
+
 $mod_list = array(
-'advspy',
+'ogspy', //outils
+'advspy', //Mods
 'allyranking',
 'attaques',
 'autoupdate',
@@ -81,9 +82,10 @@ $mod_list = array(
 'varally',
 'xtense',
 'zonecheck'
-);*/
+);
+/*
 $mod_list = array(
 'autoupdate',
 'xtense'
-);
+);*/
 ?>
