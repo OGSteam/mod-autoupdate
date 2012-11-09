@@ -72,7 +72,7 @@ function upgrade_ogspy_mod($mod){
      reset($objects);
      rmdir($dir);
    }
- } 
+ }
 // copies files and non-empty directories
 function rcopy($src, $dst) {
   if (is_dir($src)) {
