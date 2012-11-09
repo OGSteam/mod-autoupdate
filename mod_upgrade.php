@@ -30,12 +30,13 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     }else{
         //Sinon on prends la dernière
         $version= getRepositoryVersion($modroot);
+        if($version == '-1') die("Pas de version officielle disponible, Merci de signaler le problème à l'OGSteam");
     }
 
 	if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
 
 		if( $version == 'trunk'){
-            $modzip = "https://bitbucket.org/ogsteam/".$modroot."/get/tip.zip";
+            $modzip = "https://bitbucket.org/ogsteam/mod-".$modroot."/get/tip.zip";
         }else{
             $modzip = "https://bitbucket.org/ogsteam/mod-".$modroot."/get/".$version.".zip";
         }
@@ -75,7 +76,13 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             echo '<table>'."\n";
             echo "\t".'<tr>'."\n";
             echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_wantupdate'].$modroot.' '.$version.' ?</td>'."\n";
+            echo "\t".'</tr>'."\n";
+            echo "\t".'<tr>'."\n";
             echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod='.$modroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
+            echo "\t".'</tr>'."\n";
+            echo "\t".'<tr>'."\n";
+            echo "\t".'</tr>'."\n";
+            echo "\t".'<tr>'."\n";            
             echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
             echo "\t".'</tr>'."\n";
             echo '</table>'."\n";

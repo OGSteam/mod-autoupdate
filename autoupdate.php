@@ -20,11 +20,6 @@ require_once("mod/autoupdate/lang_main.php");
 * Défini où se trouve le fichier qui contient les dernières versions des mods.
 * Différent suivant si allow_url_fopen est activé ou non. S'il n'est pas activé, on va chercher le fichier en local après téléchargement.
 */
-if(mod_get_option("DOWNJSON")) {
-	DEFINE("JSON_FILE","http://update.ogsteam.fr/update.json");
-} else {
-	DEFINE("JSON_FILE","parameters/modupdate.json");
-}
 
 if (!isset($pub_sub)) {
 	$sub = "overview";

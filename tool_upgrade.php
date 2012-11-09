@@ -32,11 +32,16 @@ if($user_data['user_admin'] == 1) {
 			die("Erreur: Le répertoire OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
       
+        if( $version == 'trunk'){
+            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/tip.zip";
+        }else{
+            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/".$version.".zip";
+        }
+      
        //$modzip = "http://update.ogsteam.fr/".$toolroot."/download.php?download=".$toolroot."-".$version;
-       $modzip = "http://darkcity.fr/ogspy311.zip";
-
+       //$toolzip = "http://darkcity.fr/ogspy311.zip";
        
-		if(copy($modzip , './mod/autoupdate/tmp/'.$toolroot.'.zip')) {
+		if(copy($toolzip , './mod/autoupdate/tmp/'.$toolroot.'.zip')) {
                 echo '<table align="center" style="width : 400px">'."\n";
                 
 			if ($zip->open('./mod/autoupdate/tmp/'.$toolroot.'.zip') === TRUE) {
@@ -44,11 +49,17 @@ if($user_data['user_admin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo(".");
+                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 
                 unlink("./mod/autoupdate/tmp/".$toolroot.".zip");
+
+                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
+                $folder = explode('/', $nom_répertoire[0]);
+                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],".");
+                rrmdir("./mod/autoupdate/tmp/".$modroot);
                 
+                //On passe au script de mise à jour.
                 if (!is_writable("./install")) {
                     die("Erreur: Le répertoire install OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
                 }

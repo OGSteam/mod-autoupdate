@@ -38,7 +38,7 @@ function upgrade_ogspy_mod($mod){
         if (file_exists("mod/".$mod."/update.php"))
         {
             require_once("mod/".$mod."/update.php");
-            generate_all_cache();
+            generate_mod_cache();
             log_("mod_update", $mod);
             $maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
         } else{
@@ -157,16 +157,24 @@ function getmodlist(){
 
 function getRepositoryVersion($Reponame, $isMod = true ){
 
+    global $mod_list;
+    //Vérifie si le mod est approuvé ou non
+   if(array_search($Reponame, $mod_list) === false){
+        log_('mod', 'Mod ou outil '.$Reponame.' non référencé dans la liste des mise à jour automatique');
+      //die("not approved");
+       return "-1";
+   }
+    // Ajuste le lien en fonction du mode outil/mod
     if($isMod){
         $repo_link = 'https://api.bitbucket.org/1.0/repositories/ogsteam/mod-'.$Reponame.'/tags';
     }else{
         $repo_link = 'https://api.bitbucket.org/1.0/repositories/ogsteam/'.$Reponame.'/tags';
     }
     
-    //if( !ini_get('safe_mode') ) set_time_limit(30);
+    if( !ini_get('safe_mode') ) set_time_limit(30);
     
     if(time() > (mod_get_option('LAST_MOD_UPDATE-'.$Reponame) + mod_get_option('CYCLEMAJ') * 3600)){
-        copy($repo_link, './mod/autoupdate/tmp/'.$Reponame.'.json');
+        @copy($repo_link, './mod/autoupdate/tmp/'.$Reponame.'.json');
         mod_set_option('LAST_MOD_UPDATE-'.$Reponame, time());
     }
      if(file_exists('./mod/autoupdate/tmp/'.$Reponame.'.json')){
@@ -186,11 +194,13 @@ function getRepositoryVersion($Reponame, $isMod = true ){
             return $version_list[0];
         }else
         {
+            log_('mod', 'Pas de version de Production pour le mod '.$Reponame);
             return "-1";
         }
      }else{
+         log_('mod', 'Impossible de récupérer le fichier de version du mod '.$Reponame);
          mod_del_option('LAST_MOD_UPDATE-'.$Reponame);
-         die("Impossible de récupérer le fichier de version");
+         return "-1";
          
      }
 }

@@ -37,7 +37,7 @@ $lang['autoupdate_tableau_ok'] = "Téléchargement de modupdate.json réussi";
 $lang['autoupdate_tableau_ok1'] = "Forcer le téléchargement";
 $lang['autoupdate_tableau_uptodateok'] = "Mise à jour effectuée";
 $lang['autoupdate_tableau_installok'] = "Installation effectuée";
-$lang['autoupdate_tableau_back'] = "<a href=index.php?action=autoupdate>Revenir au tableau des mises à jour</a> ";
+$lang['autoupdate_tableau_back'] = "<a href=index.php?action=autoupdate>Retour au tableau des mises à jour</a> ";
 $lang['autoupdate_tableau_uptodateoff'] = "Mise à jour impossible, passez par la page d'administration";
 $lang['autoupdate_tableau_installoff'] = "Installation impossible, passez par la page d'administration";
 $lang['autoupdate_MaJ_file'] = "Fichier";

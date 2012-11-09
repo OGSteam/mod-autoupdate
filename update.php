@@ -18,8 +18,6 @@ update_mod($mod_folder,$mod_name);
 if(file_exists("mod/autoupdate/modupdate.json")) {
 	unlink("mod/autoupdate/modupdate.json");
 	mod_set_option ( "CYCLEMAJ", "1");
-	mod_set_option ( "BAN_MODS", "1");
-	mod_set_option ( "DOWNJSON", "1");
 	mod_set_option ( "MAJ_TRUNK", "0");
 }
 ?>
