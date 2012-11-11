@@ -19,7 +19,7 @@ if ($is_ok == true)
 	{
 		//si besoin de creer des tables, a faire ici
 		//Options par défaut.
-		mod_set_option ( "CYCLEMAJ", "1");
+		mod_set_option ( "CYCLEMAJ", "24");
 		mod_set_option ( "MAJ_TRUNK", "0");
 	}
 else
