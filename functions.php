@@ -83,23 +83,6 @@ function rcopy($src, $dst) {
   }
   else if (file_exists($src)) copy($src, $dst);
 }
-/**
-*Copie le fichier modupdate.json dans mod/modupdate.json
-*/
-function copymodupdate() {
-global $lang;
-
-    if(time() > (mod_get_option('LAST_MODLIST_UPDATE') + mod_get_option('CYCLEMAJ') * 3600)){
-        if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")) {
-            $affiche = "<br />\n".$lang['autoupdate_tableau_error2'];
-        } else {
-            $affiche = "<br />\n".$lang['autoupdate_tableau_ok'];
-            mod_set_option('LAST_MODLIST_UPDATE', time());
-        }
-
-        return $affiche;
-    }   
-}
 
 /**
 * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
@@ -110,7 +93,7 @@ function tableau($tableau, $type = "maj") {
 		$fichier = explode("/", $key);
 		$nom = "";
 		for($i = 1; $i < count($fichier); $i++) {
-			if (count($fichier) >= 3 AND count($fichier) != $i AND $i > 1) {
+			if (count($fichier) >= 3 && count($fichier) != $i && $i > 1) {
 				$slash = "/";
 			} else {
 				$slash = "";
@@ -118,7 +101,7 @@ function tableau($tableau, $type = "maj") {
 			$nom .= $slash.$fichier[$i];
 		}
 		$explode = explode(".", $key);
-		if ($nom != "" AND $explode[0] != $key) {
+		if ($nom != "" && $explode[0] != $key) {
 			if ($type == "maj") {
 				$etat = $lang['autoupdate_MaJ_uptodateok'];
 			} else if ($type == "down") {
