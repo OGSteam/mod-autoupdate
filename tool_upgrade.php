@@ -37,9 +37,6 @@ if($user_data['user_admin'] == 1) {
         }else{
             $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/".$version.".zip";
         }
-      
-       //$modzip = "http://update.ogsteam.fr/".$toolroot."/download.php?download=".$toolroot."-".$version;
-       //$toolzip = "http://darkcity.fr/ogspy311.zip";
        
 		if(copy($toolzip , './mod/autoupdate/tmp/'.$toolroot.'.zip')) {
                 echo '<table align="center" style="width : 400px">'."\n";
