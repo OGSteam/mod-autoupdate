@@ -32,13 +32,16 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         $version= getRepositoryVersion($modroot);
         if($version == '-1') die("Pas de version officielle disponible, Merci de signaler le problème à l'OGSteam");
     }
-
+    
 	if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
+        
+        //Récupération des infos du mod :
+        $repoDetails = getRepositoryDetails("mod-".$modroot);
 
 		if( $version == 'trunk'){
-            $modzip = "https://bitbucket.org/ogsteam/mod-".$modroot."/get/tip.zip";
+            $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/tip.zip";
         }else{
-            $modzip = "https://bitbucket.org/ogsteam/mod-".$modroot."/get/".$version.".zip";
+            $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/".$version.".zip";
         }
         
 		if (!is_writable("./mod/autoupdate/tmp/")) {
