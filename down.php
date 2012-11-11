@@ -10,8 +10,6 @@
 */
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-require_once("mod/autoupdate/mod_list.php");
-
 require_once("views/page_header.php");
 
 if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
@@ -26,6 +24,8 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 		$installed_mods[$a]['root'] = $modroot;
 		$installed_mods[$a++]['version'] = $modversion;
 	}
+    //Récupérer la liste des mods disponibles sur le dépot
+    $download_mod_list = getRepositorylist();
 
 ?>
 <table width='600'>
@@ -44,14 +44,15 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 	</tr>
 	<?php	
 	//
-	for ($i = 0 ; $i < count($mod_list) ; $i++) {
+	foreach($download_mod_list as $downloadmod) {
+
+		$cur_modname = $downloadmod['nom'];
+		$cur_description = $downloadmod['description'];
 		
-		$cur_modname = $mod_list[$i];
-		$cur_description = "Aucune";
-		
+                
 		$install = false;
 		for ($j = 0 ; $j < $a ; $j++) {
-			if ($installed_mods[$j]['root'] == $cur_modname) {
+			if ($installed_mods[$j]['root'] == $cur_modname || $cur_modname == 'ogspy') {
 				$install = true;
 			}
 		}

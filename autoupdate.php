@@ -15,6 +15,8 @@ require_once("views/page_header.php");
 if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre à jour PHP(>= 5.2)");
 require_once("mod/autoupdate/functions.php");
 require_once("mod/autoupdate/lang_main.php");
+require_once("mod/autoupdate/mod_list.php");
+
 
 /**
 * Défini où se trouve le fichier qui contient les dernières versions des mods.
@@ -72,7 +74,7 @@ echo "\t</tr><br />\n";
 echo "</table>\n<br />\n";
 
 if (!isset($pub_sub)) $sub = 'overview'; else $sub = htmlentities($pub_sub);
- switch($sub)
+switch($sub)
 {
 case 'overview': include ('overview.php');break;
 case 'mod_upgrade': include ('mod_upgrade.php');break;
