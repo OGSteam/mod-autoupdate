@@ -1,0 +1,3 @@
+autoupdate
+2.0.2
+autoupdate,AutoUpdate,autoupdate,autoupdate,autoupdate.php,1,0
