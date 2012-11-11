@@ -17,10 +17,6 @@ require_once("views/page_header.php");
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
-/* On mets à jour la liste des mods si besoin */
-$affiche = '';
-$affiche = copymodupdate();
-
 /*On récupère la liste des mods installés*/
 
 $sql = "SELECT title,root,version from ".TABLE_MOD;
@@ -44,7 +40,7 @@ while (list($modname,$modroot,$modversion) = $db->sql_fetch_row($res))
 <br />
 <table width='700'>
 	<tr>
-		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_toolinstall'].$affiche; ?></td>
+		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_toolinstall']; ?></td>
 	</tr>
     <tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_nametool']; ?></td>
@@ -81,7 +77,7 @@ echo "</th>";
 		<td class='c' colspan='100'></td>
 	</tr>
 	<tr>
-		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_modinstall'].$affiche; ?></td>
+		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_modinstall']; ?></td>
 	</tr>
 	<tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
