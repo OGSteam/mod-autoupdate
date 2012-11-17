@@ -36,7 +36,7 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 	if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
         
         //Récupération des infos du mod :
-        $repoDetails = getRepositoryDetails("mod-".$modroot);
+        $repoDetails = getRepositoryDetails($modroot);
 
 		if( $version == 'trunk'){
             $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/tip.zip";
