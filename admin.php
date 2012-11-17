@@ -30,13 +30,13 @@ if (isset($pub_valid)) {
 	</tr>
 	<form action="index.php?action=autoupdate&sub=admin" method="post">
 	<tr>
+		<th><?php echo $lang['autoupdate_admin_trunk']; ?><br /><?php echo $lang['autoupdate_admin_trunk1']; ?></th>
+		<th><input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?> value="0"/></th>
+	</tr>
+	<tr>
 		<th><?php echo $lang['autoupdate_admin_frequency']; ?></th>
 		<th><input name="cycle" type="text" size="3" maxlength="2" value="<?php echo mod_get_option("CYCLEMAJ");?>">
 		</th>
-	</tr>
-	<tr>
-		<th><?php echo $lang['autoupdate_admin_trunk']; ?><br /><?php echo $lang['autoupdate_admin_trunk1']; ?></th>
-		<th><input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?> value="0"/></th>
 	</tr>
 	<tr>
 		<td></td>
