@@ -46,15 +46,15 @@ if($user_data['user_admin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
+                $zip->extractTo("./mod/autoupdate/tmp/".$toolroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 
                 unlink("./mod/autoupdate/tmp/".$toolroot.".zip");
 
-                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
+                $nom_répertoire = glob("./mod/autoupdate/tmp/".$toolroot."/*-".$toolroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],".");
-                rrmdir("./mod/autoupdate/tmp/".$modroot);
+                rcopy("./mod/autoupdate/tmp/".$toolroot."/".$folder[5],".");
+                rrmdir("./mod/autoupdate/tmp/".$toolroot);
                 
                 //On passe au script de mise à jour.
                 if (!is_writable("./install")) {
