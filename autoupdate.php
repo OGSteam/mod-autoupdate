@@ -28,7 +28,7 @@ if (!isset($pub_sub)) {
 	$pub_sub = "overview";
 } else $sub = $pub_sub;
 
-if ($user_data["user_admin"] == 1 OR $user_data["user_coadmin"] == 1) {
+if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($sub != "overview") {
 		$bouton1 = "\t\t"."<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=overview';\">";
 

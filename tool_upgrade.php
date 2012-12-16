@@ -87,9 +87,15 @@ if($user_data['user_admin'] == 1) {
             echo '<table>'."\n";
             echo "\t".'<tr>'."\n";
             echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJtool_wantbackup'].'</td>'."\n";
+			echo "\t".'</tr>'."\n";
+			echo "\t".'<tr>'."\n";
             echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJtool_wantupdate'].$toolroot.' '.$version.' ?</td>'."\n";
-            echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool='.$toolroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
-            echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
+            echo "\t".'</tr>'."\n";
+			echo "\t".'<tr>'."\n";
+			echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool='.$toolroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
+            echo "\t".'</tr>'."\n";
+			echo "\t".'<tr>'."\n";
+			echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
             echo "\t".'</tr>'."\n";
             echo '</table>'."\n";
 	}
