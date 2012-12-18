@@ -84,7 +84,7 @@ function getRepositoryVersion($Reponame, $isMod = true ){
     
     $repo_link = 'https://api.bitbucket.org'.$repo_details['resource_uri'].'/tags';
    
-    if( !ini_get('safe_mode') ) set_time_limit(30);
+    if( !ini_get('safe_mode') ) @set_time_limit(30);
     
     if(time() > (mod_get_option('LAST_MOD_UPDATE-'.$Reponame) + mod_get_option('CYCLEMAJ') * 3600)){
         @copy($repo_link, './mod/autoupdate/tmp/'.$Reponame.'.json');
