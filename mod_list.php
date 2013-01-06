@@ -8,7 +8,6 @@
 * modified	: 16/01/2012
 */
 
-
 function getRepositorylist(){
     
     $mod_list = array();
@@ -36,27 +35,28 @@ function getRepositorylist(){
     //Mise en Forme pour le mod (Fait en 2 partie pour plus de lisibilité)
     foreach($mods_tmp as $mod)
     {
-        if(preg_match("/-/",$mod["nom"])){
+        if(preg_match("/mod-/",$mod["nom"])){
             $mod_name = explode('-',$mod["nom"]);
             $mod["nom"] = $mod_name[1];
-        }
-                    
-        if($mod["is_fork"] == false){            
-            $mod_list[] = array('nom' => $mod["nom"],
-            'description' => $mod["description"],
-            'resource_uri' => $mod["resource_uri"],
-            'owner' => $mod["owner"]);
-        }else{
-            $mod_list[] = array('nom' =>$mod["nom"],
-            'description' => $mod["description"],
-            'resource_uri' => $mod["fork_resource_uri"],
-            'owner' => $mod["fork_owner"]);            
-        }
-        
+			if($mod["is_fork"] == false){            
+				$mod_list[] = array('nom' => $mod["nom"],
+				'description' => $mod["description"],
+				'resource_uri' => $mod["resource_uri"],
+				'owner' => $mod["owner"]);
+			}else{
+				$mod_list[] = array('nom' =>$mod["nom"],
+				'description' => $mod["description"],
+				'resource_uri' => $mod["fork_resource_uri"],
+				'owner' => $mod["fork_owner"]);            
+			}
+		}else if(preg_match("/ogspy/",$mod["nom"])){
+        		$mod_list[] = array('nom' => $mod["nom"],
+				'description' => $mod["description"],
+				'resource_uri' => $mod["resource_uri"],
+				'owner' => $mod["owner"]);
+			}
      }
-    //print_r($mod_list);
     return ($mod_list);
-     
 }
 
 function getRepositoryDetails($repoName){
