@@ -15,7 +15,6 @@ $mod_folder= "autoupdate";
 $mod_name = "autoupdate";
 update_mod($mod_folder,$mod_name);
 
-
 mod_set_option ( "CYCLEMAJ", "24");
 mod_set_option ( "MAJ_TRUNK", "0");
 
