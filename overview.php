@@ -70,7 +70,12 @@ if (version_compare($cur_version,$server_config["version"],">"))
     echo "Aucune";
 }
 echo "</th>";
-
+if(mod_get_option("MAJ_TRUNK") == 1){
+	echo "<th>";
+	$ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>Télécharger</a>";
+	echo "<font color='lime'>".$ziplink."</font>";
+	echo "</th>";
+}
 ?>
 	</tr>
     <tr>
