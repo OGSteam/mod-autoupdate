@@ -19,8 +19,9 @@ function getRepositorylist(){
     }
     $mod_file = file_get_contents('./mod/autoupdate/tmp/repo_list.json');	
 
-    $result = utf8_encode($mod_file);
-    $data = json_decode($result, true);
+    //$result = utf8_encode($mod_file);
+    $data = json_decode($mod_file, true);
+	//print_r($data);
     //On récupère ce que l'on a besoin dans la structure JSON
     foreach($data['repositories'] as $id)
     {
@@ -40,18 +41,18 @@ function getRepositorylist(){
             $mod["nom"] = $mod_name[1];
 			if($mod["is_fork"] == false){            
 				$mod_list[] = array('nom' => $mod["nom"],
-				'description' => $mod["description"],
+				'description' => utf8_decode($mod["description"]),
 				'resource_uri' => $mod["resource_uri"],
 				'owner' => $mod["owner"]);
 			}else{
 				$mod_list[] = array('nom' =>$mod["nom"],
-				'description' => $mod["description"],
+				'description' => utf8_decode($mod["description"]),
 				'resource_uri' => $mod["fork_resource_uri"],
 				'owner' => $mod["fork_owner"]);            
 			}
 		}else if(preg_match("/ogspy/",$mod["nom"])){
         		$mod_list[] = array('nom' => $mod["nom"],
-				'description' => $mod["description"],
+				'description' => utf8_decode($mod["description"]),
 				'resource_uri' => $mod["resource_uri"],
 				'owner' => $mod["owner"]);
 			}

@@ -19,6 +19,7 @@ $lang['autoupdate_tableau_error1'] = "Récupération des informations de version i
 $lang['autoupdate_tableau_error2'] = "Récupération du fichier modupdate.json impossible !";
 $lang['autoupdate_tableau_error3'] = "Le téléchargement du fichier modupdate.json n'a pas eu lieu";
 $lang['autoupdate_tableau_namemod'] = "Nom du module";
+$lang['autoupdate_tableau_descmod'] = "Description";
 $lang['autoupdate_tableau_nametool'] = "Nom de l'outil";
 $lang['autoupdate_tableau_description'] = "Description du module";
 $lang['autoupdate_tableau_modinstall'] = "Modules installés - Recherche des mises à jour sur OGSteam.fr";

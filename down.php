@@ -38,9 +38,12 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 	<tr>
 		<td class='c' colspan='4'><?php echo $lang['autoupdate_tableau_modnoinstall']; ?></td>
 	</tr>
+
 	<tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
+		<td class='c'><?php echo $lang['autoupdate_tableau_descmod']; ?></td>
 		<?php if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
+		<?php if(mod_get_option("MAJ_TRUNK") == 1){ echo "<td class='c' width = '50'>"; echo $lang['autoupdate_tableau_versionTrunk']."</td>"; }?>
 	</tr>
 	<?php	
 	//
@@ -48,8 +51,7 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
 		$cur_modname = $downloadmod['nom'];
 		$cur_description = $downloadmod['description'];
-		
-                
+		                
 		$install = false;
 		for ($j = 0 ; $j < $a ; $j++) {
 			if ($installed_mods[$j]['root'] == $cur_modname || $cur_modname == 'ogspy') {
@@ -57,10 +59,17 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 			}
 		}
 		if ($install == false) {
-			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&type=down&mod=".$cur_modname."\">Télécharger</a>";
+			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."\">Télécharger</a>";
 			echo "\t<tr>\n";
 			echo "\t\t<th>".$cur_modname."</th>\n";
+			echo "\t\t<th>".$cur_description."</th>\n";
 			echo "\t\t<th><font color='lime'>".$link."</font></th>\n";
+			if(mod_get_option("MAJ_TRUNK") == 1){
+                echo "\t\t<th>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
+                echo "<font color='lime'>".$ziplink."</font>";
+                echo "</th>\n";
+            }
 			echo "\t</tr>\n";
 		}
 	}
