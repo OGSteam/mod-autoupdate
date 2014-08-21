@@ -1,7 +1,7 @@
 <?php
 /** $Id: functions.php 7668 2012-07-15 22:16:03Z darknoon $ **/
 /**
-* functions.php Défini les fonctions du mod
+* functions.php DÃ©fini les fonctions du mod
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0
@@ -16,7 +16,7 @@ require_once("mod/autoupdate/mod_list.php");
 require_once("includes/cache.php");
 
 /**
-*Récupère la version du mod
+*RÃ©cupÃ¨re la version du mod
 */
 function versionmod() {
 	global $db, $pub_action;
@@ -27,14 +27,14 @@ function versionmod() {
 }
 function upgrade_ogspy_mod($mod){
 	global $db, $lang;
-    // On vérifie si le mod est déjà installé
+    // On vÃ©rifie si le mod est dÃ©jÃ  installÃ©
     $check = "SELECT title FROM " . TABLE_MOD . " WHERE root='" . $mod .
         "'";
     $query_check = $db->sql_query($check);
     $result_check = $db->sql_numrows($query_check);
 
     if ($result_check != 0) { 
-    // Si le mod existe, on fait une mise à jour
+    // Si le mod existe, on fait une mise Ã  jour
         if (file_exists("mod/".$mod."/update.php"))
         {
             require_once("mod/".$mod."/update.php");
@@ -85,7 +85,7 @@ function rcopy($src, $dst) {
 }
 
 /**
-* Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
+* Affiche sous forme de tableau table Ã  2 colonne les fichiers du zip et son Ã©tat.
 */
 function tableau($tableau, $type = "maj") {
 	global $lang;

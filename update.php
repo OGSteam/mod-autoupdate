@@ -1,7 +1,7 @@
 <?php
 /** $Id: update.php 7672 2012-08-05 21:33:46Z darknoon $ **/
 /**
-* update.php Met à jour le mod
+* update.php Met Ã  jour le mod
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0a

@@ -1,6 +1,6 @@
 <?php
 /**
-* mod_list.php List des Fichiers à ne pas télécharger
+* mod_list.php List des Fichiers Ã  ne pas tÃ©lÃ©charger
 * @package [MOD] AutoUpdate
 * @author DarkNoon <darknoon@darkcity.fr>
 * @version 1.0
@@ -22,7 +22,7 @@ function getRepositorylist(){
     //$result = utf8_encode($mod_file);
     $data = json_decode($mod_file, true);
 	//print_r($data);
-    //On récupère ce que l'on a besoin dans la structure JSON
+    //On rÃ©cupÃ¨re ce que l'on a besoin dans la structure JSON
     foreach($data['repositories'] as $id)
     {
         $mods_tmp[] = array('nom' => $id["slug"],
@@ -33,7 +33,7 @@ function getRepositorylist(){
         'fork_resource_uri' => $id["fork_of"]["resource_uri"],
         'fork_owner' =>$id["fork_of"]["owner"]);
     }
-    //Mise en Forme pour le mod (Fait en 2 partie pour plus de lisibilité)
+    //Mise en Forme pour le mod (Fait en 2 partie pour plus de lisibilitÃ©)
     foreach($mods_tmp as $mod)
     {
         if(preg_match("/mod-/",$mod["nom"])){
@@ -97,11 +97,11 @@ function getRepositoryVersion($Reponame, $isMod = true ){
         $result = utf8_encode($api_list);
         $data = json_decode($result, true);
         $version_list = array_keys($data);
-        // Supression de l'étiquette tip
+        // Supression de l'Ã©tiquette tip
         $tip_id = array_search('tip', $version_list);
         unset($version_list[$tip_id]);
 
-        //tri de la liste de versions pour obtenir la dernière :
+        //tri de la liste de versions pour obtenir la derniÃ¨re :
         rsort($version_list);
 
         if(count($version_list) > 0)
@@ -113,7 +113,7 @@ function getRepositoryVersion($Reponame, $isMod = true ){
             return "-1";
         }
      }else{
-         log_('mod', 'Impossible de récupérer le fichier de version du mod '.$Reponame);
+         log_('mod', 'Impossible de rÃ©cupÃ©rer le fichier de version du mod '.$Reponame);
          mod_del_option('LAST_MOD_UPDATE-'.$Reponame);
          return "-1";
          

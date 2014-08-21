@@ -1,6 +1,6 @@
 <?php
 /**
-* tool_upgrade.php Met à jour OGSpy depuis le serveur
+* tool_upgrade.php Met Ã  jour OGSpy depuis le serveur
 * @package [MOD] AutoUpdate
 * @author DarkNoon
 * @version 2.0
@@ -11,7 +11,7 @@
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 /**
-*Récupère les fonctions zip
+*RÃ©cupÃ¨re les fonctions zip
 */
 $zip = new ZipArchive;
 
@@ -29,7 +29,7 @@ if($user_data['user_admin'] == 1) {
         //echo substr(sprintf('%o', fileperms('./install')), -4);
         
 		if (!is_writable(".")) {
-			die("Erreur: Le répertoire OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
+			die("Erreur: Le rÃ©pertoire OGSpy doit etre accessible en Ã©criture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
       
         if( $version == 'trunk'){
@@ -46,30 +46,30 @@ if($user_data['user_admin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo("./mod/autoupdate/tmp/".$toolroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
+                $zip->extractTo("./mod/autoupdate/tmp/".$toolroot."/"); //On extrait le mod dans le rÃ©pertoire temporaire d'autoupdate
                 $zip->close();
                 
                 unlink("./mod/autoupdate/tmp/".$toolroot.".zip");
 
-                $nom_répertoire = glob("./mod/autoupdate/tmp/".$toolroot."/*-".$toolroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
-                $folder = explode('/', $nom_répertoire[0]);
+                $nom_rÃ©pertoire = glob("./mod/autoupdate/tmp/".$toolroot."/*-".$toolroot."*",GLOB_ONLYDIR);//On rÃ©cupÃ¨re le nom du rÃ©pertoire
+                $folder = explode('/', $nom_rÃ©pertoire[0]);
                 rcopy("./mod/autoupdate/tmp/".$toolroot."/".$folder[5],".");
                 rrmdir("./mod/autoupdate/tmp/".$toolroot);
                 
-                //On passe au script de mise à jour.
+                //On passe au script de mise Ã  jour.
                 if (!is_writable("./install")) {
-                    die("Erreur: Le répertoire install OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
+                    die("Erreur: Le rÃ©pertoire install OGSpy doit etre accessible en Ã©criture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
                 }
                 
-                chdir('./install'); //Passage dans le répertoire d'installation
-                $pub_verbose = false; //Paramétrage de la mise à jour
+                chdir('./install'); //Passage dans le rÃ©pertoire d'installation
+                $pub_verbose = false; //ParamÃ©trage de la mise Ã  jour
                 echo "\t".'<tr>'."\n";
-				require_once("upgrade_to_latest.php"); // Mise à jour...
+				require_once("upgrade_to_latest.php"); // Mise Ã  jour...
 				echo "\t".'</tr>'."\n";
-                chdir('..');// Retour au répertoire par défaut.
+                chdir('..');// Retour au rÃ©pertoire par dÃ©faut.
 				
 				if(!rrmdir("./install")){
-					die("Impossible de supprimer le répertoire d'installation");
+					die("Impossible de supprimer le rÃ©pertoire d'installation");
 				}
 
                

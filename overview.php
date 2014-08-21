@@ -1,7 +1,7 @@
 <?php
 /** $Id: tableau.php 7672 2012-08-05 21:33:46Z darknoon $ **/
 /**
-* autoupdate.php Met à jour les mods depuis le serveur
+* autoupdate.php Met Ã  jour les mods depuis le serveur
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0
@@ -17,7 +17,7 @@ require_once("views/page_header.php");
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
-/*On récupère la liste des mods installés*/
+/*On rÃ©cupÃ¨re la liste des mods installÃ©s*/
 
 $sql = "SELECT title,root,version from ".TABLE_MOD;
 $res = $db->sql_query($sql,false,true);
@@ -30,9 +30,9 @@ while (list($modname,$modroot,$modversion) = $db->sql_fetch_row($res))
     $installed_mods[$i++]['version'] 	= $modversion;
 }
 
-// Recupération des Mods disponible sur l'ogsteam
+// RecupÃ©ration des Mods disponible sur l'ogsteam
 //$data = getmodlist();
-//$mod_names = array_keys($data); // Récupération des clés
+//$mod_names = array_keys($data); // RÃ©cupÃ©ration des clÃ©s
 
 
 ?>
@@ -72,7 +72,7 @@ if (version_compare($cur_version,$server_config["version"],">"))
 echo "</th>";
 if(mod_get_option("MAJ_TRUNK") == 1){
 	echo "<th>";
-	$ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>Télécharger</a>";
+	$ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>TÃ©lÃ©charger</a>";
 	echo "<font color='lime'>".$ziplink."</font>";
 	echo "</th>";
 }
@@ -113,7 +113,7 @@ for ($i=0 ; $i<count($installed_mods) ; $i++) {
          
         if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             echo "\t\t<th>";
-            if (!is_writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
+            if (!is_writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en Ã©criture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
             else {
                 if (version_compare($cur_version, $installed_mods[$i]['version'],">"))
                 {
@@ -126,7 +126,7 @@ for ($i=0 ; $i<count($installed_mods) ; $i++) {
             echo "</th>\n";
             if(mod_get_option("MAJ_TRUNK") == 1){
                 echo "\t\t<th>";
-                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modroot."&tag=trunk'>Télécharger</a>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modroot."&tag=trunk'>TÃ©lÃ©charger</a>";
                 echo "<font color='lime'>".$ziplink."</font>";
                 echo "</th>\n";
             }

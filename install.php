@@ -18,12 +18,12 @@ $is_ok = install_mod($mod_folder);
 if ($is_ok == true)
 	{
 		//si besoin de creer des tables, a faire ici
-		//Options par défaut.
+		//Options par dÃ©faut.
 		mod_set_option ( "CYCLEMAJ", "24");
 		mod_set_option ( "MAJ_TRUNK", "0");
 	}
 else
 	{
-		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+		echo  "<script>alert('DÃ©solÃ©, un problÃ¨me a eu lieu pendant l'installation, corrigez les problÃ¨mes survenue et rÃ©essayez.');</script>";
 	}
 ?>
