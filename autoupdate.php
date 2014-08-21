@@ -1,6 +1,6 @@
 <?php
 /**
-* autoupdate.php Page maitresse du mod (fait les mises ‡ jours des mods et affiche les pages demandÈes)
+* autoupdate.php Page maitresse du mod (fait les mises √† jours des mods et affiche les pages demand√©es)
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0
@@ -12,9 +12,9 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 require_once("views/page_header.php");
-if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre ‡ jour PHP(>= 5.2)");
-if ( !extension_loaded('zip')) die("Autoupdate ne peut fonctionner correctement sans la librairie Zip, Merci de vÈrifier la configuration de votre serveur");
-if ( !ini_get('allow_url_fopen')) die("Autoupdate ne peut accËder ‡ serveur de versions avec la configuration actuelle");
+if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre √† jour PHP(>= 5.2)");
+if ( !extension_loaded('zip')) die("Autoupdate ne peut fonctionner correctement sans la librairie Zip, Merci de v√©rifier la configuration de votre serveur");
+if ( !ini_get('allow_url_fopen')) die("Autoupdate ne peut acc√®der √† serveur de versions avec la configuration actuelle");
 
 require_once("mod/autoupdate/functions.php");
 require_once("mod/autoupdate/lang_main.php");
@@ -22,8 +22,8 @@ require_once("mod/autoupdate/mod_list.php");
 
 
 /**
-* DÈfini o˘ se trouve le fichier qui contient les derniËres versions des mods.
-* DiffÈrent suivant si allow_url_fopen est activÈ ou non. S'il n'est pas activÈ, on va chercher le fichier en local aprËs tÈlÈchargement.
+* D√©fini o√π se trouve le fichier qui contient les derni√®res versions des mods.
+* Diff√©rent suivant si allow_url_fopen est activ√© ou non. S'il n'est pas activ√©, on va chercher le fichier en local apr√®s t√©l√©chargement.
 */
 
 if (!isset($pub_sub)) {

@@ -1,6 +1,6 @@
 <?php
 /**
-* down.php Télécharge de nouveaux mods sur le serveur
+* down.php TÃ©lÃ©charge de nouveaux mods sur le serveur
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0
@@ -14,7 +14,7 @@ require_once("views/page_header.php");
 
 if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 	
-	// Récupérer la liste des modules installés
+	// RÃ©cupÃ©rer la liste des modules installÃ©s
 	$sql = "SELECT title,root,version from ".TABLE_MOD;
 	$res = $db->sql_query($sql,false,true);
 	
@@ -24,14 +24,14 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 		$installed_mods[$a]['root'] = $modroot;
 		$installed_mods[$a++]['version'] = $modversion;
 	}
-    //Récupérer la liste des mods disponibles sur le dépot
+    //RÃ©cupÃ©rer la liste des mods disponibles sur le dÃ©pot
     $download_mod_list = getRepositorylist();
 
 ?>
 <table width='600'>
 <?php
 	if (!is_writable("./mod/")) {
-	echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
+	echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accÃ¨s en Ã©criture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au rÃ©pertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
 	}
 
 ?>
@@ -59,14 +59,14 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 			}
 		}
 		if ($install == false) {
-			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."\">Télécharger</a>";
+			$link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."\">TÃ©lÃ©charger</a>";
 			echo "\t<tr>\n";
 			echo "\t\t<th>".$cur_modname."</th>\n";
 			echo "\t\t<th>".$cur_description."</th>\n";
 			echo "\t\t<th><font color='lime'>".$link."</font></th>\n";
 			if(mod_get_option("MAJ_TRUNK") == 1){
                 echo "\t\t<th>";
-                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=".$cur_modname."&tag=trunk'>TÃ©lÃ©charger</a>";
                 echo "<font color='lime'>".$ziplink."</font>";
                 echo "</th>\n";
             }

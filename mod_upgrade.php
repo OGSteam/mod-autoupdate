@@ -1,6 +1,6 @@
 <?php
 /**
-* mod_upgrade.php Met à jour les mods depuis le serveur
+* mod_upgrade.php Met Ã  jour les mods depuis le serveur
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0a
@@ -11,7 +11,7 @@
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 /**
-*Récupère les fonctions zip
+*RÃ©cupÃ¨re les fonctions zip
 */
 $zip = new ZipArchive;
 
@@ -25,17 +25,17 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     
     if(isset($pub_tag))
     {
-        //Si une version est spécifiée...
+        //Si une version est spÃ©cifiÃ©e...
         $version = mysql_real_escape_string($pub_tag);
     }else{
-        //Sinon on prends la dernière
+        //Sinon on prends la derniÃ¨re
         $version= getRepositoryVersion($modroot);
-        if($version == '-1') die("Pas de version officielle disponible, Merci de signaler le problème à l'OGSteam");
+        if($version == '-1') die("Pas de version officielle disponible, Merci de signaler le problÃ¨me Ã  l'OGSteam");
     }
     
 	if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
         
-        //Récupération des infos du mod :
+        //RÃ©cupÃ©ration des infos du mod :
         $repoDetails = getRepositoryDetails($modroot);
 
 		if( $version == 'trunk'){
@@ -45,7 +45,7 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         }
         
 		if (!is_writable("./mod/autoupdate/tmp/")) {
-			die("Erreur: Le repertoire /mod/autoupdate/tmp/ doit etre accessible en écriture (777) ".__FILE__. "(Ligne: ".__LINE__.")");
+			die("Erreur: Le repertoire /mod/autoupdate/tmp/ doit etre accessible en Ã©criture (777) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
         
 		if(copy($modzip , './mod/autoupdate/tmp/'.$modroot.'.zip')) {
@@ -55,12 +55,12 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
+                $zip->extractTo("./mod/autoupdate/tmp/".$modroot."/"); //On extrait le mod dans le rÃ©pertoire temporaire d'autoupdate
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/".$modroot.".zip");
-                $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
-                $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot); //Copie du répertoire dans le dossier des mods
+                $nom_rÃ©pertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On rÃ©cupÃ¨re le nom du rÃ©pertoire
+                $folder = explode('/', $nom_rÃ©pertoire[0]);
+                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot); //Copie du rÃ©pertoire dans le dossier des mods
                 rrmdir("./mod/autoupdate/tmp/".$modroot);
                 echo "\t".'<tr>'."\n";
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";

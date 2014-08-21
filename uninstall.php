@@ -1,7 +1,7 @@
 <?php
 /** $Id: uninstall.php 7672 2012-08-05 21:33:46Z darknoon $ **/
 /**
-* uninstall.php Désinstall le mod
+* uninstall.php DÃ©sinstall le mod
 * @package [MOD] AutoUpdate
 * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
 * @version 1.0
