@@ -21,12 +21,12 @@ if(!isset($pub_confirmed)) $pub_confirmed = "no";
 
 if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     
-    $modroot = mysql_real_escape_string($pub_mod);
+    $modroot = filter_var($pub_mod, FILTER_SANITIZE_STRING);
     
     if(isset($pub_tag))
     {
         //Si une version est spécifiée...
-        $version = mysql_real_escape_string($pub_tag);
+        $version = filter_var($pub_tag, FILTER_SANITIZE_STRING);
     }else{
         //Sinon on prends la dernière
         $version= getRepositoryVersion($modroot);

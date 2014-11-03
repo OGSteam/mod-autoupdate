@@ -21,8 +21,8 @@ if(!isset($pub_confirmed)) $pub_confirmed = "no";
 
 if($user_data['user_admin'] == 1) {
     
-    $toolroot = mysql_real_escape_string($pub_tool);
-    $version = mysql_real_escape_string($pub_tag);
+        $toolroot = filter_var($pub_tool, FILTER_SANITIZE_STRING);
+        $version = filter_var($pub_tag, FILTER_SANITIZE_STRING);
 
 	if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
         
