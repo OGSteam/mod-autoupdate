@@ -1,6 +1,6 @@
 <?php
 /**
-* mod_list.php List des Fichiers à ne pas télécharger
+* mod_list.php Liste des Fichiers à ne pas télécharger
 * @package [MOD] AutoUpdate
 * @author DarkNoon <darknoon@darkcity.fr>
 * @version 1.0
@@ -41,18 +41,18 @@ function getRepositorylist(){
             $mod["nom"] = $mod_name[1];
 			if($mod["is_fork"] == false){            
 				$mod_list[] = array('nom' => $mod["nom"],
-				'description' => utf8_decode($mod["description"]),
+				'description' => $mod["description"],
 				'resource_uri' => $mod["resource_uri"],
 				'owner' => $mod["owner"]);
 			}else{
 				$mod_list[] = array('nom' =>$mod["nom"],
-				'description' => utf8_decode($mod["description"]),
+				'description' => $mod["description"],
 				'resource_uri' => $mod["fork_resource_uri"],
 				'owner' => $mod["fork_owner"]);            
 			}
 		}else if(preg_match("/ogspy/",$mod["nom"])){
         		$mod_list[] = array('nom' => $mod["nom"],
-				'description' => utf8_decode($mod["description"]),
+				'description' => $mod["description"],
 				'resource_uri' => $mod["resource_uri"],
 				'owner' => $mod["owner"]);
 			}
@@ -94,8 +94,8 @@ function getRepositoryVersion($Reponame, $isMod = true ){
      if(file_exists('./mod/autoupdate/tmp/'.$Reponame.'.json')){
         $api_list = file_get_contents('./mod/autoupdate/tmp/'.$Reponame.'.json');	
 
-        $result = utf8_encode($api_list);
-        $data = json_decode($result, true);
+        //$result = utf8_encode($api_list);
+        $data = json_decode($api_list, true);
         $version_list = array_keys($data);
         // Supression de l'étiquette tip
         $tip_id = array_search('tip', $version_list);
