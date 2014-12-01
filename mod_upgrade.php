@@ -39,7 +39,7 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         $repoDetails = getRepositoryDetails($modroot);
 
 		if( $version == 'trunk'){
-            $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/tip.zip";
+            $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/default.zip";
         }else{
             $modzip = "https://bitbucket.org/".$repoDetails['owner']."/mod-".$modroot."/get/".$version.".zip";
         }

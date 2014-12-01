@@ -33,7 +33,7 @@ if($user_data['user_admin'] == 1) {
 		}
       
         if( $version == 'trunk'){
-            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/tip.zip";
+            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/default.zip";
         }else{
             $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/".$version.".zip";
         }
