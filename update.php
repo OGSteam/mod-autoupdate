@@ -11,11 +11,17 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
+	
 $mod_folder= "autoupdate";
 $mod_name = "autoupdate";
-update_mod($mod_folder,$mod_name);
 
-mod_set_option ( "CYCLEMAJ", "24");
-mod_set_option ( "MAJ_TRUNK", "0");
-
+if (version_compare("3.2.0",$server_config["version"]) > 0 ){
+	log_("mod_erreur_txt_version",$mod_folder);
+	redirection("index.php?action=message&id_message=errormod&info");
+	exit();
+else{
+	update_mod($mod_folder,$mod_name);
+	mod_set_option ( "CYCLEMAJ", "24");
+	mod_set_option ( "MAJ_TRUNK", "0");
+}
 ?>
