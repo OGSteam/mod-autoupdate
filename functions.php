@@ -28,8 +28,7 @@ function versionmod() {
 function upgrade_ogspy_mod($mod){
 	global $db, $lang;
     // On vérifie si le mod est déjà installé
-    $check = "SELECT title FROM " . TABLE_MOD . " WHERE root='" . $mod .
-        "'";
+    $check = "SELECT title FROM " . TABLE_MOD . " WHERE root='" . $mod . "'";
     $query_check = $db->sql_query($check);
     $result_check = $db->sql_numrows($query_check);
 
@@ -53,9 +52,9 @@ function upgrade_ogspy_mod($mod){
             require_once("mod/".$mod."/install.php");
             generate_all_cache();
             log_("mod_install", $mod);
-            $maj = $lang['autoupdate_tableau_installok']."<br />\n<br />\n";
+            $maj = $lang['autoupdate_tableau_installok']."<br /><br />";
         } else{
-            $maj = $lang['autoupdate_tableau_installoff']."<br />\n<br />\n";
+            $maj = $lang['autoupdate_tableau_installoff']."<br /><br />";
         }
         return $maj;
                 
@@ -115,4 +114,31 @@ function tableau($tableau, $type = "maj") {
 	}
 }
 
+/**
+ * Vérifie la version d'ogspy avant installation
+ *
+ *
+ */
+function check_ogspy_version_bcopy($mod_folder)
+{
+    global $server_config;
+    // verification sur le fichier .txt
+    $filename = 'mod/autoupdate/tmp/' . $mod_folder . '/version.txt';
+
+    // On récupère les données du fichier version.txt
+
+    if(!file_exists($filename)) return false;
+    $file = file($filename);
+
+    //Version Minimale OGSpy
+    /** @var string $mod_required_ogspy */
+    $mod_required_ogspy = trim($file[3]);
+    if(isset($mod_required_ogspy)){
+        if (version_compare($mod_required_ogspy,$server_config["version"]) > 0 ){
+            log_("mod_erreur_txt_version",$mod_folder);
+            return false;
+        }
+    }
+    return true;
+}
 ?>

@@ -60,19 +60,22 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 unlink("./mod/autoupdate/tmp/".$modroot.".zip");
                 $nom_répertoire = glob("./mod/autoupdate/tmp/".$modroot."/*-".$modroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot); //Copie du répertoire dans le dossier des mods
-                rrmdir("./mod/autoupdate/tmp/".$modroot);
-                echo "\t".'<tr>'."\n";
-                echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";
-                echo "\t".'</tr>'."\n";
-                echo "\t".'<tr>'."\n";
-                echo "\t\t".'<td class="c">'.upgrade_ogspy_mod($modroot).'</td>'."\n";
-                echo "\t".'</tr>'."\n";
-                echo "\t".'<tr>'."\n";
-                echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
-                echo "\t".'</tr>'."\n";
-				echo '</table>'."\n";
-				echo '<br />'."\n";
+
+                if(check_ogspy_version_bcopy($modroot."/".$folder[5]) == true){
+                    log_("debug","Installation du mod");
+                    rcopy("./mod/autoupdate/tmp/".$modroot."/".$folder[5],"./mod/".$modroot); //Copie du répertoire dans le dossier des mods
+                    rrmdir("./mod/autoupdate/tmp/".$modroot);
+                    echo "\t".'<tr>'."\n";
+                    echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_unzipok'].'</td>'."\n";
+                    echo "\t".'</tr>'."\n";
+                    echo "\t".'<tr>'."\n";
+                    echo "\t\t".'<td class="c">'.upgrade_ogspy_mod($modroot).'</td>'."\n";
+                }else{
+                    echo "\t".'<tr>'."\n";
+                    echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_errorversionogspy'].'</td>'."\n";
+                    echo "\t".'</tr>'."\n";
+                }
+
 			}
 		}
     }else{
@@ -84,12 +87,14 @@ if($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod='.$modroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
             echo "\t".'</tr>'."\n";
             echo "\t".'<tr>'."\n";
-            echo "\t".'</tr>'."\n";
-            echo "\t".'<tr>'."\n";            
-            echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
-            echo "\t".'</tr>'."\n";
-            echo '</table>'."\n";
 	}
+
+    echo "\t".'</tr>'."\n";
+    echo "\t".'<tr>'."\n";
+    echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
+    echo "\t".'</tr>'."\n";
+    echo '</table>'."\n";
+    echo '<br />'."\n";
 
 } else {
 	echo $lang['autoupdate_MaJ_rights'];
