@@ -47,6 +47,7 @@ $lang['autoupdate_MaJ_error'] = "Erreur à la mise à jour du fichier.";
 $lang['autoupdate_MaJ_uptodateok'] = "Mise à jour réussie !!";
 $lang['autoupdate_MaJ_downok'] = "Téléchargement réussi.";
 $lang['autoupdate_MaJ_unzipok'] = "Décompression réussie.";
+$lang['autoupdate_MaJ_errorversionogspy'] = "<span style='color:red'>Version d'OGSpy supérieure requise</span>";
 $lang['autoupdate_MaJ_statistic'] = "Statistiques de mise à jour";
 $lang['autoupdate_MaJ_number'] = "Nombre de fichiers et dossiers mis à jour";
 $lang['autoupdate_MaJ_numbermod'] = "Nombre de mods mis à jour.";
