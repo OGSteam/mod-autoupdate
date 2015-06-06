@@ -39,7 +39,7 @@ function getRepositorylist(){
         if(preg_match("/mod-/",$mod["nom"])){
             $mod_name = explode('-',$mod["nom"]);
             $mod["nom"] = $mod_name[1];
-			if($mod["is_fork"] == false){            
+			if($mod["is_fork"] == false){
 				$mod_list[] = array('nom' => $mod["nom"],
 				'description' => $mod["description"],
 				'resource_uri' => $mod["resource_uri"],
@@ -57,6 +57,7 @@ function getRepositorylist(){
 				'owner' => $mod["owner"]);
 			}
      }
+
     return ($mod_list);
 }
 
