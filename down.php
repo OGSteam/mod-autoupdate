@@ -28,7 +28,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     $download_mod_list = getRepositorylist();
 
     ?>
-    <table width='600'>
+    <table width='60%'>
     <?php
     if (!is_writable("./mod/")) {
         echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
