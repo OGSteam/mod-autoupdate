@@ -61,7 +61,6 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 $folder = explode('/', $nom_répertoire[0]);
 
                 if (check_ogspy_version_bcopy($modroot . "/" . $folder[5]) == true) {
-                    log_("debug", "Installation du mod");
                     rcopy("./mod/autoupdate/tmp/" . $modroot . "/" . $folder[5], "./mod/" . $modroot); //Copie du répertoire dans le dossier des mods
                     rrmdir("./mod/autoupdate/tmp/" . $modroot);
                     echo "\t" . '<tr>' . "\n";
