@@ -22,6 +22,7 @@ $lang['autoupdate_tableau_namemod'] = "Nom du module";
 $lang['autoupdate_tableau_authormod'] = "Auteur du module";
 $lang['autoupdate_tableau_descmod'] = "Description";
 $lang['autoupdate_tableau_nametool'] = "Nom de l'outil";
+$lang['autoupdate_tableau_authtool'] = "Auteur de l'outil";
 $lang['autoupdate_tableau_description'] = "Description du module";
 $lang['autoupdate_tableau_modinstall'] = "Modules installés - Recherche des mises à jour sur OGSteam.fr";
 $lang['autoupdate_tableau_toolinstall'] = "Outils installés - Recherche des mises à jour sur OGSteam.fr";
