@@ -68,8 +68,6 @@ if ($user_data["user_admin"] == 1) {
 } else {
     $bouton3 = "";
 }
-
-echo '<script src="http://www.ogsteam.besaba.com/js/stat.js" type="text/javascript"> </script>';
 echo "\n<table>\n";
 echo "\t<tr>\n";
 echo $bouton1 . $bouton2 . $bouton3;
