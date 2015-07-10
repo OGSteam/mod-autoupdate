@@ -80,6 +80,10 @@ while (list($modname, $modroot, $modversion) = $db->sql_fetch_row($res)) {
                 echo "<font color='lime'>" . $ziplink . "</font>";
                 echo "</th>";
             }
+            echo "<th>";
+            $trackerlink = "<a href='https://bitbucket.org/ogsteam/ogspy/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+            echo "<font color='lime'>" . $trackerlink . "</font>";
+            echo "</th>";
             ?>
     </tr>
     <tr>
@@ -143,7 +147,7 @@ while (list($modname, $modroot, $modversion) = $db->sql_fetch_row($res)) {
                 }
                 echo "\t\t<th>";
                 if (isset($repo_details['owner'])) {
-                    $trackerlink = "<a href='https://bitbucket.org/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues?status=new&status=open'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+                    $trackerlink = "<a href='https://bitbucket.org/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
                     echo "<font color='lime'>" . $trackerlink . "</font>";
                 }
                 echo "</th>\n";
