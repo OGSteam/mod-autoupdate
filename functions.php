@@ -147,4 +147,60 @@ function check_ogspy_version_bcopy($mod_folder)
     return true;
 }
 
+function send_stats()
+{
+    global $server_config, $serveur_key, $serveur_date;
+
+    if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
+        // recuperation du pays et de l univers du serveur
+        if (isset($server_config["xtense_universe"])) {
+            //pattern de recherche
+            $pattern = "#http:\/\/s([0-9]{1,3})-([a-z]{2,3})\.ogame\.gameforge.com#";
+            if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
+                $og_pays = $retour[2]; // seconde capture
+                $og_uni = $retour[1]; // premiere capture
+            }
+        }
+        //Statistiques concernant les membres
+        $users_info = sizeof(user_statistic());
+        //
+        $db_size_info = db_size_info();
+        //Envoi de la requête:
+        //Adresse du serveur a contacter
+        $url_server = "darkcity.fr";
+        //$url_server = "127.0.0.1";
+        $fsock = false;
+
+        $fsock = @fsockopen($url_server, 80, $errno, $errstr, 3);
+
+        if ($fsock === false) {
+            die($errno . ", " . $errstr . ", " . $fsock);
+        } else {
+            //paramètres de la requete
+            $link = "/statistiques/getstats/";
+            $link .= "?version=" . $server_config["version"];
+
+            $link .= "&nb_users=" . $users_info;
+
+            //Paramètres Serveur
+            $link .= "&db_size=" . urlencode($db_size_info["Server"]);
+            $link .= "&php_version=" . PHP_VERSION;
+
+
+            // clef unique
+            $link .= "&server_since=" . $serveur_date;
+            $link .= "&server_key=" . $serveur_key;
+
+            // recuperation pays et univers du serveur
+            $link .= "&og_uni=" . $og_uni;
+            $link .= "&og_pays=" . $og_pays;
+
+            @fputs($fsock, "GET " . $link . " HTTP/1.1\r\n");
+            @fputs($fsock, "HOST: " . $url_server . "\r\n");
+            @fputs($fsock, "Connection: close\r\n\r\n");
+            @fclose($fsock);
+        }
+    }
+    //log_('debug',"Sending Statistics done");
+}
 ?>

@@ -20,6 +20,8 @@ require_once("mod/autoupdate/functions.php");
 require_once("mod/autoupdate/lang_main.php");
 require_once("mod/autoupdate/mod_list.php");
 
+/* Envoi des statistiques du serveur */
+send_stats();
 
 /**
  * Défini où se trouve le fichier qui contient les dernières versions des mods.
