@@ -171,7 +171,7 @@ function send_stats()
         //$url_server = "127.0.0.1";
         $fsock = false;
 
-        $fsock = @fsockopen($url_server, 80, $errno, $errstr, 3);
+        $fsock = @fsockopen(gethostbyname($url_server), 80, $errno, $errstr, 3);
 
         if ($fsock === false) {
             die($errno . ", " . $errstr . ", " . $fsock);
