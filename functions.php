@@ -165,18 +165,7 @@ function send_stats()
         $users_info = sizeof(user_statistic());
         //
         $db_size_info = db_size_info();
-        //Envoi de la requête:
-        //Adresse du serveur a contacter
-        $url_server = "darkcity.fr";
-        //$url_server = "127.0.0.1";
-        $fsock = false;
 
-        /*$fsock = @fsockopen(gethostbyname($url_server), 80, $errno, $errstr, 3);
-
-        if ($fsock === false) {
-            die($errno . ", " . $errstr . ", " . $fsock);
-        } else {*/
-            //paramètres de la requete
             $link = "/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
 
@@ -184,7 +173,7 @@ function send_stats()
 
             //Paramètres Serveur
             $link .= "&db_size=" . urlencode($db_size_info["Server"]);
-            $link .= "&php_version=" . PHP_VERSION;
+            $link .= "&php_version=" .PHP_MAJOR_VERSION.PHP_MINOR_VERSION ;
 
 
             // clef unique
@@ -194,15 +183,9 @@ function send_stats()
             // recuperation pays et univers du serveur
             $link .= "&og_uni=" . $og_uni;
             $link .= "&og_pays=" . $og_pays;
-
-            /*@fputs($fsock, "GET " . $link . " HTTP/1.1\r\n");
-            @fputs($fsock, "HOST: " . $url_server . "\r\n");
-            @fputs($fsock, "Connection: close\r\n\r\n");
-            @fclose($fsock);*/
-			
+		
 			$repo_link = 'http://darkcity.fr'.$link;
-			@copy($repo_link, './mod/autoupdate/tmp/stats.answer');
-        /*}*/
+			@copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
     }
 
     //log_('debug',"Sending Statistics done");
