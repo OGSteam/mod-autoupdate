@@ -171,11 +171,11 @@ function send_stats()
         //$url_server = "127.0.0.1";
         $fsock = false;
 
-        $fsock = @fsockopen(gethostbyname($url_server), 80, $errno, $errstr, 3);
+        /*$fsock = @fsockopen(gethostbyname($url_server), 80, $errno, $errstr, 3);
 
         if ($fsock === false) {
             die($errno . ", " . $errstr . ", " . $fsock);
-        } else {
+        } else {*/
             //paramètres de la requete
             $link = "/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
@@ -195,12 +195,16 @@ function send_stats()
             $link .= "&og_uni=" . $og_uni;
             $link .= "&og_pays=" . $og_pays;
 
-            @fputs($fsock, "GET " . $link . " HTTP/1.1\r\n");
+            /*@fputs($fsock, "GET " . $link . " HTTP/1.1\r\n");
             @fputs($fsock, "HOST: " . $url_server . "\r\n");
             @fputs($fsock, "Connection: close\r\n\r\n");
-            @fclose($fsock);
-        }
+            @fclose($fsock);*/
+			
+			$repo_link = 'http://darkcity.fr'.$link;
+			@copy($repo_link, './mod/autoupdate/tmp/stats.answer');
+        /*}*/
     }
+
     //log_('debug',"Sending Statistics done");
 }
 ?>
