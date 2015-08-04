@@ -173,7 +173,7 @@ function send_stats()
 
             //Paramètres Serveur
             $link .= "&db_size=" . urlencode($db_size_info["Server"]);
-            $link .= "&php_version=" .PHP_MAJOR_VERSION.PHP_MINOR_VERSION ;
+            $link .= "&php_version=" .PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;
 
 
             // clef unique
