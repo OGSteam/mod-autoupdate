@@ -17,17 +17,7 @@ require_once("views/page_header.php");
 $query = "SELECT `active` FROM `" . TABLE_MOD . "` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
-/*On récupère la liste des mods installés*/
-
-$sql = "SELECT title,root,version from " . TABLE_MOD;
-$res = $db->sql_query($sql, false, true);
-
-$i = 0;
-while (list($modname, $modroot, $modversion) = $db->sql_fetch_row($res)) {
-    $installed_mods[$i]['name'] = $modname;
-    $installed_mods[$i]['root'] = $modroot;
-    $installed_mods[$i++]['version'] = $modversion;
-}
+$installed_mods = get_installed_mod_list();
 
 // Recupération des Mods disponible sur l'ogsteam
 //$data = getmodlist();

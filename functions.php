@@ -15,6 +15,23 @@ if (!defined('IN_SPYOGAME')) {
 require_once("mod/autoupdate/mod_list.php");
 require_once("includes/cache.php");
 
+
+/*On récupère la liste des mods installés*/
+
+function get_installed_mod_list(){
+
+    global $db;
+    $sql = "SELECT title,root,version from " . TABLE_MOD;
+    $res = $db->sql_query($sql, false, true);
+
+    $i = 0;
+    while (list($modname, $modroot, $modversion) = $db->sql_fetch_row($res)) {
+        $installed_mods[$i]['name'] = $modname;
+        $installed_mods[$i]['root'] = $modroot;
+        $installed_mods[$i++]['version'] = $modversion;
+    }
+    return $installed_mods;
+}
 /**
  *Récupère la version du mod
  */
@@ -161,31 +178,37 @@ function send_stats()
                 $og_uni = $retour[1]; // premiere capture
             }
         }
+        //Liste des modules installés
+
+        $installed_mod_list = get_installed_mod_list();
+        foreach($installed_mod_list as $mod_details) {
+
+            $data_mod[] = $mod_details['root'];
+        }
+            $data_mode_to_send = json_encode($data_mod);
+
         //Statistiques concernant les membres
         $users_info = sizeof(user_statistic());
         //
         $db_size_info = db_size_info();
 
-            $link = "/statistiques/getstats/";
+            $link = "/ogsteam/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
-
             $link .= "&nb_users=" . $users_info;
-
             //Paramètres Serveur
             $link .= "&db_size=" . urlencode($db_size_info["Server"]);
             $link .= "&php_version=" .PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;
-
-
             // clef unique
             $link .= "&server_since=" . $serveur_date;
             $link .= "&server_key=" . $serveur_key;
-
             // recuperation pays et univers du serveur
             $link .= "&og_uni=" . $og_uni;
             $link .= "&og_pays=" . $og_pays;
+            $link .= "&mod_list=". $data_mode_to_send;
 		
-			$repo_link = 'http://darkcity.fr'.$link;
+			$repo_link = 'http://127.0.0.1'.$link;
 			@copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
+            log_('debug',"Sending Statistics done: ". $repo_link);
     }
 
     //log_('debug',"Sending Statistics done");
