@@ -192,7 +192,7 @@ function send_stats()
         //
         $db_size_info = db_size_info();
 
-            $link = "/ogsteam/statistiques/getstats/";
+            $link = "/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
             $link .= "&nb_users=" . $users_info;
             //Paramètres Serveur
@@ -206,9 +206,8 @@ function send_stats()
             $link .= "&og_pays=" . $og_pays;
             $link .= "&mod_list=". $data_mode_to_send;
 		
-			$repo_link = 'http://127.0.0.1'.$link;
+			$repo_link = 'http://darkcity.fr'.$link;
 			@copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
-            log_('debug',"Sending Statistics done: ". $repo_link);
     }
 
     //log_('debug',"Sending Statistics done");
