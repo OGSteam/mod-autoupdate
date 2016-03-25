@@ -31,7 +31,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     <table width='60%'>
     <?php
     if (!is_writable("./mod/")) {
-        echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
+        echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
     }
 
     ?>
@@ -91,9 +91,9 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     </table><?php
 } else die($lang['autoupdate_MaJ_rights']);
 
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 
 require_once("views/page_tail.php");

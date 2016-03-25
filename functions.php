@@ -58,9 +58,9 @@ function upgrade_ogspy_mod($mod)
             require_once("mod/" . $mod . "/update.php");
             generate_mod_cache();
             log_("mod_update", $mod);
-            $maj = $lang['autoupdate_tableau_uptodateok'] . "<br />\n<br />\n";
+            $maj = $lang['autoupdate_tableau_uptodateok'] . "<br>\n<br>\n";
         } else {
-            $maj = $lang['autoupdate_tableau_uptodateoff'] . "<br />\n<br />\n";
+            $maj = $lang['autoupdate_tableau_uptodateoff'] . "<br>\n<br>\n";
         }
         return $maj;
 
@@ -70,9 +70,9 @@ function upgrade_ogspy_mod($mod)
             require_once("mod/" . $mod . "/install.php");
             generate_all_cache();
             log_("mod_install", $mod);
-            $maj = $lang['autoupdate_tableau_installok'] . "<br /><br />";
+            $maj = $lang['autoupdate_tableau_installok'] . "<br><br>";
         } else {
-            $maj = $lang['autoupdate_tableau_installoff'] . "<br /><br />";
+            $maj = $lang['autoupdate_tableau_installoff'] . "<br><br>";
         }
         return $maj;
 

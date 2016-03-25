@@ -80,7 +80,7 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_tableau_back'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
-                echo '<br />' . "\n";
+                echo '<br>' . "\n";
             }
         }
     } else {
@@ -103,9 +103,9 @@ if ($user_data['user_admin'] == 1) {
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
 ?>

@@ -73,8 +73,8 @@ if ($user_data["user_admin"] == 1) {
 echo "\n<table>\n";
 echo "\t<tr>\n";
 echo $bouton1 . $bouton2 . $bouton3;
-echo "\t</tr><br />\n";
-echo "</table>\n<br />\n";
+echo "\t</tr><br>\n";
+echo "</table>\n<br>\n";
 
 if (!isset($pub_sub)) $sub = 'overview'; else $sub = htmlentities($pub_sub);
 switch ($sub) {
