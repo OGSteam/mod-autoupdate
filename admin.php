@@ -33,7 +33,7 @@ if (isset($pub_valid)) {
         <tr>
             <th><?php echo $lang['autoupdate_admin_trunk']; ?><br/><?php echo $lang['autoupdate_admin_trunk1']; ?></th>
             <th><input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?>
-                       value="1"/> <font size="5">|</font> <input type="radio"
+                       value="1"/> <span style="font-size: large; ">|</span> <input type="radio"
                                                                   name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?>
                                                                   value="0"/></th>
         </tr>
@@ -51,9 +51,9 @@ if (isset($pub_valid)) {
 </table>
 <?php
 
-echo "<br />\n";
+echo "<br>\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
 ?>

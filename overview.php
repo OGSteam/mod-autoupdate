@@ -169,9 +169,9 @@ $installed_mods = get_installed_mod_list();
     ?>
 </table>
 <?php
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br />' . "\n";
+echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
 ?>
