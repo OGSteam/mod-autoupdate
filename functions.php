@@ -1,5 +1,4 @@
 <?php
-/** $Id: functions.php 7668 2012-07-15 22:16:03Z darknoon $ **/
 /**
  * functions.php Défini les fonctions du mod
  * @package [MOD] AutoUpdate
@@ -106,6 +105,8 @@ function rcopy($src, $dst)
 
 /**
  * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
+ * @param $tableau
+ * @param string $type
  */
 function tableau($tableau, $type = "maj")
 {
@@ -139,7 +140,8 @@ function tableau($tableau, $type = "maj")
 /**
  * Vérifie la version d'ogspy avant installation
  *
- *
+ * @param $mod_folder
+ * @return bool
  */
 function check_ogspy_version_bcopy($mod_folder)
 {
@@ -172,7 +174,7 @@ function send_stats()
         // recuperation du pays et de l univers du serveur
         if (isset($server_config["xtense_universe"])) {
             //pattern de recherche
-            $pattern = "#http:\/\/s([0-9]{1,3})-([a-z]{2,3})\.ogame\.gameforge.com#";
+            $pattern = "#https:\/\/s([0-9]{1,3})-([a-z]{2,3})\.ogame\.gameforge.com#";
             if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
                 $og_pays = $retour[2]; // seconde capture
                 $og_uni = $retour[1]; // premiere capture
@@ -192,7 +194,7 @@ function send_stats()
         //
         $db_size_info = db_size_info();
 
-            $link = "/statistiques/getstats/";
+            $link = "ogsteam/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
             $link .= "&nb_users=" . $users_info;
             //Paramètres Serveur
@@ -206,7 +208,7 @@ function send_stats()
             $link .= "&og_pays=" . $og_pays;
             $link .= "&mod_list=". $data_mode_to_send;
 		
-			$repo_link = 'http://darkcity.fr'.$link;
+			$repo_link = 'http://127.0.0.1'.$link;
 			@copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
     }
 
