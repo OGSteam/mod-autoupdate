@@ -37,20 +37,20 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
     if ($sub != "overview") {
         $bouton1 = "\t\t" . "<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=overview';\">";
 
-        $bouton1 .= "<font color='lime'>" . $lang['autoupdate_autoupdate_table'] . "</font>";
+        $bouton1 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
         $bouton1 .= "</td>\n";
     } else {
         $bouton1 = "\t\t" . "<th width='150'>";
-        $bouton1 .= "<font color=\"#5CCCE8\">" . $lang['autoupdate_autoupdate_table'] . "</font>";
+        $bouton1 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
         $bouton1 .= "</th>\n";
     }
     if ($sub != "down") {
         $bouton2 = "\t\t" . "<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=down';\">";
-        $bouton2 .= "<font color='lime'>" . $lang['autoupdate_autoupdate_down'] . "</font>";
+        $bouton2 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
         $bouton2 .= "</td>\n";
     } else {
         $bouton2 = "\t\t" . "<th width='150'>";
-        $bouton2 .= "<font color=\"#5CCCE8\">" . $lang['autoupdate_autoupdate_down'] . "</font>";
+        $bouton2 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
         $bouton2 .= "</th>\n";
     }
 } else {
@@ -60,11 +60,11 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 if ($user_data["user_admin"] == 1) {
     if ($sub != "admin") {
         $bouton3 = "\t\t" . "<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=admin';\">";
-        $bouton3 .= "<font color='lime'>" . $lang['autoupdate_autoupdate_admin'] . "</font>";
+        $bouton3 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
         $bouton3 .= "</td>\n";
     } else {
         $bouton3 = "\t\t" . "<th width='150'>";
-        $bouton3 .= "<font color=\"#5CCCE8\">" . $lang['autoupdate_autoupdate_admin'] . "</font>";
+        $bouton3 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
         $bouton3 .= "</th>\n";
     }
 } else {
