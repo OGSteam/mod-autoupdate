@@ -31,7 +31,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     <table width='60%'>
     <?php
     if (!is_writable("./mod/")) {
-        echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
+        echo "<tr><td class='c' colspan='100'><span style=\"color: red; \">Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></span></td></tr>";
     }
 
     ?>
@@ -66,11 +66,11 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             echo "\t<tr>\n";
             echo "\t\t<th>" . $cur_modname . "</th>\n";
             echo "\t\t<th>" . $cur_description . "</th>\n";
-            echo "\t\t<th><font color='lime'>" . $link . "</font></th>\n";
+            echo "\t\t<th><span style=\"color: lime; \">" . $link . "</span></th>\n";
             if (mod_get_option("MAJ_TRUNK") == 1) {
                 echo "\t\t<th>";
                 $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "&tag=trunk'>Télécharger</a>";
-                echo "<font color='lime'>" . $ziplink . "</font>";
+                echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>\n";
             }
             echo "\t</tr>\n";

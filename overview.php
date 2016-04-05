@@ -59,7 +59,7 @@ $installed_mods = get_installed_mod_list();
             echo "<th>";
             if (version_compare($cur_version, $server_config["version"], ">")) {
                 $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=" . $cur_version . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
-                echo "<font color='lime'>" . $ziplink . "</font>";
+                echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
             } else {
                 echo "Aucune";
             }
@@ -67,12 +67,12 @@ $installed_mods = get_installed_mod_list();
             if (mod_get_option("MAJ_TRUNK") == 1) {
                 echo "<th>";
                 $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>Télécharger</a>";
-                echo "<font color='lime'>" . $ziplink . "</font>";
+                echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
             echo "<th>";
             $trackerlink = "<a href='https://bitbucket.org/ogsteam/ogspy/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
-            echo "<font color='lime'>" . $trackerlink . "</font>";
+            echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
             echo "</th>";
             ?>
     </tr>
@@ -123,7 +123,7 @@ $installed_mods = get_installed_mod_list();
                 else {
                     if (version_compare($cur_version, $installed_mods[$i]['version'], ">")) {
                         $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=" . $cur_version . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
-                        echo "<font color='lime'>" . $ziplink . "</font>";
+                        echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                     } else {
                         echo "Aucune";
                     }
@@ -132,13 +132,13 @@ $installed_mods = get_installed_mod_list();
                 if (mod_get_option("MAJ_TRUNK") == 1) {
                     echo "\t\t<th>";
                     $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=trunk'>Télécharger</a>";
-                    echo "<font color='lime'>" . $ziplink . "</font>";
+                    echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                     echo "</th>\n";
                 }
                 echo "\t\t<th>";
                 if (isset($repo_details['owner'])) {
                     $trackerlink = "<a href='https://bitbucket.org/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
-                    echo "<font color='lime'>" . $trackerlink . "</font>";
+                    echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
                 }
                 echo "</th>\n";
 
