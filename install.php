@@ -21,6 +21,6 @@ if ($is_ok == true) {
     mod_set_option("CYCLEMAJ", "24");
     mod_set_option("MAJ_TRUNK", "0");
 } else {
-    echo "<script>alert('Désolé, un problème a eu lieu pendant l'installation: corrigez les problèmes survenus et réessayez.');</script>";
+    echo "<script>alert(\"Désolé, un problème a eu lieu pendant l'installation: corrigez les problèmes survenus et réessayez.\");</script>";
 }
 ?>
