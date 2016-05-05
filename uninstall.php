@@ -23,4 +23,4 @@ if (file_exists("parameters/modupdate.json")) {
 }
 
 mod_del_all_option();
-?>
+

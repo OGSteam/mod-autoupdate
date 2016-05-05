@@ -17,6 +17,9 @@ require_once("includes/cache.php");
 
 /*On récupère la liste des mods installés*/
 
+/**
+ * @return mixed
+ */
 function get_installed_mod_list(){
 
     global $db;
@@ -43,6 +46,10 @@ function versionmod()
     return $fetch['version'];
 }
 
+/**
+ * @param $mod
+ * @return string
+ */
 function upgrade_ogspy_mod($mod)
 {
     global $db, $lang;
@@ -78,6 +85,9 @@ function upgrade_ogspy_mod($mod)
     }
 }
 
+/**
+ * @param $dir
+ */
 function rrmdir($dir)
 {
     if (is_dir($dir)) {
@@ -93,6 +103,10 @@ function rrmdir($dir)
 }
 
 // copies files and non-empty directories
+/**
+ * @param $src
+ * @param $dst
+ */
 function rcopy($src, $dst)
 {
     if (is_dir($src)) {
@@ -214,4 +228,4 @@ function send_stats()
 
     //log_('debug',"Sending Statistics done");
 }
-?>
+

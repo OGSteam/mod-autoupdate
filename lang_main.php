@@ -88,4 +88,4 @@ $lang['autoupdate_createdby'] = "Créé par";
 $lang['autoupdate_and'] = "et";
 $lang['autoupdate_version'] = "version";
 $lang['autoupdate_error'] = "ERREUR";
-?>
+

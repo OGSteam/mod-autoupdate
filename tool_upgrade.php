@@ -67,10 +67,9 @@ if ($user_data['user_admin'] == 1) {
                 require_once("upgrade_to_latest.php"); // Mise à jour...
                 echo "\t" . '</tr>' . "\n";
                 chdir('..');// Retour au répertoire par défaut.
+                //Supression du répertoire Install
+                rrmdir("./install");
 
-                if (!rrmdir("./install")) {
-                    die("Impossible de supprimer le répertoire d'installation");
-                }
 
 
                 echo "\t" . '<tr>' . "\n";
@@ -108,4 +107,4 @@ echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
 echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
-?>
+

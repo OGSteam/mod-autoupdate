@@ -94,4 +94,3 @@ switch ($sub) {
         include('admin.php');
         break;
 }
-?>
