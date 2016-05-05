@@ -23,4 +23,4 @@ if ($is_ok == true) {
 } else {
     echo "<script>alert(\"Désolé, un problème a eu lieu pendant l'installation: corrigez les problèmes survenus et réessayez.\");</script>";
 }
-?>
+

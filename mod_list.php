@@ -60,6 +60,10 @@ function getRepositorylist()
     return ($mod_list);
 }
 
+/**
+ * @param $repoName
+ * @return array|bool
+ */
 function getRepositoryDetails($repoName)
 {
 
@@ -79,6 +83,11 @@ function getRepositoryDetails($repoName)
 }
 
 
+/**
+ * @param      $Reponame
+ * @param bool $isMod
+ * @return string
+ */
 function getRepositoryVersion($Reponame, $isMod = true)
 {
 
@@ -118,4 +127,3 @@ function getRepositoryVersion($Reponame, $isMod = true)
     }
 }
 
-?>
