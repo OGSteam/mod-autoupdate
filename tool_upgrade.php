@@ -26,10 +26,8 @@ if ($user_data['user_admin'] == 1) {
 
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
 
-        //echo substr(sprintf('%o', fileperms('./install')), -4);
-
-        if (!is_writable(".")) {
-            die("Erreur: Le répertoire OGSpy doit etre accessible en écriture (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
+        if (!is_writeable(".")) {
+            die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
 
         if ($version == 'trunk') {
@@ -57,8 +55,8 @@ if ($user_data['user_admin'] == 1) {
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
 
                 //On passe au script de mise à jour.
-                if (!is_writable("./install")) {
-                    die("Erreur: Le répertoire install OGSpy doit etre accessible en écriture (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
+                if (!is_writeable("./install")) {
+                    die("Error: OGSpy install folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
                 }
 
                 chdir('./install'); //Passage dans le répertoire d'installation

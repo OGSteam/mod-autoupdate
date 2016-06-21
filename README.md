@@ -1,8 +1,6 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
+### Autoupdate ###
 
 * Quick summary
 * Version
@@ -10,7 +8,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### How do I get set up? ###
 
-* Summary of set up
+* This module requires OGSpy to work correctly
 * Configuration
 * Dependencies
 * Database configuration
@@ -25,5 +23,5 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Darknoon
+* http://www.ogsteam.fr

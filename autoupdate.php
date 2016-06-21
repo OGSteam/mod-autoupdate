@@ -12,12 +12,12 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 require_once("views/page_header.php");
-if (!function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre à jour PHP(>= 5.2)");
-if (!extension_loaded('zip')) die("Autoupdate ne peut fonctionner correctement sans la librairie Zip, Merci de vérifier la configuration de votre serveur");
-if (!ini_get('allow_url_fopen')) die("Autoupdate ne peut accèder à serveur de versions avec la configuration actuelle");
+if (!function_exists('json_decode')) die("Autoupdate cannot work without the JSON Library, please use PHP(>= 5.2)");
+if (!extension_loaded('zip')) die("Autoupdate cannot work without the ZIP Library, Please check your server configuration");
+if (!ini_get('allow_url_fopen')) die("Autoupdate cannot work without external connections (fopen), Please check your server configuration");
 
 require_once("mod/autoupdate/functions.php");
-require_once("mod/autoupdate/lang_main.php");
+require_once("mod/autoupdate/lang/". $ui_lang ."/lang_autoupdate.php");
 require_once("mod/autoupdate/mod_list.php");
 
 /* Envoi des statistiques du serveur */
