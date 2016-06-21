@@ -192,6 +192,9 @@ function send_stats()
             if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
                 $og_pays = $retour[2]; // seconde capture
                 $og_uni = $retour[1]; // premiere capture
+            }else{
+                $og_pays = "NA";
+                $og_uni = "NA";
             }
         }
         //Liste des modules installés

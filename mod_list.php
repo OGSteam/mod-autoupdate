@@ -91,6 +91,7 @@ function getRepositoryDetails($repoName)
 function getRepositoryVersion($Reponame, $isMod = true)
 {
 
+    global $lang;
     $repo_details = getRepositoryDetails($Reponame);
     if ($repo_details == false) return "-1";
 
@@ -116,11 +117,11 @@ function getRepositoryVersion($Reponame, $isMod = true)
         if (count($version_list) > 0) {
             return $version_list[0];
         } else {
-            log_('mod', 'Pas de version de Production pour le mod ' . $Reponame);
+            log_('mod', $lang['autoupdate_tableau_error4'].' ' . $Reponame);
             return "-1";
         }
     } else {
-        log_('mod', 'Impossible de récupérer le fichier de version du mod ' . $Reponame);
+        log_('mod', $lang['autoupdate_tableau_error1'] . $Reponame);
         mod_del_option('LAST_MOD_UPDATE-' . $Reponame);
         return "-1";
 

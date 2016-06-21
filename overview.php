@@ -15,7 +15,7 @@ require_once("mod/autoupdate/mod_list.php");
 require_once("views/page_header.php");
 
 $query = "SELECT `active` FROM `" . TABLE_MOD . "` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
-if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
+if (!$db->sql_numrows($db->sql_query($query))) die("Mod Disabled"); //TODO Améliorer ce contrôle
 
 $installed_mods = get_installed_mod_list();
 
@@ -119,7 +119,7 @@ $installed_mods = get_installed_mod_list();
 
             if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 echo "\t\t<th>";
-                if (!is_writable("./mod/" . $installed_mods[$i]['root'] . "/")) echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><font color=red>(RO)</font></a>";
+                if (!is_writeable("./mod/" . $installed_mods[$i]['root'] . "/")) echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><font color=red>(RO)</font></a>";
                 else {
                     if (version_compare($cur_version, $installed_mods[$i]['version'], ">")) {
                         $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=" . $cur_version . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";

@@ -29,7 +29,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     } else {
         //Sinon on prends la dernière
         $version = getRepositoryVersion($modroot);
-        if ($version == '-1') die("Pas de version officielle disponible, Merci de signaler le problème à l'OGSteam");
+        if ($version == '-1') die("No official version available, Please contact OGSteam");
     }
 
     if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
@@ -43,8 +43,8 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             $modzip = "https://bitbucket.org/" . $repoDetails['owner'] . "/mod-" . $modroot . "/get/" . $version . ".zip";
         }
 
-        if (!is_writable("./mod/autoupdate/tmp/")) {
-            die("Erreur: Le repertoire /mod/autoupdate/tmp/ doit etre accessible en écriture (777) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
+        if (!is_writeable("./mod/autoupdate/tmp/")) {
+            die("Error: Folder /mod/autoupdate/tmp/ must be writeable " . __FILE__ . "(Line: " . __LINE__ . ")");
         }
 
         if (copy($modzip, './mod/autoupdate/tmp/' . $modroot . '.zip')) {
