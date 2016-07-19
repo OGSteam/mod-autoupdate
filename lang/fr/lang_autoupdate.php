@@ -1,15 +1,14 @@
 <?php
 /**
-* lang_autoupdate.php Définit les $lang
-* @package [MOD] AutoUpdate
-* @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
-* @version 1.0
-* created	: 13/11/2006
-* modified	: 18/01/2007
-*/
-if (!defined('IN_SPYOGAME')) {
-    die("Hacking attempt");
-}
+ * Autoupdate Language File
+ * @package [Mod] Autoupdate
+ * @subpackage i18n
+ * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
+ * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 2.1.9
+ */
+
 $lang['autoupdate_autoupdate_table'] = "Tableau de mise à jour";
 $lang['autoupdate_autoupdate_admin'] = "Administration";
 $lang['autoupdate_autoupdate_down'] = "Téléchargement des mods";

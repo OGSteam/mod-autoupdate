@@ -1,12 +1,12 @@
 <?php
 /**
- * autoupdate.php Page maitresse du mod (fait les mises à jours des mods et affiche les pages demandées)
- * @package [MOD] AutoUpdate
+ * Autoupdate Controller
+ * @package [Mod] Autoupdate
+ * @subpackage main
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @version 1.0
- * created    : 27/10/2006
- * modified    : 18/01/2007
- * $Id: autoupdate.php 7668 2012-07-15 22:16:03Z darknoon $
+ * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 2.1.9
  */
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");

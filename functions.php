@@ -1,12 +1,14 @@
 <?php
 /**
- * functions.php Défini les fonctions du mod
- * @package [MOD] AutoUpdate
+ * Autoupdate common functions
+ * @package [Mod] Autoupdate
+ * @subpackage main
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @version 1.0
- *    created        : 20/11/2006
- *    modified    : 17/01/2007
+ * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 2.1.9
  */
+
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
