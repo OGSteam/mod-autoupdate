@@ -1,11 +1,12 @@
 <?php
 /**
- * mod_list.php Liste des Fichiers à ne pas télécharger
- * @package [MOD] AutoUpdate
+ * Autoupdate Mod list
+ * @package [Mod] Autoupdate
+ * @subpackage main
  * @author DarkNoon <darknoon@darkcity.fr>
- * @version 1.0
- * created    : 16/01/2012
- * modified    : 16/01/2012
+ * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 2.1.9
  */
 
 function getRepositorylist()

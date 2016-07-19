@@ -1,13 +1,14 @@
 <?php
 /**
- * install.php Fichier d'installation
- * @package [MOD] AutoUpdate
+ * Autoupdate install script
+ * @package [Mod] Autoupdate
+ * @subpackage main
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @version 1.0c
- * created    : 27/10/2006
- * modified    : 18/01/2007
- * $Id: install.php 7672 2012-08-05 21:33:46Z darknoon $
+ * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 2.1.9
  */
+
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
