@@ -74,7 +74,7 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
                 echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c">' . $lang['autoupdate_tableau_back'] . '</td>' . "\n";
+                echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
@@ -83,7 +83,7 @@ if ($user_data['user_admin'] == 1) {
     } else {
         echo '<table>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJtool_wantbackup'] . '</td>' . "\n";
+        echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJtool_wantbackup'] . '</span></td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
         echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJtool_wantupdate'] . $toolroot . ' ' . $version . ' ?</td>' . "\n";
@@ -92,7 +92,7 @@ if ($user_data['user_admin'] == 1) {
         echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool=' . $toolroot . '&tag=' . $version . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_tableau_back'] . '</td>' . "\n";
+        echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo '</table>' . "\n";
     }
