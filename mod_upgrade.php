@@ -70,7 +70,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                     echo "\t\t" . '<td class="c">' . upgrade_ogspy_mod($modroot) . '</td>' . "\n";
                 } else {
                     echo "\t" . '<tr>' . "\n";
-                    echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_errorversionogspy'] . '</td>' . "\n";
+                    echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_errorversionogspy'] . '</span></td>' . "\n";
                     echo "\t" . '</tr>' . "\n";
                 }
 
@@ -89,7 +89,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
     echo "\t" . '</tr>' . "\n";
     echo "\t" . '<tr>' . "\n";
-    echo "\t\t" . '<td class="c">' . $lang['autoupdate_tableau_back'] . '</td>' . "\n";
+    echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
     echo "\t" . '</tr>' . "\n";
     echo '</table>' . "\n";
     echo '<br>' . "\n";
