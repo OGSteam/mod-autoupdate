@@ -14,8 +14,6 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 require_once("mod/autoupdate/mod_list.php");
-require_once("includes/cache.php");
-
 
 /*On récupère la liste des mods installés*/
 
