@@ -1,0 +1,15 @@
+{
+  "name": "autoupdate",
+  "version": "2.2.1",
+  "configuration": {
+    "mod_title": "autoupdate",
+    "menu_title" : "AutoUpdate",
+    "action_name" : "autoupdate",
+    "folder_name" : "autoupdate",
+    "action_file" : "autoupdate.php",
+    "active" : true,
+    "admin" : true
+  },
+  "ogspy_compat": "3.3.0",
+  "source_link" : "https://bitbucket.org/ogsteam/mod-autoupdate"
+}
