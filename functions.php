@@ -9,6 +9,8 @@
  * @version 2.1.9
  */
 
+namespace Ogsteam\Ogspy;
+
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
@@ -182,7 +184,7 @@ function check_ogspy_version_bcopy($mod_folder)
 
 function send_stats()
 {
-    global $server_config, $serveur_key, $serveur_date;
+    global $server_config, $serveur_key, $serveur_date,$db;
 
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
         // recuperation du pays et de l univers du serveur
@@ -209,7 +211,7 @@ function send_stats()
         //Statistiques concernant les membres
         $users_info = sizeof(user_statistic());
         //
-        $db_size_info = db_size_info();
+        $db_size_info = $db->db_size_info();
 
             $link = "/statistiques/getstats/";
             $link .= "?version=" . $server_config["version"];
