@@ -10,6 +10,9 @@
     "active" : true,
     "admin" : true
   },
+  "install_script": "install.php",
+  "update_script": "update.php",
+  "uninstall_script": "uninstall.php",
   "ogspy_compat": "3.3.0",
   "source_link" : "https://bitbucket.org/ogsteam/mod-autoupdate"
 }

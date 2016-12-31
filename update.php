@@ -8,6 +8,9 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
+
+namespace Ogsteam\Ogspy;
+
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
@@ -15,7 +18,6 @@ if (!defined('IN_SPYOGAME')) {
 $mod_folder = "autoupdate";
 $mod_name = "autoupdate";
 
-update_mod($mod_folder, $mod_name);
 mod_set_option("CYCLEMAJ", "24");
 mod_set_option("MAJ_TRUNK", "0");
 mod_set_option("LAST_REPO_LIST", "0");
