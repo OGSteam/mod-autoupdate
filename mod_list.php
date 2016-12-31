@@ -9,6 +9,8 @@
  * @version 2.1.9
  */
 
+namespace Ogsteam\Ogspy;
+
 function getRepositorylist()
 {
 

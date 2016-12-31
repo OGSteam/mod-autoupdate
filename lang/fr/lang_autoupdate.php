@@ -9,6 +9,8 @@
  * @version 2.1.9
  */
 
+namespace Ogsteam\Ogspy;
+
 $lang['autoupdate_autoupdate_table'] = "Tableau de mise à jour";
 $lang['autoupdate_autoupdate_admin'] = "Administration";
 $lang['autoupdate_autoupdate_down'] = "Téléchargement des mods";
