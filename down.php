@@ -63,7 +63,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 $install = true;
             }
         }
-        if ($install == false) {
+        if ($install === false) {
             $link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "\">".$lang['autoupdate_tableau_install']."</a>";
             echo "\t<tr>\n";
             echo "\t\t<th>" . $cur_modname . "</th>\n";
