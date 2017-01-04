@@ -33,12 +33,14 @@ if ($user_data['user_admin'] == 1) {
         }
 
         if ($version == 'trunk') {
-            $toolzip = "https://bitbucket.org/ogsteam/" . $toolroot . "/get/default.zip";
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/develop";
         } else {
-            $toolzip = "https://bitbucket.org/ogsteam/" . $toolroot . "/get/" . $version . ".zip";
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version;
         }
+        $tool_file = github_Request($toolzip);
+        file_put_contents('./mod/autoupdate/tmp/tarball.zip', $tool_file);
 
-        if (copy($toolzip, './mod/autoupdate/tmp/' . $toolroot . '.zip')) {
+        if (file_exists('./mod/autoupdate/tmp/tarball.zip')) {
             echo '<table align="center" style="width : 400px">' . "\n";
 
             if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip') === TRUE) {
@@ -49,7 +51,7 @@ if ($user_data['user_admin'] == 1) {
                 $zip->extractTo("./mod/autoupdate/tmp/" . $toolroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
 
-                unlink("./mod/autoupdate/tmp/" . $toolroot . ".zip");
+                unlink("./mod/autoupdate/tmp/tarball.zip");
 
                 $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR);//On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);

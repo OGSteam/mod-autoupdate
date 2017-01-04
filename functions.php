@@ -222,7 +222,7 @@ function send_stats()
             // clef unique
             $link .= "&server_since=" . $serveur_date;
             $link .= "&server_key=" . $serveur_key;
-            // recuperation pays et univers du serveur
+            // recuperation pays et univers du serveur //TODO Vérifier si Xtense est installé
             $link .= "&og_uni=" . $og_uni;
             $link .= "&og_pays=" . $og_pays;
             $link .= "&mod_list=". $data_mode_to_send;
