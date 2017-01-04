@@ -13,8 +13,8 @@ namespace Ogsteam\Ogspy;
 
 function getRepositorylist()
 {
-
     $mod_list = array();
+    $mods_tmp = array();
 
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
         $mod_data = github_Request("https://api.github.com/orgs/ogsteam/repos");
