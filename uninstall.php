@@ -15,11 +15,4 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-if (file_exists("mod/autoupdate/modupdate.json")) {
-    unlink("mod/autoupdate/modupdate.json");
-}
-if (file_exists("parameters/modupdate.json")) {
-    unlink("parameters/modupdate.json");
-}
-
 mod_del_all_option();
