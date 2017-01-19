@@ -11,13 +11,18 @@
 
 namespace Ogsteam\Ogspy;
 
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
+}
 
 require_once("mod/autoupdate/mod_list.php");
 require_once("views/page_header.php");
 
 $query = "SELECT `active` FROM `" . TABLE_MOD . "` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
-if (!$db->sql_numrows($db->sql_query($query))) die("Mod Disabled"); //TODO Améliorer ce contrôle
+if (!$db->sql_numrows($db->sql_query($query))) {
+    die("Mod Disabled");
+}
+//TODO Améliorer ce contrôle
 
 $installed_mods = get_installed_mod_list();
 
@@ -38,7 +43,10 @@ $installed_mods = get_installed_mod_list();
         <td class='c'><?php echo $lang['autoupdate_tableau_authtool']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
-        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>'; ?>
+        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+    echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+}
+?>
         <?php if (mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
@@ -89,7 +97,10 @@ $installed_mods = get_installed_mod_list();
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_authormod']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
-        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>'; ?>
+        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+    echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+}
+?>
         <?php if (mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
@@ -104,8 +115,11 @@ $installed_mods = get_installed_mod_list();
             $repo_details = getRepositoryDetails($installed_mods[$i]['root']);
             echo "\t<tr>\n";
             echo "\t\t<th>" . $installed_mods[$i]['name'] . "</th>\n";
-            if (isset($repo_details['owner'])) echo "\t\t<th>" . $repo_details['owner'] . "</th>\n";
-            else echo "\t\t<th>Non OGSteam</th>\n";
+            if (isset($repo_details['owner'])) {
+                echo "\t\t<th>" . $repo_details['owner'] . "</th>\n";
+            } else {
+                echo "\t\t<th>Non OGSteam</th>\n";
+            }
 
             echo "\t\t<th>" . $installed_mods[$i]['version'] . "</th>\n";
 
@@ -121,8 +135,9 @@ $installed_mods = get_installed_mod_list();
 
             if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 echo "\t\t<th>";
-                if (!is_writeable("./mod/" . $installed_mods[$i]['root'] . "/")) echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><font color=red>(RO)</font></a>";
-                else {
+                if (!is_writeable("./mod/" . $installed_mods[$i]['root'] . "/")) {
+                    echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><font color=red>(RO)</font></a>";
+                } else {
                     if (version_compare($cur_version, $installed_mods[$i]['version'], ">")) {
                         $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=" . $cur_version . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
                         echo "<span style=\"color: lime; \">" . $ziplink . "</span>";

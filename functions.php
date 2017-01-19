@@ -22,7 +22,7 @@ require_once("mod/autoupdate/mod_list.php");
 /**
  * @return mixed
  */
-function get_installed_mod_list(){
+function get_installed_mod_list() {
 
     global $db;
     $sql = "SELECT title,root,version from " . TABLE_MOD;
@@ -96,7 +96,11 @@ function rrmdir($dir)
         $objects = scandir($dir);
         foreach ($objects as $object) {
             if ($object != "." && $object != "..") {
-                if (filetype($dir . "/" . $object) == "dir") rrmdir($dir . "/" . $object); else unlink($dir . "/" . $object);
+                if (filetype($dir . "/" . $object) == "dir") {
+                    rrmdir($dir . "/" . $object);
+                } else {
+                    unlink($dir . "/" . $object);
+                }
             }
         }
         reset($objects);
@@ -112,12 +116,17 @@ function rrmdir($dir)
 function rcopy($src, $dst)
 {
     if (is_dir($src)) {
-        if (!is_dir($dst)) mkdir($dst);
+        if (!is_dir($dst)) {
+            mkdir($dst);
+        }
         $files = scandir($src);
-        foreach ($files as $file)
-            if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
-    } else if (file_exists($src)) copy($src, $dst);
-}
+        foreach ($files as $file) {
+                    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
+        }
+    } else if (file_exists($src)) {
+        copy($src, $dst);
+    }
+    }
 
 /**
  * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
@@ -167,7 +176,9 @@ function check_ogspy_version_bcopy($mod_folder)
 
     // On récupère les données du fichier version.txt
 
-    if (!file_exists($filename)) return false;
+    if (!file_exists($filename)) {
+        return false;
+    }
     $file = file($filename);
 
     //Version Minimale OGSpy
@@ -184,7 +195,7 @@ function check_ogspy_version_bcopy($mod_folder)
 
 function send_stats()
 {
-    global $server_config, $serveur_key, $serveur_date,$db;
+    global $server_config, $serveur_key, $serveur_date, $db;
 
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
         // recuperation du pays et de l univers du serveur
@@ -194,7 +205,7 @@ function send_stats()
             if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
                 $og_pays = $retour[2]; // seconde capture
                 $og_uni = $retour[1]; // premiere capture
-            }else{
+            } else{
                 $og_pays = "NA";
                 $og_uni = "NA";
             }
@@ -202,7 +213,7 @@ function send_stats()
         //Liste des modules installés
 
         $installed_mod_list = get_installed_mod_list();
-        foreach($installed_mod_list as $mod_details) {
+        foreach ($installed_mod_list as $mod_details) {
 
             $data_mod[] = $mod_details['root'];
         }
@@ -218,16 +229,16 @@ function send_stats()
             $link .= "&nb_users=" . $users_info;
             //Paramètres Serveur
             $link .= "&db_size=" . urlencode($db_size_info["Server"]);
-            $link .= "&php_version=" .PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;
+            $link .= "&php_version=" . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;
             // clef unique
             $link .= "&server_since=" . $serveur_date;
             $link .= "&server_key=" . $serveur_key;
             // recuperation pays et univers du serveur //TODO Vérifier si Xtense est installé
             $link .= "&og_uni=" . $og_uni;
             $link .= "&og_pays=" . $og_pays;
-            $link .= "&mod_list=". $data_mode_to_send;
+            $link .= "&mod_list=" . $data_mode_to_send;
         
-            $repo_link = 'http://darkcity.fr'.$link;
+            $repo_link = 'http://darkcity.fr' . $link;
             @copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
     }
 

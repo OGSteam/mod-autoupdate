@@ -11,15 +11,23 @@
 
 namespace Ogsteam\Ogspy;
 
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
+}
 
 require_once("views/page_header.php");
-if (!function_exists('json_decode')) die("Autoupdate cannot work without the JSON Library, please use PHP(>= 5.2)");
-if (!extension_loaded('zip')) die("Autoupdate cannot work without the ZIP Library, Please check your server configuration");
-if (!ini_get('allow_url_fopen')) die("Autoupdate cannot work without external connections (fopen), Please check your server configuration");
+if (!function_exists('json_decode')) {
+    die("Autoupdate cannot work without the JSON Library, please use PHP(>= 5.2)");
+}
+if (!extension_loaded('zip')) {
+    die("Autoupdate cannot work without the ZIP Library, Please check your server configuration");
+}
+if (!ini_get('allow_url_fopen')) {
+    die("Autoupdate cannot work without external connections (fopen), Please check your server configuration");
+}
 
 require_once("mod/autoupdate/functions.php");
-require_once("mod/autoupdate/lang/". $ui_lang ."/lang_autoupdate.php");
+require_once("mod/autoupdate/lang/" . $ui_lang . "/lang_autoupdate.php");
 require_once("mod/autoupdate/mod_list.php");
 
 /* Envoi des statistiques du serveur */
@@ -33,7 +41,9 @@ send_stats();
 if (!isset($pub_sub)) {
     $sub = "overview";
     $pub_sub = "overview";
-} else $sub = $pub_sub;
+} else {
+    $sub = $pub_sub;
+}
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
     if ($sub != "overview") {
@@ -78,7 +88,11 @@ echo $bouton1 . $bouton2 . $bouton3;
 echo "\t</tr><br>\n";
 echo "</table>\n<br>\n";
 
-if (!isset($pub_sub)) $sub = 'overview'; else $sub = htmlentities($pub_sub);
+if (!isset($pub_sub)) {
+    $sub = 'overview';
+} else {
+    $sub = htmlentities($pub_sub);
+}
 switch ($sub) {
     case 'overview':
         include('overview.php');

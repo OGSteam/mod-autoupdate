@@ -89,7 +89,9 @@ function getRepositoryVersion($Reponame, $isMod = true)
 
     global $lang;
     $repo_details = getRepositoryDetails($Reponame);
-    if ($repo_details == false) return "-1";
+    if ($repo_details == false) {
+        return "-1";
+    }
 
     $repo_link = $repo_details['resource_uri'] . '/tags';
 
@@ -106,7 +108,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
         if (count($data) > 0) {
             return $data[0]['name'];
         } else {
-            log_('mod', $lang['autoupdate_tableau_error4'].' ' . $Reponame);
+            log_('mod', $lang['autoupdate_tableau_error4'] . ' ' . $Reponame);
             return "-1";
         }
     } else {
@@ -118,7 +120,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
 }
 
 
-function github_Request($request){
+function github_Request($request) {
 
     $opts = [
         'http' => [

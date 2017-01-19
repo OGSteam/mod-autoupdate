@@ -18,7 +18,9 @@ if (!defined('IN_SPYOGAME')) {
 $error = "";
 if (isset($pub_valid)) {
 
-    if (empty($pub_cycle)) $pub_cycle = 0;
+    if (empty($pub_cycle)) {
+        $pub_cycle = 0;
+    }
 
     mod_set_option("CYCLEMAJ", $pub_cycle);
     mod_set_option("MAJ_TRUNK", $pub_majtrunk);
