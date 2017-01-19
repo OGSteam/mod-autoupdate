@@ -94,19 +94,19 @@ if (!isset($pub_sub)) {
     $sub = htmlentities($pub_sub);
 }
 switch ($sub) {
-    case 'overview':
-        include('overview.php');
-        break;
-    case 'mod_upgrade':
-        include('mod_upgrade.php');
-        break;
-    case 'tool_upgrade':
-        include('tool_upgrade.php');
-        break;
-    case 'down':
-        include('down.php');
-        break;
-    case 'admin':
-        include('admin.php');
-        break;
+        case 'overview':
+            include('overview.php');
+            break;
+        case 'mod_upgrade':
+            include('mod_upgrade.php');
+            break;
+        case 'tool_upgrade':
+            include('tool_upgrade.php');
+            break;
+        case 'down':
+            include('down.php');
+            break;
+        case 'admin':
+            include('admin.php');
+            break;
 }

@@ -69,14 +69,14 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             }
         }
         if ($install === false) {
-            $link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "\">".$lang['autoupdate_tableau_install']."</a>";
+            $link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "\">" . $lang['autoupdate_tableau_install'] . "</a>";
             echo "\t<tr>\n";
             echo "\t\t<th>" . $cur_modname . "</th>\n";
             echo "\t\t<th>" . $cur_description . "</th>\n";
             echo "\t\t<th><span style=\"color: lime; \">" . $link . "</span></th>\n";
             if (mod_get_option("MAJ_TRUNK") == 1) {
                 echo "\t\t<th>";
-                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "&tag=trunk'>".$lang['autoupdate_tableau_install']."</a>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "&tag=trunk'>" . $lang['autoupdate_tableau_install'] . "</a>";
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>\n";
             }
