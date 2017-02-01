@@ -16,6 +16,8 @@ if (!defined('IN_SPYOGAME')) {
 }
 require_once("views/page_header.php");
 
+$mod_tools = new Mod_DevTools('autoupdate');
+
 if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
     // Récupérer la liste des modules installés
@@ -50,7 +52,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
 }
 ?>
-        <?php if (mod_get_option("MAJ_TRUNK") == 1) {
+        <?php if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
         } ?>
@@ -74,7 +76,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
             echo "\t\t<th>" . $cur_modname . "</th>\n";
             echo "\t\t<th>" . $cur_description . "</th>\n";
             echo "\t\t<th><span style=\"color: lime; \">" . $link . "</span></th>\n";
-            if (mod_get_option("MAJ_TRUNK") == 1) {
+            if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
                 echo "\t\t<th>";
                 $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "&tag=trunk'>" . $lang['autoupdate_tableau_install'] . "</a>";
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";

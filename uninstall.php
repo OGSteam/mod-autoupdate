@@ -15,4 +15,3 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-mod_del_all_option();

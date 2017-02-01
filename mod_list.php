@@ -16,10 +16,12 @@ function getRepositorylist()
     $mod_list = array();
     $mods_tmp = array();
 
-    if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
+    $mod_tools = new Mod_DevTools("autoupdate");
+
+    if (time() > (intval($mod_tools->mod_get_option('LAST_REPO_LIST')) + intval($mod_tools->mod_get_option('CYCLEMAJ')) * 3600)) {
         $mod_data = github_Request("https://api.github.com/orgs/ogsteam/repos");
         file_put_contents('./mod/autoupdate/tmp/repo_list.json', $mod_data);
-        mod_set_option('LAST_REPO_LIST', time());
+        $mod_tools->mod_set_option('LAST_REPO_LIST', time());
     }
     $mod_file = file_get_contents('./mod/autoupdate/tmp/repo_list.json');
 
@@ -88,6 +90,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
 {
 
     global $lang;
+    $mod_tools = new Mod_DevTools("autoupdate");
     $repo_details = getRepositoryDetails($Reponame);
     if ($repo_details == false) {
         return "-1";
@@ -95,10 +98,10 @@ function getRepositoryVersion($Reponame, $isMod = true)
 
     $repo_link = $repo_details['resource_uri'] . '/tags';
 
-    if (time() > (mod_get_option('LAST_MOD_UPDATE-' . $Reponame) + mod_get_option('CYCLEMAJ') * 3600)) {
+    if (time() > (intval($mod_tools->mod_get_option('LAST_MOD_UPDATE-' . $Reponame)) + intval($mod_tools->mod_get_option('CYCLEMAJ')) * 3600)) {
         $mod_data = github_Request($repo_link);
         file_put_contents('./mod/autoupdate/tmp/' . $Reponame . '.json', $mod_data);
-        mod_set_option('LAST_MOD_UPDATE-' . $Reponame, time());
+        $mod_tools->mod_set_option('LAST_MOD_UPDATE-' . $Reponame, time());
     }
     if (file_exists('./mod/autoupdate/tmp/' . $Reponame . '.json')) {
         $api_list = file_get_contents('./mod/autoupdate/tmp/' . $Reponame . '.json');
@@ -113,7 +116,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
         }
     } else {
         log_('mod', $lang['autoupdate_tableau_error1'] . $Reponame);
-        mod_del_option('LAST_MOD_UPDATE-' . $Reponame);
+        $mod_tools->mod_del_option('LAST_MOD_UPDATE-' . $Reponame);
         return "-1";
 
     }

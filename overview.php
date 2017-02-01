@@ -26,10 +26,7 @@ if (!$db->sql_numrows($db->sql_query($query))) {
 
 $installed_mods = get_installed_mod_list();
 
-// Recupération des Mods disponible sur l'ogsteam
-//$data = getmodlist();
-//$mod_names = array_keys($data); // Récupération des clés
-
+$mod_tools = new Mod_DevTools('autoupdate');
 
 ?>
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
@@ -47,7 +44,7 @@ $installed_mods = get_installed_mod_list();
     echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
 }
 ?>
-        <?php if (mod_get_option("MAJ_TRUNK") == 1) {
+        <?php if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
         } ?>
@@ -74,14 +71,14 @@ $installed_mods = get_installed_mod_list();
                 echo "Aucune";
             }
             echo "</th>";
-            if (mod_get_option("MAJ_TRUNK") == 1) {
+            if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
                 echo "<th>";
                 $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>Télécharger</a>";
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
             echo "<th>";
-            $trackerlink = "<a href='https://bitbucket.org/ogsteam/ogspy/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+            $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
             echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
             echo "</th>";
             ?>
@@ -101,7 +98,7 @@ $installed_mods = get_installed_mod_list();
     echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
 }
 ?>
-        <?php if (mod_get_option("MAJ_TRUNK") == 1) {
+        <?php if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
         } ?>
@@ -146,7 +143,7 @@ $installed_mods = get_installed_mod_list();
                     }
                 }
                 echo "</th>\n";
-                if (mod_get_option("MAJ_TRUNK") == 1) {
+                if ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) {
                     echo "\t\t<th>";
                     $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=trunk'>Télécharger</a>";
                     echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
@@ -179,7 +176,7 @@ $installed_mods = get_installed_mod_list();
             </th>
         </tr>
         <tr>
-            <th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
+            <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
         </tr>
         <?php
     }

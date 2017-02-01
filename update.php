@@ -15,7 +15,9 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-mod_set_option("CYCLEMAJ", "24");
-mod_set_option("MAJ_TRUNK", "0");
-mod_set_option("LAST_REPO_LIST", "0");
+$mod_tools = new Mod_DevTools("autoupdate");
+
+$mod_tools->mod_set_option("CYCLEMAJ", "24");
+$mod_tools->mod_set_option("MAJ_TRUNK", "0");
+$mod_tools->mod_set_option("LAST_REPO_LIST", "0");
 

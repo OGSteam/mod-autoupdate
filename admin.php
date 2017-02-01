@@ -15,6 +15,8 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
+$mod_tools = new Mod_DevTools("autoupdate");
+
 $error = "";
 if (isset($pub_valid)) {
 
@@ -22,8 +24,8 @@ if (isset($pub_valid)) {
         $pub_cycle = 0;
     }
 
-    mod_set_option("CYCLEMAJ", $pub_cycle);
-    mod_set_option("MAJ_TRUNK", $pub_majtrunk);
+    $mod_tools->mod_set_option("CYCLEMAJ", $pub_cycle);
+    $mod_tools->mod_set_option("MAJ_TRUNK", $pub_majtrunk);
 
 }
 
@@ -37,15 +39,15 @@ if (isset($pub_valid)) {
     <form action="index.php?action=autoupdate&sub=admin" method="post">
         <tr>
             <th><?php echo $lang['autoupdate_admin_trunk']; ?><br/><?php echo $lang['autoupdate_admin_trunk1']; ?></th>
-            <th><input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?>
+            <th><input type="radio" name="majtrunk" <?php echo ($mod_tools->mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?>
                        value="1"/> <span style="font-size: large; ">|</span> <input type="radio"
-                                                                  name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?>
+                                                                  name="majtrunk" <?php echo ($mod_tools->mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?>
                                                                   value="0"/></th>
         </tr>
         <tr>
             <th><?php echo $lang['autoupdate_admin_frequency']; ?></th>
             <th><input name="cycle" type="text" size="3" maxlength="2"
-                       value="<?php echo mod_get_option("CYCLEMAJ"); ?>">
+                       value="<?php echo $mod_tools->mod_get_option("CYCLEMAJ"); ?>">
             </th>
         </tr>
         <tr>
