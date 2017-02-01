@@ -95,7 +95,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         </th>
     </tr>
     <tr>
-        <th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
+        <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
     </tr>
     </table><?php
 } else {

@@ -151,7 +151,7 @@ $mod_tools = new Mod_DevTools('autoupdate');
                 }
                 echo "\t\t<th>";
                 if (isset($repo_details['owner'])) {
-                    $trackerlink = "<a href='https://bitbucket.org/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+                    $trackerlink = "<a href='https://github.com/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
                     echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
                 }
                 echo "</th>\n";
