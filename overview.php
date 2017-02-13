@@ -71,7 +71,7 @@ $installed_mods = get_installed_mod_list();
                 echo "</th>";
             }
             echo "<th>";
-            $trackerlink = "<a href='https://bitbucket.org/ogsteam/ogspy/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+            $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
             echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
             echo "</th>";
             ?>
@@ -137,7 +137,7 @@ $installed_mods = get_installed_mod_list();
                 }
                 echo "\t\t<th>";
                 if (isset($repo_details['owner'])) {
-                    $trackerlink = "<a href='https://bitbucket.org/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues?status=new&status=open' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+                    $trackerlink = "<a href='https://github.com/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
                     echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
                 }
                 echo "</th>\n";
@@ -162,7 +162,7 @@ $installed_mods = get_installed_mod_list();
             </th>
         </tr>
         <tr>
-            <th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
+            <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
         </tr>
         <?php
     }

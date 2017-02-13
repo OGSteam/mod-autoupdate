@@ -38,25 +38,28 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         $repoDetails = getRepositoryDetails($modroot);
 
         if ($version == 'trunk') {
-            $modzip = "https://bitbucket.org/" . $repoDetails['owner'] . "/mod-" . $modroot . "/get/default.zip";
+            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/develop";
         } else {
-            $modzip = "https://bitbucket.org/" . $repoDetails['owner'] . "/mod-" . $modroot . "/get/" . $version . ".zip";
+            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version;
         }
 
         if (!is_writeable("./mod/autoupdate/tmp/")) {
             die("Error: Folder /mod/autoupdate/tmp/ must be writeable " . __FILE__ . "(Line: " . __LINE__ . ")");
         }
 
-        if (copy($modzip, './mod/autoupdate/tmp/' . $modroot . '.zip')) {
+        $mod_file = github_Request($modzip);
+        file_put_contents('./mod/autoupdate/tmp/tarball.zip', $mod_file);
+
+        if (file_exists('./mod/autoupdate/tmp/tarball.zip')) {
             echo '<table align="center" style="width : 400px">' . "\n";
-            if ($zip->open('./mod/autoupdate/tmp/' . $modroot . '.zip') === TRUE) {
+            if ($zip->open('./mod/autoupdate/tmp/tarball.zip') === TRUE) {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
 
                 $zip->extractTo("./mod/autoupdate/tmp/" . $modroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
-                unlink("./mod/autoupdate/tmp/" . $modroot . ".zip");
+                unlink("./mod/autoupdate/tmp/tarball.zip");
                 $nom_répertoire = glob("./mod/autoupdate/tmp/" . $modroot . "/*-" . $modroot . "*", GLOB_ONLYDIR);//On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
 
