@@ -186,15 +186,14 @@ function send_stats()
 
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
         // recuperation du pays et de l univers du serveur
+        $og_pays = "NA";
+        $og_uni = "NA";
         if (isset($server_config["xtense_universe"])) {
             //pattern de recherche
             $pattern = "#https:\/\/s([0-9]{1,3})-([a-z]{2,3})\.ogame\.gameforge.com#";
             if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
                 $og_pays = $retour[2]; // seconde capture
                 $og_uni = $retour[1]; // premiere capture
-            }else{
-                $og_pays = "NA";
-                $og_uni = "NA";
             }
         }
         //Liste des modules installés
