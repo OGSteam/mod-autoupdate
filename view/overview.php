@@ -11,8 +11,8 @@
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-require_once("mod/autoupdate/mod_list.php");
-require_once("views/page_header.php");
+require_once("mod/autoupdate/core/mod_list.php");
+//require_once("view/page_header.php");
 
 $query = "SELECT `active` FROM `" . TABLE_MOD . "` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Mod Disabled"); //TODO Améliorer ce contrôle

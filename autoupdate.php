@@ -16,9 +16,10 @@ if (!function_exists('json_decode')) die("Autoupdate cannot work without the JSO
 if (!extension_loaded('zip')) die("Autoupdate cannot work without the ZIP Library, Please check your server configuration");
 if (!ini_get('allow_url_fopen')) die("Autoupdate cannot work without external connections (fopen), Please check your server configuration");
 
-require_once("mod/autoupdate/functions.php");
+require_once("mod/autoupdate/core/functions.php");
 require_once("mod/autoupdate/lang/". $ui_lang ."/lang_autoupdate.php");
-require_once("mod/autoupdate/mod_list.php");
+require_once("mod/autoupdate/core/mod_list.php");
+
 
 /* Envoi des statistiques du serveur */
 send_stats();
@@ -79,18 +80,18 @@ echo "</table>\n<br>\n";
 if (!isset($pub_sub)) $sub = 'overview'; else $sub = htmlentities($pub_sub);
 switch ($sub) {
     case 'overview':
-        include('overview.php');
+        include('view/overview.php');
         break;
     case 'mod_upgrade':
-        include('mod_upgrade.php');
+        include('core/mod_upgrade.php');
         break;
     case 'tool_upgrade':
-        include('tool_upgrade.php');
+        include('core/tool_upgrade.php');
         break;
     case 'down':
-        include('down.php');
+        include('view/down.php');
         break;
     case 'admin':
-        include('admin.php');
+        include('view/admin.php');
         break;
 }
