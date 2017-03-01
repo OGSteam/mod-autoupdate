@@ -60,7 +60,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                 $zip->extractTo("./mod/autoupdate/tmp/" . $modroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/tarball.zip");
-                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $modroot . "/*-" . $modroot . "*", GLOB_ONLYDIR);//On récupère le nom du répertoire
+                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $modroot . "/*-" . $modroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
 
                 if (check_ogspy_version_bcopy($modroot . "/" . $folder[5]) == true) {

@@ -51,7 +51,7 @@ if ($user_data['user_admin'] == 1) {
 
                 unlink("./mod/autoupdate/tmp/tarball.zip");
 
-                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR);//On récupère le nom du répertoire
+                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
                 rcopy("./mod/autoupdate/tmp/" . $toolroot . "/" . $folder[5], ".");
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
@@ -66,7 +66,7 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t" . '<tr>' . "\n";
                 require_once("upgrade_to_latest.php"); // Mise à jour...
                 echo "\t" . '</tr>' . "\n";
-                chdir('..');// Retour au répertoire par défaut.
+                chdir('..'); // Retour au répertoire par défaut.
                 //Supression du répertoire Install
                 rrmdir("./install");
 
