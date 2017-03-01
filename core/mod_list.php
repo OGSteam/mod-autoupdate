@@ -14,9 +14,10 @@ function getRepositorylist()
 
     $mod_list = array();
 
-    $repo_link = 'https://api.bitbucket.org/1.0/users/ogsteam';
+
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
-        @copy($repo_link, './mod/autoupdate/tmp/repo_list.json');
+        $mod_data = github_Request("https://api.github.com/orgs/ogsteam/repos");
+        file_put_contents('./mod/autoupdate/tmp/repo_list.json', $mod_data);
         mod_set_option('LAST_REPO_LIST', time());
     }
     $mod_file = file_get_contents('./mod/autoupdate/tmp/repo_list.json');
@@ -25,31 +26,25 @@ function getRepositorylist()
     $data = json_decode($mod_file, true);
     //print_r($data);
     //On récupère ce que l'on a besoin dans la structure JSON
-    foreach ($data['repositories'] as $id) {
-        $mods_tmp[] = array('nom' => $id["slug"],
+    foreach ($data as $id) {
+        $mods_tmp[] = array(
+            'nom' => $id["name"],
             'description' => $id["description"],
-            'resource_uri' => $id["resource_uri"],
-            'owner' => $id["owner"],
-            'is_fork' => $id["is_fork"],
-            'fork_resource_uri' => $id["fork_of"]["resource_uri"],
-            'fork_owner' => $id["fork_of"]["owner"]);
+            'resource_uri' => $id["url"],
+            'owner' => "OGSteam",
+            'is_fork' => $id["fork"]);
     }
     //Mise en Forme pour le mod (Fait en 2 partie pour plus de lisibilité)
     foreach ($mods_tmp as $mod) {
         if (preg_match("/mod-/", $mod["nom"])) {
             $mod_name = explode('-', $mod["nom"]);
             $mod["nom"] = $mod_name[1];
-            if ($mod["is_fork"] == false) {
-                $mod_list[] = array('nom' => $mod["nom"],
-                    'description' => $mod["description"],
-                    'resource_uri' => $mod["resource_uri"],
-                    'owner' => $mod["owner"]);
-            } else {
-                $mod_list[] = array('nom' => $mod["nom"],
-                    'description' => $mod["description"],
-                    'resource_uri' => $mod["fork_resource_uri"],
-                    'owner' => $mod["fork_owner"]);
-            }
+            $mod_list[] = array(
+                'nom' => $mod["nom"],
+                'description' => $mod["description"],
+                'resource_uri' => $mod["resource_uri"],
+                'owner' => $mod["owner"]);
+
         } else if (preg_match("/ogspy/", $mod["nom"])) {
             $mod_list[] = array('nom' => $mod["nom"],
                 'description' => $mod["description"],
@@ -94,31 +89,26 @@ function getRepositoryVersion($Reponame, $isMod = true)
 
     global $lang;
     $repo_details = getRepositoryDetails($Reponame);
-    if ($repo_details == false) return "-1";
+    if ($repo_details == false) {
+        return "-1";
+    }
 
-    $repo_link = 'https://api.bitbucket.org' . $repo_details['resource_uri'] . '/tags';
+    $repo_link = $repo_details['resource_uri'] . '/tags';
 
-    if (time() > (mod_get_option('LAST_MOD_UPDATE-' . $Reponame) + mod_get_option('CYCLEMAJ') * 3600)) {
-        @copy($repo_link, './mod/autoupdate/tmp/' . $Reponame . '.json');
+    if (time() > (intval(mod_get_option('LAST_MOD_UPDATE-' . $Reponame)) + intval(mod_get_option('CYCLEMAJ')) * 3600)) {
+        $mod_data = github_Request($repo_link);
+        file_put_contents('./mod/autoupdate/tmp/' . $Reponame . '.json', $mod_data);
         mod_set_option('LAST_MOD_UPDATE-' . $Reponame, time());
     }
     if (file_exists('./mod/autoupdate/tmp/' . $Reponame . '.json')) {
         $api_list = file_get_contents('./mod/autoupdate/tmp/' . $Reponame . '.json');
 
-        //$result = utf8_encode($api_list);
         $data = json_decode($api_list, true);
-        $version_list = array_keys($data);
-        // Supression de l'étiquette tip
-        $tip_id = array_search('tip', $version_list);
-        unset($version_list[$tip_id]);
 
-        //tri de la liste de versions pour obtenir la dernière :
-        rsort($version_list);
-
-        if (count($version_list) > 0) {
-            return $version_list[0];
+        if (count($data) > 0) {
+            return $data[0]['name'];
         } else {
-            log_('mod', $lang['autoupdate_tableau_error4'].' ' . $Reponame);
+            log_('mod', $lang['autoupdate_tableau_error4'] . ' ' . $Reponame);
             return "-1";
         }
     } else {
@@ -127,5 +117,25 @@ function getRepositoryVersion($Reponame, $isMod = true)
         return "-1";
 
     }
+}
+
+
+/**
+ * @param string $request
+ */
+function github_Request($request) {
+
+    $opts = [
+        'http' => [
+            'method' => 'GET',
+            'header' => [
+                'User-Agent: OGSpy'
+            ]
+        ]
+    ];
+
+    $context = stream_context_create($opts);
+    $data = file_get_contents($request, false, $context);
+    return $data;
 }
 

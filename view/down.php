@@ -9,7 +9,9 @@
  * @version 2.1.9
  */
 
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
+}
 require_once("views/page_header.php");
 
 if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
@@ -42,7 +44,10 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     <tr>
         <td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
         <td class='c'><?php echo $lang['autoupdate_tableau_descmod']; ?></td>
-        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>'; ?>
+        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+    echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+}
+?>
         <?php if (mod_get_option("MAJ_TRUNK") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionTrunk'] . "</td>";
@@ -86,10 +91,12 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         </th>
     </tr>
     <tr>
-        <th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
+        <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
     </tr>
     </table><?php
-} else die($lang['autoupdate_MaJ_rights']);
+} else {
+    die($lang['autoupdate_MaJ_rights']);
+}
 
 echo '<br>' . "\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
