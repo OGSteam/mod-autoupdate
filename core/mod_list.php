@@ -104,6 +104,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
         $api_list = file_get_contents('./mod/autoupdate/tmp/' . $Reponame . '.json');
 
         $data = json_decode($api_list, true);
+        asort($data);
 
         if (count($data) > 0) {
             return $data[0]['name'];
