@@ -104,6 +104,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
         $api_list = file_get_contents('./mod/autoupdate/tmp/' . $Reponame . '.json');
 
         $data = json_decode($api_list, true);
+        asort($data);
 
         if (count($data) > 0) {
             return $data[0]['name'];
@@ -122,6 +123,7 @@ function getRepositoryVersion($Reponame, $isMod = true)
 
 /**
  * @param string $request
+ * @return string
  */
 function github_Request($request) {
 
@@ -135,7 +137,17 @@ function github_Request($request) {
     ];
 
     $context = stream_context_create($opts);
-    $data = file_get_contents($request, false, $context);
+
+    try {
+        $data = file_get_contents($request, false, $context);
+
+        if ($data === false) {
+            log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
+        }
+    } catch (Exception $e) {
+        log_('mod', "[ERROR_github_Request] Excetpion: " . $e->getMessage() );
+    }
+
     return $data;
 }
 
