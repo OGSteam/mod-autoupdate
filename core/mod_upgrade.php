@@ -9,7 +9,9 @@
  * @version 2.1.9
  */
 
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
+}
 /**
  *Récupère les fonctions zip
  */
@@ -17,7 +19,9 @@ $zip = new ZipArchive;
 
 require_once("views/page_header.php");
 
-if (!isset($pub_confirmed)) $pub_confirmed = "no";
+if (!isset($pub_confirmed)) {
+    $pub_confirmed = "no";
+}
 
 if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
@@ -29,7 +33,9 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     } else {
         //Sinon on prends la dernière
         $version = getRepositoryVersion($modroot);
-        if ($version == '-1') die("No official version available, Please contact OGSteam");
+        if ($version == '-1') {
+            die("No official version available, Please contact OGSteam");
+        }
     }
 
     if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {

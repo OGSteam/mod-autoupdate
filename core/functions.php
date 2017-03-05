@@ -119,7 +119,9 @@ function rcopy($src, $dst)
         }
         $files = scandir($src);
         foreach ($files as $file) {
-                    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
+                    if ($file != "." && $file != "..") {
+                        rcopy("$src/$file", "$dst/$file");
+                    }
         }
     } else if (file_exists($src)) {
         copy($src, $dst);

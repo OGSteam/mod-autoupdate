@@ -146,7 +146,7 @@ function github_Request($request) {
             log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
         }
     } catch (Exception $e) {
-        log_('mod', "[ERROR_github_Request] Excetpion: " . $e->getMessage() );
+        log_('mod', "[ERROR_github_Request] Excetpion: " . $e->getMessage());
     }
 
     return $data;
