@@ -131,7 +131,8 @@ function github_Request($request) {
         'http' => [
             'method' => 'GET',
             'header' => [
-                'User-Agent: OGSpy'
+                'User-Agent: OGSpy',
+                'Authorization: token d08499607a0f2469405465cf29e3aeb9d4b1265f'
             ]
         ]
     ];
