@@ -15,7 +15,7 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-require_once("mod/autoupdate/mod_list.php");
+//require_once("mod/autoupdate/mod_list.php");
 
 /*On récupère la liste des mods installés*/
 
