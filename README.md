@@ -24,4 +24,4 @@
 ### Who do I talk to? ###
 
 * Darknoon
-* http://www.ogsteam.fr
+* https://www.ogsteam.fr
