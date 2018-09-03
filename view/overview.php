@@ -24,10 +24,6 @@ if (!$db->sql_numrows($db->sql_query($query))) {
 
 $installed_mods = get_installed_mod_list();
 
-// Recupération des Mods disponible sur l'ogsteam
-//$data = getmodlist();
-//$mod_names = array_keys($data); // Récupération des clés
-
 
 ?>
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>

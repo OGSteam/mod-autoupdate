@@ -57,6 +57,11 @@ if (isset($pub_valid)) {
 echo "<br>\n";
 echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
 echo '<br>' . "\n";
-echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
+echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div><br>';
+?>
+<a href="https://github.com/ogsteam/mod-autoupdate" target="_blank"><img src="./mod/autoupdate/img/GitHub-Mark-Light-32px.png"/></a>
+
+
+<?php
 require_once("views/page_tail.php");
 ?>
