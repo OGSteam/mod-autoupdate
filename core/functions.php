@@ -181,14 +181,18 @@ function check_ogspy_version_bcopy($mod_folder)
     }
     $file = file($filename);
 
-    //Version Minimale OGSpy
+    //Version Minimale OGSpy (Ligne 3)
     /** @var string $mod_required_ogspy */
-    $mod_required_ogspy = trim($file[3]);
-    if (isset($mod_required_ogspy)) {
+    if (isset($file[3]))
+    {
+        $mod_required_ogspy = trim($file[3]);
         if (version_compare($mod_required_ogspy, $server_config["version"]) > 0) {
             log_("mod_erreur_txt_version", $mod_folder);
             return false;
         }
+    }else {
+        log_("mod_erreur_txt_warning",$mod_folder);
+        return false;
     }
     return true;
 }
