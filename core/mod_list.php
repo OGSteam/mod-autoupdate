@@ -45,7 +45,7 @@ function getRepositorylist()
                 'resource_uri' => $mod["resource_uri"],
                 'owner' => $mod["owner"]);
 
-        } else if (preg_match("/ogspy/", $mod["nom"])) {
+        } else if (preg_match("/^ogspy$/", $mod["nom"])) {
             $mod_list[] = array('nom' => $mod["nom"],
                 'description' => $mod["description"],
                 'resource_uri' => $mod["resource_uri"],
