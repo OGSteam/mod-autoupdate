@@ -33,9 +33,10 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     } else {
         //Sinon on prends la dernière
         $version = getRepositoryVersion($modroot);
-        if ($version == '-1') {
+        if (!is_array($version) || $version == '-1') {
             die("No official version available, Please contact OGSteam");
         }
+        $version = $version['release'];
     }
 
     if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {

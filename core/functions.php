@@ -201,7 +201,7 @@ function send_stats()
 {
     global $server_config, $serveur_key, $serveur_date;
 
-    if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
+    if (time() > (mod_get_option('LAST_REPO_LIST') + 3600 * mod_get_option('CYCLEMAJ'))) {
         // recuperation du pays et de l univers du serveur
         $og_pays = "NA";
         $og_uni = "NA";
@@ -241,7 +241,7 @@ function send_stats()
             $link .= "&og_pays=" . $og_pays;
             $link .= "&mod_list=" . $data_mode_to_send;
         
-            $repo_link = 'http://darkcity.fr' . $link;
+            $repo_link = 'https://darkcity.fr' . $link;
             @copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
     }
 

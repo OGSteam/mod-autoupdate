@@ -20,7 +20,9 @@ if ($is_ok == true) {
     //si besoin de creer des tables, a faire ici
     //Options par défaut.
     mod_set_option("CYCLEMAJ", "24");
-    mod_set_option("MAJ_TRUNK", "0");
+    mod_set_option("MAJ_DEV", "0");
+    mod_set_option("MAJ_ALPHA", "0");
+    mod_set_option("MAJ_BETA", "0");
     mod_set_option("LAST_REPO_LIST", "0");
 } else {
     echo "<script>alert(\"Désolé, un problème a eu lieu pendant l'installation: corrigez les problèmes survenus et réessayez.\");</script>";

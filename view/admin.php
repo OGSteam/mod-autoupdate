@@ -21,7 +21,9 @@ if (isset($pub_valid)) {
     }
 
     mod_set_option("CYCLEMAJ", $pub_cycle);
-    mod_set_option("MAJ_TRUNK", $pub_majtrunk);
+    mod_set_option("MAJ_DEV", $pub_majdev);
+    mod_set_option("MAJ_ALPHA", $pub_majalpha);
+    mod_set_option("MAJ_BETA", $pub_majbeta);
 
 }
 
@@ -34,10 +36,24 @@ if (isset($pub_valid)) {
     </tr>
     <form action="index.php?action=autoupdate&sub=admin" method="post">
         <tr>
-            <th><?php echo $lang['autoupdate_admin_trunk']; ?><br/><?php echo $lang['autoupdate_admin_trunk1']; ?></th>
-            <th><input type="radio" name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 1) ? 'checked' : ''; ?>
+            <th><?php echo $lang['autoupdate_admin_beta']; ?><br/><?php echo $lang['autoupdate_admin_beta1']; ?></th>
+            <th><input type="radio" name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 1) ? 'checked' : ''; ?>
                        value="1"/> <span style="font-size: large; ">|</span> <input type="radio"
-                                                                  name="majtrunk" <?php echo (mod_get_option("MAJ_TRUNK") == 0) ? 'checked' : ''; ?>
+                                                                                    name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 0) ? 'checked' : ''; ?>
+                                                                                    value="0"/></th>
+        </tr>
+        <tr>
+            <th><?php echo $lang['autoupdate_admin_alpha']; ?><br/><?php echo $lang['autoupdate_admin_alpha1']; ?></th>
+            <th><input type="radio" name="majalpha" <?php echo (mod_get_option("MAJ_ALPHA") == 1) ? 'checked' : ''; ?>
+                       value="1"/> <span style="font-size: large; ">|</span> <input type="radio"
+                                                                                    name="majalpha" <?php echo (mod_get_option("MAJ_ALPHA") == 0) ? 'checked' : ''; ?>
+                                                                                    value="0"/></th>
+        </tr>
+        <tr>
+            <th><?php echo $lang['autoupdate_admin_dev']; ?><br/><?php echo $lang['autoupdate_admin_dev1']; ?></th>
+            <th><input type="radio" name="majdev" <?php echo (mod_get_option("MAJ_DEV") == 1) ? 'checked' : ''; ?>
+                       value="1"/> <span style="font-size: large; ">|</span> <input type="radio"
+                                                                  name="majdev" <?php echo (mod_get_option("MAJ_DEV") == 0) ? 'checked' : ''; ?>
                                                                   value="0"/></th>
         </tr>
         <tr>

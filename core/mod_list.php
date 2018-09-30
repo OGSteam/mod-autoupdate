@@ -22,7 +22,6 @@ function getRepositorylist()
     }
     $mod_file = file_get_contents('./mod/autoupdate/tmp/repo_list.json');
 
-    //$result = utf8_encode($mod_file);
     $data = json_decode($mod_file, true);
     //print_r($data);
     //On récupère ce que l'on a besoin dans la structure JSON
@@ -86,8 +85,10 @@ function getRepositoryDetails($repoName)
  */
 function getRepositoryVersion($Reponame, $isMod = true)
 {
-
     global $lang;
+
+    $version = array('release' => null , 'beta' => null , 'alpha' => null );
+
     $repo_details = getRepositoryDetails($Reponame);
     if ($repo_details == false) {
         return "-1";
@@ -104,10 +105,33 @@ function getRepositoryVersion($Reponame, $isMod = true)
         $api_list = file_get_contents('./mod/autoupdate/tmp/' . $Reponame . '.json');
 
         $data = json_decode($api_list, true);
-        asort($data);
+        arsort($data);
 
         if (count($data) > 0) {
-            return $data[0]['name'];
+            foreach ($data as $tagged_release)
+            {
+                $tagged_release = $tagged_release['name'];
+
+                if( preg_match("/alpha/i",$tagged_release) ){
+                   if(!isset($version['alpha']))  $version['alpha'] = $tagged_release;
+                } elseif (preg_match("/beta/i",$tagged_release) ) {
+                    if (!isset($version['beta'])) $version['beta'] = $tagged_release;
+                } else{
+                    if (!isset($version['release'])) $version['release'] = $tagged_release;
+                }
+            }
+
+            if(version_compare($version['release'], $version['alpha'], ">")){
+
+                unset($version['alpha']);
+            }elseif (version_compare($version['release'], $version['beta'], ">")) {
+
+                unset($version['beta']);
+            }
+
+
+            //Gestion alpha et beta ici
+            return $version; // Récupération du Tag de version
         } else {
             log_('mod', $lang['autoupdate_tableau_error4'] . ' ' . $Reponame);
             return "-1";
@@ -146,7 +170,7 @@ function github_Request($request) {
             log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
         }
     } catch (Exception $e) {
-        log_('mod', "[ERROR_github_Request] Excetpion: " . $e->getMessage());
+        log_('mod', "[ERROR_github_Request] Exception: " . $e->getMessage());
     }
 
     return $data;
