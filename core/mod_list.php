@@ -80,10 +80,9 @@ function getRepositoryDetails($repoName)
 
 /**
  * @param      $Reponame
- * @param bool $isMod
  * @return array|string
  */
-function getRepositoryVersion($Reponame, $isMod = true)
+function getRepositoryVersion($Reponame)
 {
     global $lang;
 

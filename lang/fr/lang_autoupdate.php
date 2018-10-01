@@ -25,7 +25,6 @@ $lang['autoupdate_tableau_toolinstall'] = "Outils installés - Recherche des mis
 $lang['autoupdate_tableau_modnoinstall'] = "Modules non installés - Recherche des mods sur OGSteam.fr";
 $lang['autoupdate_tableau_version'] = "Version installée";
 $lang['autoupdate_tableau_versionSVN'] = "Dernière version disponible";
-$lang['autoupdate_tableau_versionDev'] = "Dernière version Dev";
 $lang['autoupdate_tableau_versionAlpha'] = "Dernière version Alpha";
 $lang['autoupdate_tableau_versionBeta'] = "Dernière version Beta";
 $lang['autoupdate_tableau_action'] = "Action";

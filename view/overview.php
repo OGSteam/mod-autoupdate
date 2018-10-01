@@ -48,10 +48,6 @@ $installed_mods = get_installed_mod_list();
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionAlpha'] . "</td>";
         }
-        if (mod_get_option("MAJ_DEV") == 1) {
-            echo "<td class='c' width = '50'>";
-            echo $lang['autoupdate_tableau_versionDev'] . "</td>";
-        }
         ?>
         <td class='c' width="80"><?php echo $lang['autoupdate_tableau_bug']; ?></td>
     </tr>
@@ -61,7 +57,7 @@ $installed_mods = get_installed_mod_list();
         <th>
             <?php
             echo $server_config["version"] . "</th>";
-            $cur_version = getRepositoryVersion('ogspy', false);
+            $cur_version = getRepositoryVersion('ogspy');
             if (!is_array($cur_version) || $cur_version == '-1') {
                 echo "\t\t<th>" . $lang['autoupdate_tableau_norefered'] . "</th>\n";
                 $cur_version = 0;
@@ -96,16 +92,7 @@ $installed_mods = get_installed_mod_list();
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
-            if (mod_get_option("MAJ_DEV") == 1) {
-                echo "<th>";
-            if(isset($cur_version['alpha'])) {
-                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=dev'>".$cur_version['dev']."</a>";
-            }else{
-                $ziplink = "-";
-            }
-                echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
-                echo "</th>";
-            }
+
             echo "<th>";
             $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
             echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
@@ -134,10 +121,6 @@ $installed_mods = get_installed_mod_list();
         <?php if (mod_get_option("MAJ_ALPHA") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionAlpha'] . "</td>";
-        } ?>
-        <?php if (mod_get_option("MAJ_DEV") == 1) {
-            echo "<td class='c' width = '50'>";
-            echo $lang['autoupdate_tableau_versionDev'] . "</td>";
         } ?>
         <td class='c' width="80"><?php echo $lang['autoupdate_tableau_bug']; ?></td>
     </tr>
@@ -202,17 +185,7 @@ $installed_mods = get_installed_mod_list();
                     echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                     echo "</th>\n";
                 }
-                if (mod_get_option("MAJ_DEV") == 1) {
-                    echo "\t\t<th>";
-                    if(isset($cur_version['dev'])) {
-                    $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=dev'>".$cur_version['dev']."</a>";
-                    }else
-                    {
-                        $ziplink = "-";
-                    }
-                    echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
-                    echo "</th>\n";
-                }
+
                 echo "\t\t<th>";
                 if (isset($repo_details['owner'])) {
                     $trackerlink = "<a href='https://github.com/" . $repo_details['owner'] . "/mod-" . $cur_modroot . "/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";

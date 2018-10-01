@@ -28,7 +28,7 @@ if ($user_data['user_admin'] == 1) {
     $toolroot = filter_var($pub_tool, FILTER_SANITIZE_STRING);
     $tool_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
 
-    $version = getRepositoryVersion('ogspy',false);
+    $version = getRepositoryVersion('ogspy');
 
     $target_version = $version[ $tool_tag ];
 
