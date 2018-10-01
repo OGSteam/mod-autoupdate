@@ -70,7 +70,7 @@ $installed_mods = get_installed_mod_list();
             }
             echo "<th>";
             if (version_compare($cur_version['release'], $server_config["version"], ">")) {
-                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=" . $cur_version['release'] . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=release'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
             } else {
                 echo "Aucune";
@@ -99,7 +99,7 @@ $installed_mods = get_installed_mod_list();
             if (mod_get_option("MAJ_DEV") == 1) {
                 echo "<th>";
             if(isset($cur_version['alpha'])) {
-                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=trunk'>".$cur_version['dev']."</a>";
+                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=dev'>".$cur_version['dev']."</a>";
             }else{
                 $ziplink = "-";
             }
@@ -173,7 +173,7 @@ $installed_mods = get_installed_mod_list();
                     echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><span style=\"color: red; \">(RO)</span></a>";
                 } else {
                     if (version_compare($cur_version['release'], $installed_mods[$i]['version'], ">")) {
-                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=" . $cur_version['release'] . "'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
+                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=release'>" . $lang['autoupdate_tableau_uptodate'] . "</a>";
                         echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                     } else {
                         echo "Aucune";
@@ -205,7 +205,7 @@ $installed_mods = get_installed_mod_list();
                 if (mod_get_option("MAJ_DEV") == 1) {
                     echo "\t\t<th>";
                     if(isset($cur_version['dev'])) {
-                    $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=trunk'>".$cur_version['dev']."</a>";
+                    $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=dev'>".$cur_version['dev']."</a>";
                     }else
                     {
                         $ziplink = "-";

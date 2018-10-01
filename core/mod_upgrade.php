@@ -29,14 +29,12 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
     if (isset($pub_tag)) {
         //Si une version est spécifiée...
-        $version = filter_var($pub_tag, FILTER_SANITIZE_STRING);
-    } else {
-        //Sinon on prends la dernière
+        $mod_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
         $version = getRepositoryVersion($modroot);
         if (!is_array($version) || $version == '-1') {
             die("No official version available, Please contact OGSteam");
         }
-        $version = $version['release'];
+        $target_version = $version[ $mod_tag ];
     }
 
     if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
@@ -44,10 +42,17 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         //Récupération des infos du mod :
         $repoDetails = getRepositoryDetails($modroot);
 
-        if ($version == 'trunk') {
+        if ($mod_tag == 'dev') {
             $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/develop";
-        } else {
-            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version;
+        }elseif ($mod_tag == 'alpha')
+        {
+            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['alpha'];
+        }
+        elseif ($mod_tag == 'beta')
+        {
+            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['beta'];
+        }else {
+            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['release'];
         }
 
         if (!is_writeable("./mod/autoupdate/tmp/")) {
@@ -89,10 +94,10 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     } else {
         echo '<table>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_wantupdate'] . $modroot . ' ' . $version . ' ?</td>' . "\n";
+        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_wantupdate'] . $modroot . ' ' . $target_version . ' ?</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod=' . $modroot . '&tag=' . $version . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
+        echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod=' . $modroot . '&tag=' . $mod_tag . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
     }

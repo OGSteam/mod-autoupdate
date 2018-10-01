@@ -81,7 +81,7 @@ function getRepositoryDetails($repoName)
 /**
  * @param      $Reponame
  * @param bool $isMod
- * @return string
+ * @return array|string
  */
 function getRepositoryVersion($Reponame, $isMod = true)
 {
@@ -128,9 +128,6 @@ function getRepositoryVersion($Reponame, $isMod = true)
 
                 unset($version['beta']);
             }
-
-
-            //Gestion alpha et beta ici
             return $version; // Récupération du Tag de version
         } else {
             log_('mod', $lang['autoupdate_tableau_error4'] . ' ' . $Reponame);

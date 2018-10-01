@@ -26,7 +26,11 @@ if (!isset($pub_confirmed)) {
 if ($user_data['user_admin'] == 1) {
 
     $toolroot = filter_var($pub_tool, FILTER_SANITIZE_STRING);
-    $version = filter_var($pub_tag, FILTER_SANITIZE_STRING);
+    $tool_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
+
+    $version = getRepositoryVersion('ogspy',false);
+
+    $target_version = $version[ $tool_tag ];
 
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
 
@@ -34,10 +38,14 @@ if ($user_data['user_admin'] == 1) {
             die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
 
-        if ($version == 'trunk') {
+        if ($tag == 'dev') {
             $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/develop";
+        }elseif ($tag == 'alpha') {
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['alpha'];
+        }elseif ($tag == 'beta') {
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['beta'];
         } else {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version;
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['release'];
         }
         $tool_file = github_Request($toolzip);
         file_put_contents('./mod/autoupdate/tmp/tarball.zip', $tool_file);
@@ -92,10 +100,10 @@ if ($user_data['user_admin'] == 1) {
         echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJtool_wantbackup'] . '</span></td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJtool_wantupdate'] . $toolroot . ' ' . $version . ' ?</td>' . "\n";
+        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJtool_wantupdate'] . $toolroot . ' ' . $target_version . ' ?</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool=' . $toolroot . '&tag=' . $version . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
+        echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool=' . $toolroot . '&tag=' . $tool_tag . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
         echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
