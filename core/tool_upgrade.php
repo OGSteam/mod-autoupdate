@@ -32,26 +32,37 @@ if ($user_data['user_admin'] == 1) {
 
     $target_version = $version[ $tool_tag ];
 
+
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
+
+        echo '<table align="center" style="width : 400px">' . "\n";
+
+        echo "\t" . '<tr>' . "\n";
+        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_rightscheck'] . '</td>' . "\n";
+        echo "\t" . '</tr>' . "\n";
 
         if (!is_writeable(".")) {
             die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
 
-        if ($tag == 'dev') {
+        if ($tool_tag == 'dev') {
             $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/develop";
-        }elseif ($tag == 'alpha') {
+        }elseif ($tool_tag == 'alpha') {
             $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['alpha'];
-        }elseif ($tag == 'beta') {
+        }elseif ($tool_tag == 'beta') {
             $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['beta'];
         } else {
             $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['release'];
         }
+
+        echo "\t" . '<tr>' . "\n";
+        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_startdownload'] . '</td>' . "\n";
+        echo "\t" . '</tr>' . "\n";
+
         $tool_file = github_Request($toolzip);
         file_put_contents('./mod/autoupdate/tmp/tarball.zip', $tool_file);
 
         if (file_exists('./mod/autoupdate/tmp/tarball.zip')) {
-            echo '<table align="center" style="width : 400px">' . "\n";
 
             if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip') === TRUE) {
                 echo "\t" . '<tr>' . "\n";
