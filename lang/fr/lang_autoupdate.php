@@ -45,6 +45,7 @@ $lang['autoupdate_MaJ_rightscheck'] = "Vérification des droits";
 $lang['autoupdate_MaJ_startdownload'] = "Lancement du téléchargement...";
 $lang['autoupdate_MaJ_downok'] = "Téléchargement réussi.";
 $lang['autoupdate_MaJ_unzipok'] = "Décompression réussie.";
+$lang['autoupdate_MaJ_unzipnotok'] = "Echec Décompression.";
 $lang['autoupdate_MaJ_errorversionogspy'] = "Version d'OGSpy supérieure requise";
 $lang['autoupdate_MaJ_rights'] = "Vous n'avez pas les droits nécessaire.";
 $lang['autoupdate_MaJ_wantupdate'] = "Voulez vous continuer la mise à jour du mod ";

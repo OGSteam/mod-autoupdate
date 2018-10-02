@@ -60,9 +60,9 @@ if ($user_data['user_admin'] == 1) {
         echo "\t" . '</tr>' . "\n";
 
         $tool_file = github_Request($toolzip);
-        file_put_contents('./mod/autoupdate/tmp/tarball.zip', $tool_file);
+        file_put_contents('./mod/autoupdate/tmp/' . $toolroot . '.zip', $tool_file);
 
-        if (file_exists('./mod/autoupdate/tmp/tarball.zip')) {
+        if (file_exists('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
 
             if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip') === TRUE) {
                 echo "\t" . '<tr>' . "\n";
@@ -72,7 +72,7 @@ if ($user_data['user_admin'] == 1) {
                 $zip->extractTo("./mod/autoupdate/tmp/" . $toolroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
 
-                unlink("./mod/autoupdate/tmp/tarball.zip");
+                unlink("./mod/autoupdate/tmp/" . $toolroot . ".zip");
 
                 $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
@@ -103,6 +103,11 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
+            }else{
+                echo "\t" . '<tr>' . "\n";
+                echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
+                echo "\t" . '</tr>' . "\n";
+                echo "\t" . '<tr>' . "\n";
             }
         }
     } else {
