@@ -74,7 +74,7 @@ $installed_mods = get_installed_mod_list();
             echo "</th>";
             if (mod_get_option("MAJ_BETA") == 1) {
                 echo "<th>";
-            if(isset($cur_version['alpha'])) {
+            if(isset($cur_version['beta'])) {
                 $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=beta'>".$cur_version['beta']."</a>";
             }else{
                 $ziplink = "-";
