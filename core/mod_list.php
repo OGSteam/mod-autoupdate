@@ -121,11 +121,10 @@ function getRepositoryVersion($Reponame)
             }
 
             if(version_compare($version['release'], $version['alpha'], ">")){
-
-                unset($version['alpha']);
-            }elseif (version_compare($version['release'], $version['beta'], ">")) {
-
-                unset($version['beta']);
+                $version['alpha'] = null;
+            }
+            if (version_compare($version['release'], $version['beta'], ">")) {
+                $version['beta'] = null;
             }
             return $version; // Récupération du Tag de version
         } else {
