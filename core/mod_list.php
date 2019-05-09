@@ -147,7 +147,7 @@ function getRepositoryVersion($Reponame)
 function github_Request($request) {
 
     $opts = [
-        'http' => [
+        'https' => [
             'method' => 'GET',
             'header' => [
                 'User-Agent: OGSpy',
