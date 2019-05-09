@@ -14,6 +14,9 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 require_once("views/page_header.php");
+if (!function_exists('random_bytes')) {
+    die("OGSpy cannot work anymore without Php Security Layers, please use PHP(>= 7.0)");
+}
 if (!function_exists('json_decode')) {
     die("Autoupdate cannot work without the JSON Library, please use PHP(>= 5.2)");
 }
