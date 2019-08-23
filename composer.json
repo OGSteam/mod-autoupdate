@@ -1,0 +1,35 @@
+{
+    "name" : "ogsteam/mod-autoupdate",
+    "description" : "OGSpy module that helps you to keep latest versions for all OGSteam Tools",
+    "type" : "ogspy-mod",
+    "keywords" : [ "ogspy" ],
+    "license" : "GPL-2.0-only",
+    "authors" : [
+        {
+            "name" : "DarkNoon",
+            "email" : "darknoon@darkcity.fr",
+            "role" : "Lead Developer"
+        }
+    ],
+    "require" : {
+        "php" : ">=7.0.0"
+    },
+    "extra" : {
+            "install_script": "install.php",
+            "update_script": "update.php",
+            "uninstall_script": "uninstall.php",
+            "mod_title": "autoupdate",
+            "menu_title" : "AutoUpdate",
+            "action_name" : "autoupdate",
+            "folder_name" : "autoupdate",
+            "action_file" : "autoupdate.php",
+            "active" : true,
+            "admin" : true
+    },
+    "homepage" : "https://github.com/ogsteam/mod-autoupdate",
+    "support": {
+        "issues": "https://github.com/ogsteam/mod-autoupdate/issues",
+        "source": "https://github.com/ogsteam/mod-autoupdate/tree/master",
+         "chat" : "https://discord.gg/Azcb67b"
+    }
+}
