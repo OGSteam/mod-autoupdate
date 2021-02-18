@@ -4,7 +4,7 @@
  * @package [Mod] Autoupdate
  * @subpackage main
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @copyright Copyright &copy; 2016, http://ogsteam.eu/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */

@@ -14,7 +14,7 @@ Aucune configuration à réaliser même si des options sont disponibles pour aff
 
 ### Pour nous contacter ###
 
-* [Forum OGSteam](https://forum.ogsteam.fr) : Vous y trouverez notre équipe de support ainsi que l'invitation vers notre salon Discord
+* [Forum OGSteam](https://forum.ogsteam.eu) : Vous y trouverez notre équipe de support ainsi que l'invitation vers notre salon Discord
 
 ### Index Codacy ###
 
@@ -23,7 +23,7 @@ Aucune configuration à réaliser même si des options sont disponibles pour aff
 ### Contact ###
 
 * [Darknoon](https://github.com/darknoon29)
-* https://www.ogsteam.fr ou Discord : https://discord.gg/Azcb67b
+* https://www.ogsteam.eu ou Discord : https://discord.gg/Azcb67b
 
 
 
@@ -48,7 +48,7 @@ So if you need a modification, please Fork the mod to you user space and create 
 ### Contact ###
 
 * [Darknoon](https://github.com/darknoon29)
-* [Forum](https://www.ogsteam.fr) ou [Discord](https://discord.gg/Azcb67b)
+* [Forum](https://www.ogsteam.eu) ou [Discord](https://discord.gg/Azcb67b)
 
 
 

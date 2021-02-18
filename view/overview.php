@@ -4,7 +4,7 @@
  * @package [Mod] Autoupdate
  * @subpackage main
  * @author DarkNoon <darknoon@darkcity.fr>
- * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @copyright Copyright &copy; 2016, http://ogsteam.eu/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
@@ -213,7 +213,7 @@ $installed_mods = get_installed_mod_list();
             </th>
         </tr>
         <tr>
-            <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
+            <th colspan="100"><a href="https://www.ogsteam.eu">ogsteam.eu</a></th>
         </tr>
         <?php
     }

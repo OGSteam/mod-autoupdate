@@ -4,7 +4,7 @@
  * @package [Mod] Autoupdate
  * @subpackage i18n
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @copyright Copyright &copy; 2016, http://ogsteam.eu/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
@@ -20,9 +20,9 @@ $lang['autoupdate_tableau_authormod'] = "módulo de autor";
 $lang['autoupdate_tableau_descmod'] = "Descripcion";
 $lang['autoupdate_tableau_nametool'] = "Nombre del instrumento";
 $lang['autoupdate_tableau_authtool'] = "Auteur de l'outil";
-$lang['autoupdate_tableau_modinstall'] = "Modules installés - Recherche des mises à jour sur OGSteam.fr";
-$lang['autoupdate_tableau_toolinstall'] = "Outils installés - Recherche des mises à jour sur OGSteam.fr";
-$lang['autoupdate_tableau_modnoinstall'] = "Modules non installés - Recherche des mods sur OGSteam.fr";
+$lang['autoupdate_tableau_modinstall'] = "Modules installés - Recherche des mises à jour sur ogsteam.eu";
+$lang['autoupdate_tableau_toolinstall'] = "Outils installés - Recherche des mises à jour sur ogsteam.eu";
+$lang['autoupdate_tableau_modnoinstall'] = "Modules non installés - Recherche des mods sur ogsteam.eu";
 $lang['autoupdate_tableau_version'] = "Version installée";
 $lang['autoupdate_tableau_versionSVN'] = "Dernière version disponible";
 $lang['autoupdate_tableau_versionTrunk'] = "Dernière version sur Trunk";

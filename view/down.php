@@ -4,7 +4,7 @@
  * @package [Mod] Autoupdate
  * @subpackage main
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @copyright Copyright &copy; 2016, http://ogsteam.fr/
+ * @copyright Copyright &copy; 2016, http://ogsteam.eu/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
@@ -81,7 +81,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         </th>
     </tr>
     <tr>
-        <th colspan="100"><a href="https://www.ogsteam.fr">OGSteam.fr</a></th>
+        <th colspan="100"><a href="https://www.ogsteam.eu">ogsteam.eu</a></th>
     </tr>
     </table><?php
 } else {
