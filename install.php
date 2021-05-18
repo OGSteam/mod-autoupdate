@@ -23,6 +23,7 @@ if ($is_ok == true) {
     mod_set_option("MAJ_ALPHA", "0");
     mod_set_option("MAJ_BETA", "0");
     mod_set_option("LAST_REPO_LIST", "0");
+    mod_set_option("GITHUBTOKEN", "");
 } else {
     echo "<script>alert(\"Désolé, un problème a eu lieu pendant l'installation: corrigez les problèmes survenus et réessayez.\");</script>";
 }

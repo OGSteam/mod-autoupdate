@@ -146,15 +146,47 @@ function getRepositoryVersion($Reponame)
  */
 function github_Request($request) {
 
+    $userdefinedtoken = '';
+    $tokensource = '';
+    
+    if (strlen($userdefinedtoken) !== 40) {
+
+        $userdefinedtoken = mod_get_option('GITHUBTOKEN');
+        $tokensource = 'mod_get_option';
+        if(is_array($userdefinedtoken)) {
+            if(count($userdefinedtoken) == 0) $userdefinedtoken = '';
+        }
+    }
+
+    /*if (function_exists('get_aTokenOGSpy') && strlen($userdefinedtoken) !== 40) {
+        $userdefinedtoken =  get_aTokenOGSpy(':');
+        $tokensource = 'get_aTokenOGSpy';
+    }*/
+
+    if (strlen($userdefinedtoken) !== 40) {
+        $userdefinedtoken = github_RequestToken();
+        $tokensource = 'external';
+    }
+
+    if (strlen($userdefinedtoken) !== 40) {
+        log_('mod', $lang['autoupdate_tableau_errortoken'] . ' ' . $request);
+        $userdefinedtoken = '';
+        $tokensource = 'none';
+    }
+
+    log_('debug', "Autoupdate Token source $tokensource");
+
     $opts = [
         'http' => [
             'method' => 'GET',
             'header' => [
                 'User-Agent: OGSpy',
-                'Authorization: token d08499607a0f2469405465cf29e3aeb9d4b1265f'
+                'Authorization: token '
             ]
         ]
     ];
+
+    $opts['http']['header'][1] .= $userdefinedtoken;
 
     $context = stream_context_create($opts);
 
@@ -164,10 +196,29 @@ function github_Request($request) {
         if ($data === false) {
             log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
         }
+
+        mod_set_option('GITHUBTOKEN', $userdefinedtoken);
+
+        return $data;
+
     } catch (Exception $e) {
         log_('mod', "[ERROR_github_Request] Exception: " . $e->getMessage());
     }
 
-    return $data;
+    
 }
 
+function github_RequestToken() {
+
+    $opts = [
+        'http' => [
+            'method' => 'GET',
+            'header' => [
+                'User-Agent: OGSpy'
+            ]
+        ]
+    ];
+
+    $data = file_get_contents('https://darkcity.fr/statistiques/collector/repolistkey', false, $context);
+    return $data;
+}

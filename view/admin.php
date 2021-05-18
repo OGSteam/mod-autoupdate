@@ -22,6 +22,7 @@ if (isset($pub_valid)) {
     mod_set_option("CYCLEMAJ", $pub_cycle);
     mod_set_option("MAJ_ALPHA", $pub_majalpha);
     mod_set_option("MAJ_BETA", $pub_majbeta);
+    mod_set_option("GITHUBTOKEN", $pub_githubtoken);
 }
 
 ?>
@@ -50,6 +51,12 @@ if (isset($pub_valid)) {
             <th><?php echo $lang['autoupdate_admin_frequency']; ?></th>
             <th><input name="cycle" type="text" size="3" maxlength="2"
                        value="<?php echo mod_get_option("CYCLEMAJ"); ?>">
+            </th>
+        </tr>
+        <tr>
+            <th><?php echo $lang['autoupdate_admin_githubtoken']; ?></th>
+            <th><input name="githubtoken" type="text" size="40" maxlength="40"
+                       value="<?php echo mod_get_option("GITHUBTOKEN"); ?>">
             </th>
         </tr>
         <tr>
