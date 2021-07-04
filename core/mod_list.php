@@ -146,6 +146,7 @@ function getRepositoryVersion($Reponame)
  */
 function github_Request($request) {
 
+    global $lang;
     $userdefinedtoken = '';
     $tokensource = '';
     
@@ -156,6 +157,7 @@ function github_Request($request) {
         if(is_array($userdefinedtoken)) {
             if(count($userdefinedtoken) == 0) $userdefinedtoken = '';
         }
+        if(substr($userdefinedtoken, 0, 4) != 'ghp_' ) $userdefinedtoken = ''; // Nouveau format de Token avec prefix requis
     }
 
     /*if (function_exists('get_aTokenOGSpy') && strlen($userdefinedtoken) !== 40) {
@@ -186,26 +188,27 @@ function github_Request($request) {
         ]
     ];
 
-    $opts['http']['header'][1] .= $userdefinedtoken;
+    if($userdefinedtoken ===  ''){ 
+        // On Efface le header d'Authorization
+        unset($opts['http']['header'][1]);
+    } else {
+        $opts['http']['header'][1] .= $userdefinedtoken;
+    }
 
     $context = stream_context_create($opts);
 
-    try {
-        $data = file_get_contents($request, false, $context);
+        $data = @file_get_contents($request, false, $context);
 
         if ($data === false) {
             log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
+            mod_set_option('GITHUBTOKEN', 'UnauthorizedToken', 'autoupdate');
+            echo('Error Data');
+            exit();
         }
 
         mod_set_option('GITHUBTOKEN', $userdefinedtoken);
 
         return $data;
-
-    } catch (Exception $e) {
-        log_('mod', "[ERROR_github_Request] Exception: " . $e->getMessage());
-    }
-
-    
 }
 
 function github_RequestToken() {
