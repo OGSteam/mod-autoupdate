@@ -150,15 +150,13 @@ function github_Request($request) {
     $userdefinedtoken = '';
     $tokensource = '';
     
-    if (strlen($userdefinedtoken) !== 40) {
-
-        $userdefinedtoken = mod_get_option('GITHUBTOKEN');
-        $tokensource = 'mod_get_option';
-        if(is_array($userdefinedtoken)) {
-            if(count($userdefinedtoken) == 0) $userdefinedtoken = '';
-        }
-        if(substr($userdefinedtoken, 0, 4) != 'ghp_' ) $userdefinedtoken = ''; // Nouveau format de Token avec prefix requis
+    $userdefinedtoken = mod_get_option('GITHUBTOKEN');
+    $tokensource = 'mod_get_option';
+    if(is_array($userdefinedtoken)) {
+        if(count($userdefinedtoken) == 0) $userdefinedtoken = '';
     }
+    if(substr($userdefinedtoken, 0, 4) != 'ghp_' ) $userdefinedtoken = ''; // Nouveau format de Token avec prefixe requis
+
 
     /*if (function_exists('get_aTokenOGSpy') && strlen($userdefinedtoken) !== 40) {
         $userdefinedtoken =  get_aTokenOGSpy(':');
@@ -176,7 +174,7 @@ function github_Request($request) {
         $tokensource = 'none';
     }
 
-    log_('debug', "Autoupdate Token source $tokensource");
+    //log_('debug', "Autoupdate Token source $tokensource");
 
     $opts = [
         'http' => [
@@ -202,7 +200,7 @@ function github_Request($request) {
         if ($data === false) {
             log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
             mod_set_option('GITHUBTOKEN', 'UnauthorizedToken', 'autoupdate');
-            echo('Error Data');
+            echo('Error Data, Please Retry with a new Token (See Settings)');
             exit();
         }
 
