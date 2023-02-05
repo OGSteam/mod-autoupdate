@@ -11,6 +11,7 @@ Ce module permet de télécharger et de mettre à jour OGSpy et ses modules
 
 Aucune configuration à réaliser même si des options sont disponibles pour afficher les versions développeur.
 
+Il est néanmoins possible d'utiliser son compte GitHub pour récupérer les données du dépôt OGSteam. Vous pouvez générer une clé dans la section Settings/Developper Settings/Personal Access Token et de l'utiliser avec vos paramètres Autoupdate. A défaut Autoupdate utilisera une clé appartenant à l'OGSteam.
 ## Pour nous contacter
 
 * [Forum OGSteam](https://forum.ogsteam.eu) : Vous y trouverez notre équipe de support ainsi que l'invitation vers notre salon Discord
