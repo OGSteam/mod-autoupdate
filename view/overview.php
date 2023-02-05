@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate Table view
  * @package [Mod] Autoupdate
@@ -27,7 +28,7 @@ $installed_mods = get_installed_mod_list();
 
 ?>
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
-<br/>
+<br />
 <table width='60%'>
     <tr>
         <td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_toolinstall']; ?></td>
@@ -38,9 +39,9 @@ $installed_mods = get_installed_mod_list();
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
         <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
-    echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
-}
-         if (mod_get_option("MAJ_BETA") == 1) {
+            echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+        }
+        if (mod_get_option("MAJ_BETA") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionBeta'] . "</td>";
         }
@@ -74,27 +75,27 @@ $installed_mods = get_installed_mod_list();
             echo "</th>";
             if (mod_get_option("MAJ_BETA") == 1) {
                 echo "<th>";
-            if(isset($cur_version['beta'])) {
-                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=beta'>".$cur_version['beta']."</a>";
-            }else{
-                $ziplink = "-";
-            }
+                if (isset($cur_version['beta'])) {
+                    $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=beta'>" . $cur_version['beta'] . "</a>";
+                } else {
+                    $ziplink = "-";
+                }
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
             if (mod_get_option("MAJ_ALPHA") == 1) {
                 echo "<th>";
-            if(isset($cur_version['alpha'])) {
-                $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=alpha'>".$cur_version['alpha']."</a>";
-            }else{
-                $ziplink = "-";
-            }
+                if (isset($cur_version['alpha'])) {
+                    $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=alpha'>" . $cur_version['alpha'] . "</a>";
+                } else {
+                    $ziplink = "-";
+                }
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
 
             echo "<th>";
-            $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
+            $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank' rel='noopener'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
             echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
             echo "</th>";
             ?>
@@ -111,9 +112,9 @@ $installed_mods = get_installed_mod_list();
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
         <td class='c' width="50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
         <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
-    echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
-}
-?>
+            echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+        }
+        ?>
         <?php if (mod_get_option("MAJ_BETA") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionBeta'] . "</td>";
@@ -165,10 +166,9 @@ $installed_mods = get_installed_mod_list();
                 echo "</th>\n";
                 if (mod_get_option("MAJ_BETA") == 1) {
                     echo "\t\t<th>";
-                    if(isset($cur_version['beta'])) {
-                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=beta'>".$cur_version['beta']."</a>";
-                    }else
-                    {
+                    if (isset($cur_version['beta'])) {
+                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=beta'>" . $cur_version['beta'] . "</a>";
+                    } else {
                         $ziplink = "-";
                     }
                     echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
@@ -176,10 +176,9 @@ $installed_mods = get_installed_mod_list();
                 }
                 if (mod_get_option("MAJ_ALPHA") == 1) {
                     echo "\t\t<th>";
-                    if(isset($cur_version['alpha'])) {
-                    $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=alpha'>".$cur_version['alpha']."</a>";
-                    }else
-                    {
+                    if (isset($cur_version['alpha'])) {
+                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=alpha'>" . $cur_version['alpha'] . "</a>";
+                    } else {
                         $ziplink = "-";
                     }
                     echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
@@ -192,9 +191,7 @@ $installed_mods = get_installed_mod_list();
                     echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
                 }
                 echo "</th>\n";
-
             }
-
         }
         echo "\t</tr>\n";
     }
@@ -203,19 +200,18 @@ $installed_mods = get_installed_mod_list();
     if ($user_data["user_admin"] == 1 || $user_data['user_coadmin'] == 1) {
         // Proposer le lien vers le panneau d'administration des modules
 
-        ?>
+    ?>
         <tr>
             <td class="c" colspan="100"><?php echo $lang['autoupdate_tableau_link']; ?></td>
         </tr>
         <tr>
-            <th colspan="100"><a
-                    href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a>
+            <th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a>
             </th>
         </tr>
         <tr>
             <th colspan="100"><a href="https://www.ogsteam.eu">ogsteam.eu</a></th>
         </tr>
-        <?php
+    <?php
     }
     ?>
 </table>
