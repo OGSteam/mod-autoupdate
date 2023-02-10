@@ -16,9 +16,9 @@ Il est néanmoins possible d'utiliser son compte GitHub pour récupérer les don
 
 * [Forum OGSteam](https://forum.ogsteam.eu) : Vous y trouverez notre équipe de support ainsi que l'invitation vers notre salon Discord
 
-## Index Codacy
+## Sonar Cloud Analysis
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c13a9e1d4d4f46598f1201619b54a6b2)](https://www.codacy.com/app/OGSteam/mod-autoupdate?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OGSteam/mod-autoupdate&amp;utm_campaign=Badge_Grade)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://sonarcloud.io/summary/new_code?id=OGSteam_mod-autoupdate)
 
 ## Contact
 
