@@ -18,8 +18,6 @@ if (!defined('IN_SPYOGAME')) {
  */
 $zip = new ZipArchive;
 
-function 
-
 require_once("views/page_header.php");
 
 if (!isset($pub_confirmed)) {
@@ -49,17 +47,14 @@ if ($user_data['user_admin'] == 1) {
         }
 
         if ($tool_tag == 'beta') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/releases/download/" . $version['beta'] . "/$toolroot-" . $version['beta'] . ".zip";
+            $toolzip = "https://github.com/OGSteam/" . $toolroot . "/releases/download/" . $version['beta'] . "/$toolroot-" . $version['beta'] . ".zip";
         } else {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/releases/download/" . $version['release'] . "/$toolroot-" . $version['release'] . ".zip";
+            $toolzip = "https://github.com/OGSteam/" . $toolroot . "/releases/download/" . $version['release'] . "/$toolroot-" . $version['release'] . ".zip";
         }
 
         echo "\t" . '<tr>' . "\n";
         echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_startdownload'] . '</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
-
-        echo "download $toolzip";
-        exit();
 
         $tool_file = github_Request($toolzip);
         file_put_contents('./mod/autoupdate/tmp/' . $toolroot . '.zip', $tool_file);
