@@ -71,9 +71,9 @@ if ($user_data['user_admin'] == 1) {
 
                 unlink("./mod/autoupdate/tmp/" . $toolroot . ".zip");
 
-                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
+                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot, GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/" . $toolroot . "/" . $folder[5], ".");
+                rcopy("./mod/autoupdate/tmp/" . $toolroot . "/" . $folder[4], ".");
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
 
                 //On passe au script de mise à jour.
