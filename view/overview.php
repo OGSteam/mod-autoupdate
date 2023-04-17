@@ -45,10 +45,6 @@ $installed_mods = get_installed_mod_list();
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionBeta'] . "</td>";
         }
-        if (mod_get_option("MAJ_ALPHA") == 1) {
-            echo "<td class='c' width = '50'>";
-            echo $lang['autoupdate_tableau_versionAlpha'] . "</td>";
-        }
         ?>
         <td class='c' width="80"><?php echo $lang['autoupdate_tableau_bug']; ?></td>
     </tr>
@@ -83,17 +79,6 @@ $installed_mods = get_installed_mod_list();
                 echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
                 echo "</th>";
             }
-            if (mod_get_option("MAJ_ALPHA") == 1) {
-                echo "<th>";
-                if (isset($cur_version['alpha'])) {
-                    $ziplink = "<a href='index.php?action=autoupdate&sub=tool_upgrade&tool=ogspy&tag=alpha'>" . $cur_version['alpha'] . "</a>";
-                } else {
-                    $ziplink = "-";
-                }
-                echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
-                echo "</th>";
-            }
-
             echo "<th>";
             $trackerlink = "<a href='https://github.com/OGSteam/ogspy/issues' target='_blank' rel='noopener'>" . $lang['autoupdate_tableau_buglink'] . "</a>";
             echo "<span style=\"color: lime; \">" . $trackerlink . "</span>";
@@ -118,10 +103,6 @@ $installed_mods = get_installed_mod_list();
         <?php if (mod_get_option("MAJ_BETA") == 1) {
             echo "<td class='c' width = '50'>";
             echo $lang['autoupdate_tableau_versionBeta'] . "</td>";
-        } ?>
-        <?php if (mod_get_option("MAJ_ALPHA") == 1) {
-            echo "<td class='c' width = '50'>";
-            echo $lang['autoupdate_tableau_versionAlpha'] . "</td>";
         } ?>
         <td class='c' width="80"><?php echo $lang['autoupdate_tableau_bug']; ?></td>
     </tr>
@@ -168,16 +149,6 @@ $installed_mods = get_installed_mod_list();
                     echo "\t\t<th>";
                     if (isset($cur_version['beta'])) {
                         $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=beta'>" . $cur_version['beta'] . "</a>";
-                    } else {
-                        $ziplink = "-";
-                    }
-                    echo "<span style=\"color: lime; \">" . $ziplink . "</span>";
-                    echo "</th>\n";
-                }
-                if (mod_get_option("MAJ_ALPHA") == 1) {
-                    echo "\t\t<th>";
-                    if (isset($cur_version['alpha'])) {
-                        $ziplink = "<a href='index.php?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modroot . "&tag=alpha'>" . $cur_version['alpha'] . "</a>";
                     } else {
                         $ziplink = "-";
                     }

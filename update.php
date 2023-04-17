@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate update script
  * @package [Mod] Autoupdate
@@ -23,4 +24,3 @@ mod_set_option("CYCLEMAJ", "24");
 mod_set_option("MAJ_ALPHA", "0");
 mod_set_option("MAJ_BETA", "0");
 mod_set_option("LAST_REPO_LIST", "0");
-

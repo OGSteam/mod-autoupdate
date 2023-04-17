@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate Tool upgrade File
  * @package [Mod] Autoupdate
@@ -17,6 +18,8 @@ if (!defined('IN_SPYOGAME')) {
  */
 $zip = new ZipArchive;
 
+function 
+
 require_once("views/page_header.php");
 
 if (!isset($pub_confirmed)) {
@@ -25,12 +28,12 @@ if (!isset($pub_confirmed)) {
 
 if ($user_data['user_admin'] == 1) {
 
-    $toolroot = filter_var($pub_tool, FILTER_SANITIZE_STRING);
-    $tool_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
+    $toolroot = filter_var($pub_tool);
+    $tool_tag = filter_var($pub_tag);
 
     $version = getRepositoryVersion('ogspy');
 
-    $target_version = $version[ $tool_tag ];
+    $target_version = $version[$tool_tag];
 
 
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
@@ -45,19 +48,18 @@ if ($user_data['user_admin'] == 1) {
             die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
 
-        if ($tool_tag == 'dev') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/develop";
-        }elseif ($tool_tag == 'alpha') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['alpha'];
-        }elseif ($tool_tag == 'beta') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['beta'];
+        if ($tool_tag == 'beta') {
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/releases/download/" . $version['beta'] . "/$toolroot-" . $version['beta'] . ".zip";
         } else {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['release'];
+            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/releases/download/" . $version['release'] . "/$toolroot-" . $version['release'] . ".zip";
         }
 
         echo "\t" . '<tr>' . "\n";
         echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_startdownload'] . '</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
+
+        echo "download $toolzip";
+        exit();
 
         $tool_file = github_Request($toolzip);
         file_put_contents('./mod/autoupdate/tmp/' . $toolroot . '.zip', $tool_file);
@@ -87,13 +89,12 @@ if ($user_data['user_admin'] == 1) {
                 chdir('./install'); //Passage dans le répertoire d'installation
                 $pub_verbose = false; //Paramétrage de la mise à jour
                 echo "\t" . '<tr>' . "\n";
+                require_once("version.php");
                 require_once("upgrade_to_latest.php"); // Mise à jour...
                 echo "\t" . '</tr>' . "\n";
                 chdir('..'); // Retour au répertoire par défaut.
                 //Supression du répertoire Install
                 rrmdir("./install");
-
-
 
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
@@ -103,7 +104,7 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
-            }else{
+            } else {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
@@ -126,7 +127,6 @@ if ($user_data['user_admin'] == 1) {
         echo "\t" . '</tr>' . "\n";
         echo '</table>' . "\n";
     }
-
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
@@ -135,4 +135,3 @@ echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
 echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
-

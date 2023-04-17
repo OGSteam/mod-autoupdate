@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate Controller
  * @package [Mod] Autoupdate
@@ -96,19 +97,19 @@ if (!isset($pub_sub)) {
     $sub = htmlentities($pub_sub);
 }
 switch ($sub) {
-        case 'overview':
-            include('view/overview.php');
-            break;
-        case 'mod_upgrade':
-            include('core/mod_upgrade.php');
-            break;
-        case 'tool_upgrade':
-            include('core/tool_upgrade.php');
-            break;
-        case 'down':
-            include('view/down.php');
-            break;
-        case 'admin':
-            include('view/admin.php');
-            break;
+    case 'overview':
+        include('view/overview.php');
+        break;
+    case 'mod_upgrade':
+        include('core/mod_upgrade.php');
+        break;
+    case 'tool_upgrade':
+        include('core/tool_upgrade.php');
+        break;
+    case 'down':
+        include('view/down.php');
+        break;
+    case 'admin':
+        include('view/admin.php');
+        break;
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate Tool Mod upgrade File
  * @package [Mod] Autoupdate
@@ -25,16 +26,16 @@ if (!isset($pub_confirmed)) {
 
 if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
 
-    $modroot = filter_var($pub_mod, FILTER_SANITIZE_STRING);
+    $modroot = filter_var($pub_mod);
 
     if (isset($pub_tag)) {
         //Si une version est spécifiée...
-        $mod_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
+        $mod_tag = filter_var($pub_tag);
         $version = getRepositoryVersion($modroot);
         if (!is_array($version) || $version == '-1') {
             die("No official version available, Please contact OGSteam");
         }
-        $target_version = $version[ $mod_tag ];
+        $target_version = $version[$mod_tag];
     }
 
     if ($pub_sub == "mod_upgrade" && $pub_confirmed == "yes") {
@@ -42,16 +43,9 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         //Récupération des infos du mod :
         $repoDetails = getRepositoryDetails($modroot);
 
-        if ($mod_tag == 'dev') {
-            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/develop";
-        }elseif ($mod_tag == 'alpha')
-        {
-            $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['alpha'];
-        }
-        elseif ($mod_tag == 'beta')
-        {
+        if ($mod_tag == 'beta') {
             $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['beta'];
-        }else {
+        } else {
             $modzip = "https://api.github.com/repos/" . $repoDetails['owner'] . "/mod-" . $modroot . "/zipball/" . $version['release'];
         }
 
@@ -88,7 +82,6 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                     echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_errorversionogspy'] . '</span></td>' . "\n";
                     echo "\t" . '</tr>' . "\n";
                 }
-
             }
         }
     } else {
@@ -108,7 +101,6 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     echo "\t" . '</tr>' . "\n";
     echo '</table>' . "\n";
     echo '<br>' . "\n";
-
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
