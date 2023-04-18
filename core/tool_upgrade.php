@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate Tool upgrade File
  * @package [Mod] Autoupdate
@@ -25,12 +26,12 @@ if (!isset($pub_confirmed)) {
 
 if ($user_data['user_admin'] == 1) {
 
-    $toolroot = filter_var($pub_tool, FILTER_SANITIZE_STRING);
-    $tool_tag = filter_var($pub_tag, FILTER_SANITIZE_STRING);
+    $toolroot = filter_var($pub_tool);
+    $tool_tag = filter_var($pub_tag);
 
     $version = getRepositoryVersion('ogspy');
 
-    $target_version = $version[ $tool_tag ];
+    $target_version = $version[$tool_tag];
 
 
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
@@ -45,14 +46,10 @@ if ($user_data['user_admin'] == 1) {
             die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
 
-        if ($tool_tag == 'dev') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/develop";
-        }elseif ($tool_tag == 'alpha') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['alpha'];
-        }elseif ($tool_tag == 'beta') {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['beta'];
+        if ($tool_tag == 'beta') {
+            $toolzip = "https://github.com/OGSteam/" . $toolroot . "/releases/download/" . $version['beta'] . "/$toolroot-" . $version['beta'] . ".zip";
         } else {
-            $toolzip = "https://api.github.com/repos/OGSteam/" . $toolroot . "/zipball/" . $version['release'];
+            $toolzip = "https://github.com/OGSteam/" . $toolroot . "/releases/download/" . $version['release'] . "/$toolroot-" . $version['release'] . ".zip";
         }
 
         echo "\t" . '<tr>' . "\n";
@@ -64,7 +61,7 @@ if ($user_data['user_admin'] == 1) {
 
         if (file_exists('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
 
-            if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip') === TRUE) {
+            if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
@@ -74,26 +71,27 @@ if ($user_data['user_admin'] == 1) {
 
                 unlink("./mod/autoupdate/tmp/" . $toolroot . ".zip");
 
-                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot . "/*-" . $toolroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
+                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot, GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/" . $toolroot . "/" . $folder[5], ".");
+                rcopy("./mod/autoupdate/tmp/" . $toolroot, ".");
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
 
+
+
                 //On passe au script de mise à jour.
-                if (!is_writeable("./install")) {
+                if (!is_writable("./install")) {
                     die("Error: OGSpy install folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
                 }
 
                 chdir('./install'); //Passage dans le répertoire d'installation
                 $pub_verbose = false; //Paramétrage de la mise à jour
                 echo "\t" . '<tr>' . "\n";
+                require_once("version.php");
                 require_once("upgrade_to_latest.php"); // Mise à jour...
                 echo "\t" . '</tr>' . "\n";
                 chdir('..'); // Retour au répertoire par défaut.
                 //Supression du répertoire Install
                 rrmdir("./install");
-
-
 
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
@@ -103,7 +101,7 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
-            }else{
+            } else {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
@@ -126,7 +124,6 @@ if ($user_data['user_admin'] == 1) {
         echo "\t" . '</tr>' . "\n";
         echo '</table>' . "\n";
     }
-
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
@@ -135,4 +132,3 @@ echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
 echo '<br>' . "\n";
 echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
 require_once("views/page_tail.php");
-
