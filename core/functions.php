@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Autoupdate common functions
  * @package [Mod] Autoupdate
@@ -20,7 +21,8 @@ if (!defined('IN_SPYOGAME')) {
 /**
  * @return mixed
  */
-function get_installed_mod_list() {
+function get_installed_mod_list()
+{
 
     global $db;
     $sql = "SELECT title,root,version from " . TABLE_MOD;
@@ -69,7 +71,6 @@ function upgrade_ogspy_mod($mod)
             $maj = $lang['autoupdate_tableau_uptodateoff'] . "<br>\n<br>\n";
         }
         return $maj;
-
     } else {
         // Si le mod n'existe pas, on fait une installation
         if (file_exists("mod/" . $mod . "/install.php")) {
@@ -81,7 +82,6 @@ function upgrade_ogspy_mod($mod)
             $maj = $lang['autoupdate_tableau_installoff'] . "<br><br>";
         }
         return $maj;
-
     }
 }
 
@@ -119,14 +119,14 @@ function rcopy($src, $dst)
         }
         $files = scandir($src);
         foreach ($files as $file) {
-                    if ($file != "." && $file != "..") {
-                        rcopy("$src/$file", "$dst/$file");
-                    }
+            if ($file != "." && $file != "..") {
+                rcopy("$src/$file", "$dst/$file");
+            }
         }
-    } else if (file_exists($src)) {
+    } elseif (file_exists($src)) {
         copy($src, $dst);
     }
-    }
+}
 
 /**
  * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
@@ -151,7 +151,7 @@ function tableau($tableau, $type = "maj")
         if ($nom != "" && $explode[0] != $key) {
             if ($type == "maj") {
                 $etat = $lang['autoupdate_MaJ_uptodateok'];
-            } else if ($type == "down") {
+            } elseif ($type == "down") {
                 $etat = $lang['autoupdate_MaJ_downok'];
             }
             echo "\t" . '<tr>' . "\n";
@@ -183,15 +183,14 @@ function check_ogspy_version_bcopy($mod_folder)
 
     //Version Minimale OGSpy (Ligne 3)
     /** @var string $mod_required_ogspy */
-    if (isset($file[3]))
-    {
+    if (isset($file[3])) {
         $mod_required_ogspy = trim($file[3]);
         if (version_compare($mod_required_ogspy, $server_config["version"]) > 0) {
             log_("mod_erreur_txt_version", $mod_folder);
             return false;
         }
-    }else {
-        log_("mod_erreur_txt_warning",$mod_folder);
+    } else {
+        log_("mod_erreur_txt_warning", $mod_folder);
         return false;
     }
     return true;
@@ -220,31 +219,30 @@ function send_stats()
 
             $data_mod[] = $mod_details['root'];
         }
-            $data_mode_to_send = json_encode($data_mod);
+        $data_mode_to_send = json_encode($data_mod);
 
         //Statistiques concernant les membres
         $users_info = sizeof(user_statistic());
         //
         $db_size_info = db_size_info();
 
-            $link = "/statistiques/getstats/";
-            $link .= "?version=" . $server_config["version"];
-            $link .= "&nb_users=" . $users_info;
-            //Paramètres Serveur
-            $link .= "&db_size=" . urlencode($db_size_info["Server"]);
-            $link .= "&php_version=" . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;
-            // clef unique
-            $link .= "&server_since=" . $serveur_date;
-            $link .= "&server_key=" . $serveur_key;
-            // recuperation pays et univers du serveur
-            $link .= "&og_uni=" . $og_uni;
-            $link .= "&og_pays=" . $og_pays;
-            $link .= "&mod_list=" . $data_mode_to_send;
-        
-            $repo_link = 'https://darkcity.fr' . $link;
-            @copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
+        $link = "/statistiques/getstats/";
+        $link .= "?version=" . $server_config["version"];
+        $link .= "&nb_users=" . $users_info;
+        //Paramètres Serveur
+        $link .= "&db_size=" . urlencode($db_size_info["Server"]);
+        $link .= "&php_version=" . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;
+        // clef unique
+        $link .= "&server_since=" . $serveur_date;
+        $link .= "&server_key=" . $serveur_key;
+        // recuperation pays et univers du serveur
+        $link .= "&og_uni=" . $og_uni;
+        $link .= "&og_pays=" . $og_pays;
+        $link .= "&mod_list=" . $data_mode_to_send;
+
+        $repo_link = 'https://darkcity.fr' . $link;
+        @copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
     }
 
     //log_('debug',"Sending Statistics done");
 }
-
