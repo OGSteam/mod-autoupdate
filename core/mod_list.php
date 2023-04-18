@@ -115,11 +115,11 @@ function getRepositoryVersion($Reponame)
             foreach ($data as $tagged_release) {
 
                 if ($tagged_release['prerelease']) {
-                    if (empty($version['beta'])) {
+                    if (version_compare($tagged_release['tag_name'], $version['beta'], ">")) {
                         $version['beta'] = $tagged_release['tag_name'];
                     }
                 } else {
-                    if (empty($version['release'])) {
+                    if (version_compare($tagged_release['tag_name'], $version['release'], ">")) {
                         $version['release'] = $tagged_release['tag_name'];
                     }
                 }

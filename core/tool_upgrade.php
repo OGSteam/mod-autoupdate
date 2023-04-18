@@ -61,7 +61,7 @@ if ($user_data['user_admin'] == 1) {
 
         if (file_exists('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
 
-            if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip') === TRUE) {
+            if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
@@ -73,11 +73,13 @@ if ($user_data['user_admin'] == 1) {
 
                 $nom_répertoire = glob("./mod/autoupdate/tmp/" . $toolroot, GLOB_ONLYDIR); //On récupère le nom du répertoire
                 $folder = explode('/', $nom_répertoire[0]);
-                rcopy("./mod/autoupdate/tmp/" . $toolroot . "/" . $folder[4], ".");
+                rcopy("./mod/autoupdate/tmp/" . $toolroot, ".");
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
 
+
+
                 //On passe au script de mise à jour.
-                if (!is_writeable("./install")) {
+                if (!is_writable("./install")) {
                     die("Error: OGSpy install folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
                 }
 
