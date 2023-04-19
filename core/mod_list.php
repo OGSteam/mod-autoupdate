@@ -14,14 +14,21 @@ function getRepositorylist()
 {
 
     $mod_list = array();
+    $repoListFilename = './mod/autoupdate/tmp/repo_list.json';
 
 
     if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
         $mod_data = github_Request("https://api.github.com/orgs/ogsteam/repos?per_page=100");
-        file_put_contents('./mod/autoupdate/tmp/repo_list.json', $mod_data);
+        file_put_contents($repoListFilename, $mod_data);
         mod_set_option('LAST_REPO_LIST', time());
     }
-    $mod_file = file_get_contents('./mod/autoupdate/tmp/repo_list.json');
+
+    if (is_readable($repoListFilename)) {
+        $mod_file = file_get_contents($repoListFilename);
+    }else {
+        mod_set_option('LAST_REPO_LIST', 0);
+        return false;
+    }
 
     $data = json_decode($mod_file, true);
     //print_r($data);
@@ -68,16 +75,18 @@ function getRepositoryDetails($repoName)
 
     $liste_mods = getRepositorylist();
     //print_r($liste_mods);
-    foreach ($liste_mods as $mod) {
+    if (is_array($liste_mods)) {
+        foreach ($liste_mods as $mod) {
 
-        if ($mod['nom'] == $repoName) {
+            if ($mod['nom'] == $repoName) {
 
-            return array(
-                'nom' => $mod["nom"],
-                'description' => $mod["description"],
-                'resource_uri' => $mod["resource_uri"],
-                'owner' => $mod["owner"]
-            );
+                return array(
+                    'nom' => $mod["nom"],
+                    'description' => $mod["description"],
+                    'resource_uri' => $mod["resource_uri"],
+                    'owner' => $mod["owner"]
+                );
+            }
         }
     }
     return false;
@@ -218,6 +227,8 @@ function github_RequestToken()
             ]
         ]
     ];
+
+    $context = stream_context_create($opts);
 
     $data = file_get_contents('https://darkcity.fr/statistiques/collector/repolistkey', false, $context);
     return $data;
