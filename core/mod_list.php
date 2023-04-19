@@ -74,7 +74,6 @@ function getRepositoryDetails($repoName)
 {
 
     $liste_mods = getRepositorylist();
-    //print_r($liste_mods);
     if (is_array($liste_mods)) {
         foreach ($liste_mods as $mod) {
 

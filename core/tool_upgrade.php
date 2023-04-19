@@ -10,6 +10,8 @@
  * @version 2.1.9
  */
 
+ use Ogsteam\Ogspy\Model\Config_Model;
+
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
@@ -76,12 +78,16 @@ if ($user_data['user_admin'] == 1) {
                 rcopy("./mod/autoupdate/tmp/" . $toolroot, ".");
                 rrmdir("./mod/autoupdate/tmp/" . $toolroot);
 
-
-
                 //On passe au script de mise à jour.
                 if (!is_writable("./install")) {
                     die("Error: OGSpy install folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
                 }
+
+                //Disable Logs (Will not work due to chdir)
+                $Config_Model = new Config_Model();
+                $Config_Model->update_one(0, "debug_log");
+                $Config_Model->update_one(0, "log_phperror");
+                generate_config_cache();
 
                 chdir('./install'); //Passage dans le répertoire d'installation
                 $pub_verbose = false; //Paramétrage de la mise à jour
