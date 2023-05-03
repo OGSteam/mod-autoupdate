@@ -4,8 +4,8 @@
  * @package [Mod] Autoupdate
  * @subpackage i18n
  * @author Bartheleway <contactbarthe@g.q-le-site.webou.net>
- * @copyright Copyright &copy; 2016, http://ogsteam.fr/
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright Copyright &copy; 2016, https://ogsteam.eu/
+ * @license https://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
 
@@ -21,9 +21,9 @@ $lang['autoupdate_tableau_authormod'] = "Autor moda";
 $lang['autoupdate_tableau_descmod'] = "Opis";
 $lang['autoupdate_tableau_nametool'] = "Naziv alata";
 $lang['autoupdate_tableau_authtool'] = "Autor alata";
-$lang['autoupdate_tableau_modinstall'] = "Instalirani modovi - Pretraži za ažuriranja na OGSteam.fr";
-$lang['autoupdate_tableau_toolinstall'] = "Instalirani alati - Pretraži za ažuriranja na OGSteam.fr";
-$lang['autoupdate_tableau_modnoinstall'] = "Ne instalirani modovi - Pretraži za ažuriranja na OGSteam.fr";
+$lang['autoupdate_tableau_modinstall'] = "Instalirani modovi - Pretraži za ažuriranja na OGSteam.eu";
+$lang['autoupdate_tableau_toolinstall'] = "Instalirani alati - Pretraži za ažuriranja na OGSteam.eu";
+$lang['autoupdate_tableau_modnoinstall'] = "Ne instalirani modovi - Pretraži za ažuriranja na OGSteam.eu";
 $lang['autoupdate_tableau_version'] = "Instalirana verzija";
 $lang['autoupdate_tableau_versionSVN'] = "Posljednja dostupna verzija";
 $lang['autoupdate_tableau_versionAlpha'] = "Posljednja Alpha verzija";
