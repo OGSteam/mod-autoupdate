@@ -54,21 +54,19 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
         $bouton1 = "\t\t" . "<td class='og-button' onclick=\"window.location = 'index.php?action=autoupdate&sub=overview';\">";
 
         $bouton1 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
-        $bouton1 .= "</td>\n";
     } else {
         $bouton1 = "\t\t" . "<td class='og-button'";
         $bouton1 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
-        $bouton1 .= "</td>\n";
     }
+    $bouton1 .= "</td>\n";
     if ($sub != "down") {
         $bouton2 = "\t\t" . "<td class='og-button'  onclick=\"window.location = 'index.php?action=autoupdate&sub=down';\">";
         $bouton2 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
-        $bouton2 .= "</td>\n";
     } else {
         $bouton2 = "\t\t" . "<td class='og-button'";
         $bouton2 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
-        $bouton2 .= "</td>\n";
     }
+    $bouton2 .= "</td>\n";
 } else {
     $bouton1 = "";
     $bouton2 = "";
@@ -77,12 +75,11 @@ if ($user_data["user_admin"] == 1) {
     if ($sub != "admin") {
         $bouton3 = "\t\t" . "<td class='og-button' onclick=\"window.location = 'index.php?action=autoupdate&sub=admin';\">";
         $bouton3 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
-        $bouton3 .= "</td>\n";
     } else {
         $bouton3 = "\t\t" . "<td class='og-button'>";
         $bouton3 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
-        $bouton3 .= "</td>\n";
     }
+    $bouton3 .= "</td>\n";
 } else {
     $bouton3 = "";
 }

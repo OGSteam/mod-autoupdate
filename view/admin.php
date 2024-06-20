@@ -41,16 +41,30 @@ if (isset($pub_valid)) {
 
         <tr>
             <td><?php echo $lang['autoupdate_admin_beta']; ?><br /><?php echo $lang['autoupdate_admin_beta1']; ?></td>
-            <td><input type="radio" name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 1) ? 'checked' : ''; ?> value="1" /> <span style="font-size: large; ">|</span> <input type="radio" name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 0) ? 'checked' : ''; ?> value="0" /></td>
+            <td>
+                <label>
+                    <input type="radio" name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 1) ? 'checked' : ''; ?> value="1" />
+                </label>
+                <span>|</span>
+                <label>
+                    <input type="radio" name="majbeta" <?php echo (mod_get_option("MAJ_BETA") == 0) ? 'checked' : ''; ?> value="0" />
+                </label>
+            </td>
         </tr>
         <tr>
             <td><?php echo $lang['autoupdate_admin_frequency']; ?></td>
-            <td><input name="cycle" type="text" size="3" maxlength="2" value="<?php echo mod_get_option("CYCLEMAJ"); ?>">
+            <td>
+                <label>
+                    <input name="cycle" type="text" size="3" maxlength="2" value="<?php echo mod_get_option("CYCLEMAJ"); ?>">
+                </label>
             </td>
         </tr>
         <tr>
             <td><?php echo $lang['autoupdate_admin_githubtoken']; ?></td>
-            <td><input name="githubtoken" type="text" size="40" maxlength="40" value="<?php echo mod_get_option("GITHUBTOKEN"); ?>">
+            <td>
+                <label>
+                    <input name="githubtoken" type="text" size="40" maxlength="40" value="<?php echo mod_get_option("GITHUBTOKEN"); ?>">
+                </label>
             </td>
         </tr>
         <tr>
