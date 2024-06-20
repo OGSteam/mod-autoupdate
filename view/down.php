@@ -1,4 +1,5 @@
 <?php
+global $db, $lang, $user_data, $server_config, $installed_mods, $download_mod_list;
 
 /**
  * Autoupdate Downloader
@@ -31,25 +32,28 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     $download_mod_list = getRepositorylist();
 
 ?>
-    <table width='60%'>
+    <table class='og-table og-medium-table'>
+    <thead>
         <?php
         if (!is_writeable("./mod/")) {
-            echo "<tr><td class='c' colspan='100'><span style=\"color: red; \">" . $lang['autoupdate_tableau_error3'] . "</span></td></tr>";
+            echo "<tr><td  class='og-error' colspan='100'><span style=\"color: red; \">" . $lang['autoupdate_tableau_error3'] . "</span></td></tr>";
         }
 
         ?>
         <tr>
-            <td class='c' colspan='4'><?php echo $lang['autoupdate_tableau_modnoinstall']; ?></td>
+            <th colspan='100'><?php echo $lang['autoupdate_tableau_modnoinstall']; ?></th>
         </tr>
 
         <tr>
-            <td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
-            <td class='c'><?php echo $lang['autoupdate_tableau_descmod']; ?></td>
+            <th><?php echo $lang['autoupdate_tableau_namemod']; ?></th>
+            <th><?php echo $lang['autoupdate_tableau_descmod']; ?></th>
             <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
-                echo '<td class=\'c\' width = "100">' . $lang['autoupdate_tableau_action'] . '</td>';
+                echo '<th>' . $lang['autoupdate_tableau_action'] . '</th>';
             }
             ?>
         </tr>
+        </thead>
+        <tbody>
         <?php
         //
         foreach ($download_mod_list as $downloadmod) {
@@ -63,34 +67,43 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
                     $install = true;
                 }
             }
-            if ($install == false) {
+            if (!$install) {
                 $link = "<a href=\"?action=autoupdate&sub=mod_upgrade&mod=" . $cur_modname . "&tag=release\">" . $lang['autoupdate_tableau_install'] . "</a>";
                 echo "\t<tr>\n";
-                echo "\t\t<th>" . $cur_modname . "</th>\n";
-                echo "\t\t<th>" . $cur_description . "</th>\n";
-                echo "\t\t<th><span style=\"color: lime; \">" . $link . "</span></th>\n";
+                echo "\t\t<td>" . $cur_modname . "</td>\n";
+                echo "\t\t<td>" . $cur_description . "</td>\n";
+                echo "\t\t<td><span style=\"color: lime; \">" . $link . "</span></td>\n";
                 echo "\t</tr>\n";
             }
         }
         ?>
+        </tbody>
+    </table>
+    <table class='og-table og-medium-table'>
+    <thead>
         <tr>
-            <td class="c" colspan="100"><?php echo $lang['autoupdate_tableau_link']; ?></td>
+            <th colspan='100'><?= $lang['autoupdate_tableau_link']; ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="index.php?action=administration&subaction=mod"><?= $lang['autoupdate_tableau_pageadmin']; ?></a>
+            </td>
         </tr>
         <tr>
-            <th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a>
-            </th>
+            <td><a href="https://www.ogsteam.eu">ogsteam.eu</a></td>
         </tr>
-        <tr>
-            <th colspan="100"><a href="https://www.ogsteam.eu">ogsteam.eu</a></th>
-        </tr>
+     </tbody>
     </table><?php
         } else {
             die($lang['autoupdate_MaJ_rights']);
         }
-
-        echo '<br>' . "\n";
-        echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-        echo '<br>' . "\n";
-        echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
-
-        require_once("views/page_tail.php");
+?>
+<br>
+<div style="text-align: center">
+    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
+    <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
+</div>
+<?php
+require_once("views/page_tail.php");
+?>
