@@ -78,7 +78,7 @@ if (isset($pub_valid)) {
     <div style="text-align: center">
         AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
         <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?><br>
-        <a href="https://github.com/ogsteam/mod-autoupdate" target="_blank"><img src="./mod/autoupdate/img/GitHub-Mark-Light-32px.png"  alt="Github"/></a>
+        <a href="https://github.com/ogsteam/mod-autoupdate" target="_blank" rel="noopener"><img src="./mod/autoupdate/img/GitHub-Mark-Light-32px.png"  alt="Github"/></a>
     </div>
 
 
