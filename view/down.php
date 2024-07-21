@@ -32,7 +32,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
     $download_mod_list = getRepositorylist();
 
 ?>
-    <table class='og-table og-medium-table'>
+    <table class='og-table og-full-table'>
     <thead>
         <?php
         if (!is_writeable("./mod/")) {
@@ -79,7 +79,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         ?>
         </tbody>
     </table>
-    <table class='og-table og-medium-table'>
+    <table class='og-table og-full-table'>
     <thead>
         <tr>
             <th colspan='100'><?= $lang['autoupdate_tableau_link']; ?></th>

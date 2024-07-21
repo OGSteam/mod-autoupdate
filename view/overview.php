@@ -32,7 +32,7 @@ $installed_mods = get_installed_mod_list();
 
 <div style="text-align: center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
 <br />
-<table class='og-table og-medium-table'>
+<table class='og-table og-full-table'>
     <thead>
     <tr>
         <th colspan='100'><?php echo $lang['autoupdate_tableau_toolinstall']; ?></th>
@@ -93,7 +93,7 @@ $installed_mods = get_installed_mod_list();
     </tbody>
 </table>
 <br />
-<table class='og-table og-medium-table'>
+<table class='og-table og-full-table'>
     <thead>
     <tr>
         <th colspan="100"><?php echo $lang['autoupdate_tableau_modinstall']; ?></th>
@@ -184,7 +184,7 @@ $installed_mods = get_installed_mod_list();
         // Proposer le lien vers le panneau d'administration des modules
 
     ?>
-        <table class='og-table og-medium-table'>
+        <table class='og-table og-full-table'>
             <thead>
         <tr>
             <th colspan="100"><?php echo $lang['autoupdate_tableau_link']; ?></th>

@@ -49,55 +49,36 @@ if (!isset($pub_sub)) {
     $sub = $pub_sub;
 }
 
-if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
-    if ($sub != "overview") {
-        $bouton1 = "\t\t" . "<td class='og-button' onclick=\"window.location = 'index.php?action=autoupdate&sub=overview';\">";
-
-        $bouton1 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
-    } else {
-        $bouton1 = "\t\t" . "<td class='og-button'";
-        $bouton1 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_table'] . "</span>";
-    }
-    $bouton1 .= "</td>\n";
-    if ($sub != "down") {
-        $bouton2 = "\t\t" . "<td class='og-button'  onclick=\"window.location = 'index.php?action=autoupdate&sub=down';\">";
-        $bouton2 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
-    } else {
-        $bouton2 = "\t\t" . "<td class='og-button'";
-        $bouton2 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_down'] . "</span>";
-    }
-    $bouton2 .= "</td>\n";
-} else {
-    $bouton1 = "";
-    $bouton2 = "";
-}
-if ($user_data["user_admin"] == 1) {
-    if ($sub != "admin") {
-        $bouton3 = "\t\t" . "<td class='og-button' onclick=\"window.location = 'index.php?action=autoupdate&sub=admin';\">";
-        $bouton3 .= "<span style=\"color: lime; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
-    } else {
-        $bouton3 = "\t\t" . "<td class='og-button'>";
-        $bouton3 .= "<span style=\"color: #5CCCE8; \">" . $lang['autoupdate_autoupdate_admin'] . "</span>";
-    }
-    $bouton3 .= "</td>\n";
-} else {
-    $bouton3 = "";
-}
 ?>
+
 <div class="og-msg ">
     <h3 class="og-title">Autoupdate</h3>
     <p class="og-content">Autoupdate permet d'installer ou de mettre à jour vos modules OGSpy</p>
     <p class="og-content">Il permet aussi d'obtenir les préversions des modules ainsi que de soumettre des tickets à l'équipe de développement.</p>
 </div>
 
+<div class="nav-page-menu">
 
-<table class="og-table og-medium-table">
-    <tr>
-<?php
-        echo $bouton1 . $bouton2 . $bouton3;
-?>
-    </tr>
-</table>
+    <div class="nav-page-menu-item">
+        <a class="nav-page-menu-link" href='index.php?action=autoupdate&sub=overview'>
+            <?= $lang['autoupdate_autoupdate_table'] ?>
+        </a>
+    </div>
+    <div class="nav-page-menu-item">
+        <a class="nav-page-menu-link" href='index.php?action=autoupdate&sub=down'>
+            <?= $lang['autoupdate_autoupdate_down'] ?>
+        </a>
+    </div>
+    <?php if ($user_data["user_admin"] == 1) { ?>
+        <div class="nav-page-menu-item">
+            <a class="nav-page-menu-link" href='index.php?action=autoupdate&sub=admin'>
+                <?= $lang['autoupdate_autoupdate_admin'] ?>
+            </a>
+        </div>
+    <?php } ?>
+</div>
+
+
 <br>
 <?php
 if (!isset($pub_sub)) {

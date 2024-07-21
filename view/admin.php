@@ -28,7 +28,7 @@ if (isset($pub_valid)) {
 ?>
 <form action="index.php?action=autoupdate&sub=admin" method="post">
 
-<table class='og-table og-medium-table'>
+<table class='og-table og-full-table'>
     <thead>
     <tr>
         <th><?php echo $lang['autoupdate_admin_option']; ?></th>
