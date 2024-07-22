@@ -219,6 +219,6 @@ function github_RequestToken()
         ]
     ];
 
-    $data = file_get_contents('https://darkcity.fr/statistiques/collector/repolistkey', false, $context);
+    $data = @file_get_contents('https://darkcity.fr/statistiques/collector/repolistkey', false, $context);
     return $data;
 }
