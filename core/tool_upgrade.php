@@ -1,12 +1,13 @@
 <?php
+global $user_data, $lang;
 
 /**
  * Autoupdate Tool upgrade File
  * @package [Mod] Autoupdate
  * @subpackage main
  * @author DarkNoon <darknoon@darkcity.fr>
- * @copyright Copyright &copy; 2016, http://ogsteam.eu/
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @copyright Copyright &copy; 2016, https://ogsteam.eu/
+ * @license https://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 2.1.9
  */
 
@@ -107,6 +108,8 @@ if ($user_data['user_admin'] == 1) {
                 echo "\t" . '</tr>' . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
+                // Rechargement de la page
+                redirection("index.php");
             } else {
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
