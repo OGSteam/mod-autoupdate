@@ -1,37 +1,26 @@
 {
-    "name" : "ogsteam/mod-autoupdate",
-    "description" : "OGSpy module that helps you to keep latest versions for all OGSteam Tools",
-    "type" : "ogspy-mod",
-    "keywords" : [ "ogspy" ],
-    "license" : "GPL-2.0-only",
-    "authors" : [
+    "name": "ogsteam/mod-autoupdate",
+    "description": "OGSpy Mod : Manage your module collection",
+    "type": "library",
+    "license": "GPL-2.0-only",
+    "authors": [
         {
-            "name" : "DarkNoon",
-            "email" : "darknoon@darkcity.fr",
-            "homepage": "https://github.com/darknoon29",
-            "role" : "Lead Developer"
+            "name": "DarkNoon",
+            "email": "13015521+darknoon29@users.noreply.github.com"
         }
     ],
-    "require" : {
-        "php" : ">=7.0.0",
-        "ogsteam/ogspy" : ">=3.3.6"
+    "require": {
+      "php": ">=8.2",
+      "ext-mysqli": "*",
+      "ext-json": "*",
+      "ext-zlib": "*"
     },
-    "extra" : {
-            "install_script": "install.php",
-            "update_script": "update.php",
-            "uninstall_script": "uninstall.php",
-            "mod_title": "autoupdate",
-            "menu_title" : "AutoUpdate",
-            "action_name" : "autoupdate",
-            "folder_name" : "autoupdate",
-            "action_file" : "autoupdate.php",
-            "active" : true,
-            "admin" : true
-    },
-    "homepage" : "https://github.com/ogsteam/mod-autoupdate",
-    "support": {
-        "issues": "https://github.com/ogsteam/mod-autoupdate/issues",
-        "source": "https://github.com/ogsteam/mod-autoupdate/tree/master",
-         "chat" : "https://discord.gg/Azcb67b"
-    }
+    "require-dev": {
+    "phpunit/phpunit": "^10.5."
+  },
+  "scripts": {
+    "test": [
+      "phpunit"
+    ]
+  }
 }
