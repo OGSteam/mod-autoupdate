@@ -1,2 +1,4 @@
 *.json
 tmp/*
+/vendor/
+!/tmp/stats.answer
