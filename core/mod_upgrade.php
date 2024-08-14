@@ -1,5 +1,5 @@
 <?php
-
+global $db, $lang, $user_data, $server_config, $pub_confirmed, $pub_mod, $pub_tag, $pub_version, $pub_action, $pub_sub;
 /**
  * Autoupdate Tool Mod upgrade File
  * @package [Mod] Autoupdate
@@ -57,55 +57,61 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         file_put_contents('./mod/autoupdate/tmp/tarball.zip', $mod_file);
 
         if (file_exists('./mod/autoupdate/tmp/tarball.zip')) {
-            echo '<table align="center" style="width : 400px">' . "\n";
-            if ($zip->open('./mod/autoupdate/tmp/tarball.zip') === TRUE) {
+            echo "<table class='og-table og-full-table'>" . "\n";
+                echo "<thead>" . "\n";
+            if ($zip->open('./mod/autoupdate/tmp/tarball.zip')) {
                 echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
+                echo "\t\t" . '<th>' . $lang['autoupdate_MaJ_downok'] . '</th>' . "\n";
                 echo "\t" . '</tr>' . "\n";
-
+                echo "</thead>" . "\n";
                 $zip->extractTo("./mod/autoupdate/tmp/" . $modroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 unlink("./mod/autoupdate/tmp/tarball.zip");
-                $nom_répertoire = glob("./mod/autoupdate/tmp/" . $modroot . "/*-" . $modroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
-                $folder = explode('/', $nom_répertoire[0]);
+                $nom_repertoire = glob("./mod/autoupdate/tmp/" . $modroot . "/*-" . $modroot . "*", GLOB_ONLYDIR); //On récupère le nom du répertoire
+                $folder = explode('/', $nom_repertoire[0]);
 
-                if (check_ogspy_version_bcopy($modroot . "/" . $folder[5]) == true) {
+                if (check_ogspy_version_bcopy($modroot . "/" . $folder[5])) {
                     rcopy("./mod/autoupdate/tmp/" . $modroot . "/" . $folder[5], "./mod/" . $modroot); //Copie du répertoire dans le dossier des mods
                     rrmdir("./mod/autoupdate/tmp/" . $modroot);
+                    echo "<tbody>" . "\n";
                     echo "\t" . '<tr>' . "\n";
-                    echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
+                    echo "\t\t" . '<td>' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
                     echo "\t" . '</tr>' . "\n";
                     echo "\t" . '<tr>' . "\n";
-                    echo "\t\t" . '<td class="c">' . upgrade_ogspy_mod($modroot) . '</td>' . "\n";
+                    echo "\t\t" . '<td>' . upgrade_ogspy_mod($modroot) . '</td>' . "\n";
                 } else {
                     echo "\t" . '<tr>' . "\n";
-                    echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_errorversionogspy'] . '</span></td>' . "\n";
+                    echo "\t\t" . '<td><span style="color:red">' . $lang['autoupdate_MaJ_errorversionogspy'] . '</span></td>' . "\n";
                     echo "\t" . '</tr>' . "\n";
                 }
             }
         }
     } else {
-        echo '<table>' . "\n";
+        echo "<table class='og-table og-full-table'>" . "\n";
+        echo "<thead>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_wantupdate'] . $modroot . ' ' . $target_version . ' ?</td>' . "\n";
+        echo "\t\t" . '<th>' . $lang['autoupdate_MaJ_wantupdate'] . $modroot . ' ' . $target_version . ' ?</th>' . "\n";
         echo "\t" . '</tr>' . "\n";
+        echo "</thead>" . "\n";
+        echo "<tbody>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod=' . $modroot . '&tag=' . $mod_tag . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
+        echo "\t\t" . '<td><span class="og-button-small">' . ' <a href="index.php?action=autoupdate&sub=mod_upgrade&confirmed=yes&mod=' . $modroot . '&tag=' . $mod_tag . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></span></td>' . "\n";
         echo "\t" . '</tr>' . "\n";
-        echo "\t" . '<tr>' . "\n";
     }
-
-    echo "\t" . '</tr>' . "\n";
     echo "\t" . '<tr>' . "\n";
-    echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
+    echo "\t\t" . '<td><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
     echo "\t" . '</tr>' . "\n";
+    echo "</tbody>" . "\n";
     echo '</table>' . "\n";
     echo '<br>' . "\n";
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
-echo '<br>' . "\n";
-echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br>' . "\n";
-echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
+?>
+<div style="text-align: center">
+    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
+    <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
+</div>
+<?php
 require_once("views/page_tail.php");
+?>

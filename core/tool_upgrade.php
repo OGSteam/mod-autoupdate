@@ -1,5 +1,5 @@
 <?php
-global $user_data, $lang;
+global $user_data, $lang,$pub_confirmed,$pub_tool,$pub_tag,$pub_sub;
 
 /**
  * Autoupdate Tool upgrade File
@@ -39,12 +39,12 @@ if ($user_data['user_admin'] == 1) {
 
     if ($pub_sub == "tool_upgrade" && $pub_confirmed == "yes") {
 
-        echo '<table align="center" style="width : 400px">' . "\n";
-
+        echo "<table class='og-table og-full-table'>" . "\n";
+        echo "<thead>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_rightscheck'] . '</td>' . "\n";
+        echo "\t\t" . '<th>' . $lang['autoupdate_MaJ_rightscheck'] . '</th>' . "\n";
         echo "\t" . '</tr>' . "\n";
-
+        echo "</thead>" . "\n";
         if (!is_writeable(".")) {
             die("Error: OGSpy folder must be writeable (755) " . __FILE__ . "(Ligne: " . __LINE__ . ")");
         }
@@ -54,9 +54,9 @@ if ($user_data['user_admin'] == 1) {
         } else {
             $toolzip = "https://github.com/OGSteam/" . $toolroot . "/releases/download/" . $version['release'] . "/$toolroot-" . $version['release'] . ".zip";
         }
-
+        echo "<tbody>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_startdownload'] . '</td>' . "\n";
+        echo "\t\t" . '<td>' . $lang['autoupdate_MaJ_startdownload'] . '</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
 
         $tool_file = github_Request($toolzip);
@@ -64,9 +64,9 @@ if ($user_data['user_admin'] == 1) {
 
         if (file_exists('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
 
+            echo "\t" . '<tr>' . "\n";
             if ($zip->open('./mod/autoupdate/tmp/' . $toolroot . '.zip')) {
-                echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
+                echo "\t\t" . '<td>' . $lang['autoupdate_MaJ_downok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
 
                 $zip->extractTo("./mod/autoupdate/tmp/" . $toolroot . "/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
@@ -101,43 +101,51 @@ if ($user_data['user_admin'] == 1) {
                 rrmdir("./install");
 
                 echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
+                echo "\t\t" . '<td>' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
                 echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
+                echo "\t\t" . '<td><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
+                echo "</tbody>" . "\n";
                 echo '</table>' . "\n";
                 echo '<br>' . "\n";
                 // Rechargement de la page
                 redirection("index.php");
             } else {
-                echo "\t" . '<tr>' . "\n";
-                echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
+                echo "\t\t" . '<td><span style="color:red">' . $lang['autoupdate_MaJ_unzipnotok'] . '</span></td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
-                echo "\t" . '<tr>' . "\n";
+
             }
         }
     } else {
-        echo '<table>' . "\n";
+        echo "<table class='og-table og-full-table'>" . "\n";
+        echo "<thead>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c"><span style="color:red">' . $lang['autoupdate_MaJtool_wantbackup'] . '</span></td>' . "\n";
+        echo "\t\t" . '<th><span style="color:red">' . $lang['autoupdate_MaJtool_wantbackup'] . '</span></th>' . "\n";
         echo "\t" . '</tr>' . "\n";
+        echo "</thead>" . "\n";
+        echo "<tbody>" . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c">' . $lang['autoupdate_MaJtool_wantupdate'] . $toolroot . ' ' . $target_version . ' ?</td>' . "\n";
+        echo "\t\t" . '<td>' . $lang['autoupdate_MaJtool_wantupdate'] . $toolroot . ' ' . $target_version . ' ?</td>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
         echo "\t\t" . '<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool=' . $toolroot . '&tag=' . $tool_tag . '">' . $lang['autoupdate_MaJ_linkupdate'] . '</a></th>' . "\n";
         echo "\t" . '</tr>' . "\n";
         echo "\t" . '<tr>' . "\n";
-        echo "\t\t" . '<td class="c"><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
+        echo "\t\t" . '<td><a href=index.php?action=autoupdate>' . $lang['autoupdate_tableau_back'] . '</a></td>' . "\n";
         echo "\t" . '</tr>' . "\n";
+        echo "</tbody>" . "\n";
         echo '</table>' . "\n";
     }
 } else {
     echo $lang['autoupdate_MaJ_rights'];
 }
-echo '<br>' . "\n";
-echo 'AutoUpdate ' . $lang['autoupdate_version'] . ' ' . versionmod();
-echo '<br>' . "\n";
-echo $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway.</div>';
+?>
+<div style="text-align: center">
+    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
+    <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
+</div>
+<?php
 require_once("views/page_tail.php");
+?>
+
