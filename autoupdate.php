@@ -33,10 +33,6 @@ require_once("mod/autoupdate/core/functions.php");
 require_once("mod/autoupdate/lang/" . $ui_lang . "/lang_autoupdate.php");
 require_once("mod/autoupdate/core/mod_list.php");
 
-
-/* Envoi des statistiques du serveur */
-send_stats();
-
 /**
  * Défini où se trouve le fichier qui contient les dernières versions des mods.
  * Différent suivant si allow_url_fopen est activé ou non. S'il n'est pas activé, on va chercher le fichier en local après téléchargement.

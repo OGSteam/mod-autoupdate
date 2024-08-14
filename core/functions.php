@@ -129,14 +129,15 @@ function rcopy($src, $dst)
 }
 
 /**
- * Affiche sous forme de tableau table à 2 colonne les fichiers du zip et son état.
+ * Affiche sous forme de tableau table à 2 colonnes les fichiers du zip et son état.
  * @param $tableau
  * @param string $type
  */
-function tableau($tableau, $type = "maj")
+function tableau($tableau, string $type = "maj")
 {
     global $lang;
-    while (list($key, $valeur) = each($tableau)) {
+
+    foreach ($tableau as $key => $value) {
         $fichier = explode("/", $key);
         $nom = "";
         for ($i = 1; $i < count($fichier); $i++) {
@@ -194,55 +195,4 @@ function check_ogspy_version_bcopy($mod_folder)
         return false;
     }
     return true;
-}
-
-function send_stats()
-{
-    global $server_config, $serveur_key, $serveur_date;
-
-    if (time() > (mod_get_option('LAST_REPO_LIST') + 3600 * mod_get_option('CYCLEMAJ'))) {
-        // recuperation du pays et de l univers du serveur
-        $og_pays = "NA";
-        $og_uni = "NA";
-        if (isset($server_config["xtense_universe"])) {
-            //pattern de recherche
-            $pattern = "#https:\/\/s([0-9]{1,3})-([a-z]{2,3})\.ogame\.gameforge.com#";
-            if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
-                $og_pays = $retour[2]; // seconde capture
-                $og_uni = $retour[1]; // premiere capture
-            }
-        }
-        //Liste des modules installés
-
-        $installed_mod_list = get_installed_mod_list();
-        foreach ($installed_mod_list as $mod_details) {
-
-            $data_mod[] = $mod_details['root'];
-        }
-        $data_mode_to_send = json_encode($data_mod);
-
-        //Statistiques concernant les membres
-        $users_info = sizeof(user_statistic());
-        //
-        $db_size_info = db_size_info();
-
-        $link = "/statistiques/getstats/";
-        $link .= "?version=" . $server_config["version"];
-        $link .= "&nb_users=" . $users_info;
-        //Paramètres Serveur
-        $link .= "&db_size=" . urlencode($db_size_info["Server"]);
-        $link .= "&php_version=" . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;
-        // clef unique
-        $link .= "&server_since=" . $serveur_date;
-        $link .= "&server_key=" . $serveur_key;
-        // recuperation pays et univers du serveur
-        $link .= "&og_uni=" . $og_uni;
-        $link .= "&og_pays=" . $og_pays;
-        $link .= "&mod_list=" . $data_mode_to_send;
-
-        $repo_link = 'https://darkcity.fr' . $link;
-        @copy($repo_link, './mod/autoupdate/tmp/stats.answer'); //Will be used later
-    }
-
-    //log_('debug',"Sending Statistics done");
 }
