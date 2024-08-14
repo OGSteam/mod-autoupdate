@@ -229,6 +229,6 @@ function github_RequestToken()
 
     $context = stream_context_create($opts);
 
-    $data = file_get_contents('https://darkcity.fr/statistiques/collector/repolistkey', false, $context);
-    return $data;
+    return @file_get_contents('https://darkcity.fr/gh/577ec00a-a9ce-4c8d-b0aa-bfefc6c8ef9d.autoupdate', false, $context);
+
 }
