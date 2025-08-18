@@ -97,7 +97,7 @@ function getRepositoryDetails($repoName)
  */
 function getRepositoryVersion($Reponame)
 {
-    global $lang;
+    global $lang, $log;
 
     $version = array('release' => '' , 'beta' => '');
 
@@ -140,11 +140,11 @@ function getRepositoryVersion($Reponame)
             }
             return $version; // Récupération du Tag de version
         } else {
-            log_('mod', $lang['autoupdate_tableau_error4'] . ' ' . $Reponame);
+            $log->error($lang['autoupdate_tableau_error4'] . ' ' . $Reponame);
             return "-1";
         }
     } else {
-        log_('mod', $lang['autoupdate_tableau_error1'] . $Reponame);
+        $log->error($lang['autoupdate_tableau_error1'] . $Reponame);
         mod_del_option('LAST_MOD_UPDATE-' . $Reponame);
         return "-1";
     }
@@ -158,7 +158,7 @@ function getRepositoryVersion($Reponame)
 function github_Request($request)
 {
 
-    global $lang;
+    global $lang, $log;
     $userdefinedtoken = '';
     $tokensource = '';
 
@@ -175,12 +175,12 @@ function github_Request($request)
     }
 
     if (strlen($userdefinedtoken) !== 40) {
-        log_('mod', $lang['autoupdate_tableau_errortoken'] . ' ' . $request);
+        $log->error($lang['autoupdate_tableau_errortoken'] . ' ' . $request);
         $userdefinedtoken = '';
         $tokensource = 'none';
     }
 
-    //log_('debug', "Autoupdate Token source $tokensource");
+    //$log->debug("Autoupdate Token source $tokensource");
 
     $opts = [
         'http' => [
@@ -204,7 +204,7 @@ function github_Request($request)
     $data = @file_get_contents($request, false, $context);
 
     if ($data === false) {
-        log_('mod', "[ERROR_github_Request] Unable to get: " . $request);
+        $log->error("[ERROR_github_Request] Unable to get: " . $request);
         mod_set_option('GITHUBTOKEN', 'UnauthorizedToken', 'autoupdate');
         echo ('Error Data, Please Retry with a new Token (See Settings)');
         exit();

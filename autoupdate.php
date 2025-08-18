@@ -65,7 +65,7 @@ if (!isset($pub_sub)) {
             <?= $lang['autoupdate_autoupdate_down'] ?>
         </a>
     </div>
-    <?php if ($user_data["user_admin"] == 1) { ?>
+    <?php if ($user_data["admin"] == 1) { ?>
         <div class="nav-page-menu-item">
             <a class="nav-page-menu-link" href='index.php?action=autoupdate&sub=admin'>
                 <?= $lang['autoupdate_autoupdate_admin'] ?>
@@ -99,3 +99,13 @@ switch ($sub) {
         include('view/admin.php');
         break;
 }
+?>
+    <div style="text-align: center">
+        AutoUpdate<br>
+        <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?><br>
+        <a href="https://github.com/ogsteam/mod-autoupdate" target="_blank" rel="noopener"><img src="./mod/autoupdate/img/GitHub-Mark-Light-32px.png"  alt="Github"/></a>
+    </div>
+
+
+<?php
+require_once("views/page_tail.php");

@@ -42,7 +42,7 @@ $installed_mods = get_installed_mod_list();
         <th><?php echo $lang['autoupdate_tableau_authtool']; ?></th>
         <th><?php echo $lang['autoupdate_tableau_version']; ?></th>
         <th><?php echo $lang['autoupdate_tableau_versionSVN']; ?></th>
-        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+        <?php if ($user_data['admin'] == 1 || $user_data['coadmin'] == 1) {
             echo '<th>' . $lang['autoupdate_tableau_action'] . '</th>';
         }
         if (mod_get_option("MAJ_BETA") == 1) {
@@ -103,7 +103,7 @@ $installed_mods = get_installed_mod_list();
         <th><?php echo $lang['autoupdate_tableau_authormod']; ?></th>
         <th><?php echo $lang['autoupdate_tableau_version']; ?></th>
         <th><?php echo $lang['autoupdate_tableau_versionSVN']; ?></th>
-        <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+        <?php if ($user_data['admin'] == 1 || $user_data['coadmin'] == 1) {
             echo '<th>' . $lang['autoupdate_tableau_action'] . '</th>';
         }
         ?>
@@ -140,7 +140,7 @@ $installed_mods = get_installed_mod_list();
                 echo "\t\t<td>" . $cur_version['release'] . "</td>\n";
             }
 
-            if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+            if ($user_data['admin'] == 1 || $user_data['coadmin'] == 1) {
                 echo "\t\t<td>";
                 if (!is_writeable("./mod/" . $installed_mods[$i]['root'] . "/")) {
                     echo "<a title='Pas de droit en écriture sur:./mod/" . $installed_mods[$i]['root'] . "'><span style=\"color: red; \">(RO)</span></a>";
@@ -180,7 +180,7 @@ $installed_mods = get_installed_mod_list();
 </table>
     <?php
 
-    if ($user_data["user_admin"] == 1 || $user_data['user_coadmin'] == 1) {
+    if ($user_data["admin"] == 1 || $user_data['coadmin'] == 1) {
         // Proposer le lien vers le panneau d'administration des modules
 
     ?>
@@ -204,11 +204,3 @@ $installed_mods = get_installed_mod_list();
     }
     ?>
 </table>
-<br>
-<div style="text-align: center">
-    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
-    <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
-</div>
-<?php
-require_once("views/page_tail.php");
-?>

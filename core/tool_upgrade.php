@@ -21,13 +21,13 @@ if (!defined('IN_SPYOGAME')) {
  */
 $zip = new ZipArchive;
 
-require_once("views/page_header.php");
+require("views/page_header.php");
 
 if (!isset($pub_confirmed)) {
     $pub_confirmed = "no";
 }
 
-if ($user_data['user_admin'] == 1) {
+if ($user_data['admin'] == 1) {
 
     $toolroot = filter_var($pub_tool);
     $tool_tag = filter_var($pub_tag);
@@ -142,10 +142,9 @@ if ($user_data['user_admin'] == 1) {
 }
 ?>
 <div style="text-align: center">
-    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
+    AutoUpdate<br>
     <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
 </div>
 <?php
 require_once("views/page_tail.php");
 ?>
-

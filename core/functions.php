@@ -14,12 +14,10 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-//require_once("mod/autoupdate/mod_list.php");
-
-/*On récupère la liste des mods installés*/
-
 /**
- * @return mixed
+ * Returns an array of installed mods with their name, root, and version.
+ * Each entry in the array is an associative array with keys 'name', 'root', and 'version'.
+ * @return array
  */
 function get_installed_mod_list()
 {
@@ -36,8 +34,9 @@ function get_installed_mod_list()
     }
     return $installed_mods;
 }
+
 /**
- *Récupère la version du mod
+ *
  */
 function versionmod()
 {
@@ -54,7 +53,7 @@ function versionmod()
  */
 function upgrade_ogspy_mod($mod)
 {
-    global $db, $lang;
+    global $db, $lang, $log;
     // On vérifie si le mod est déjà installé
     $check = "SELECT title FROM " . TABLE_MOD . " WHERE root='" . $mod . "'";
     $query_check = $db->sql_query($check);
@@ -65,9 +64,19 @@ function upgrade_ogspy_mod($mod)
         if (file_exists("mod/" . $mod . "/update.php")) {
             require_once("mod/" . $mod . "/update.php");
             generate_mod_cache();
-            log_("mod_update", $mod);
+            $log->info("Module update completed successfully", [
+                'module' => $mod,
+                'action' => 'mod_update',
+                'update_file' => "mod/" . $mod . "/update.php"
+            ]);
             $maj = $lang['autoupdate_tableau_uptodateok'] . "<br>\n<br>\n";
         } else {
+            $log->warning("Module update file missing", [
+                'module' => $mod,
+                'action' => 'mod_update_failed',
+                'missing_file' => "mod/" . $mod . "/update.php",
+                'message' => "Update file update.php not found for module {$mod}"
+            ]);
             $maj = $lang['autoupdate_tableau_uptodateoff'] . "<br>\n<br>\n";
         }
         return $maj;
@@ -76,9 +85,19 @@ function upgrade_ogspy_mod($mod)
         if (file_exists("mod/" . $mod . "/install.php")) {
             require_once("mod/" . $mod . "/install.php");
             generate_all_cache();
-            log_("mod_install", $mod);
+            $log->info("Module installation completed successfully", [
+                'module' => $mod,
+                'action' => 'mod_install',
+                'install_file' => "mod/" . $mod . "/install.php"
+            ]);
             $maj = $lang['autoupdate_tableau_installok'] . "<br><br>";
         } else {
+            $log->warning("Module installation file missing", [
+                'module' => $mod,
+                'action' => 'mod_install_failed',
+                'missing_file' => "mod/" . $mod . "/install.php",
+                'message' => "Install file install.php not found for module {$mod}"
+            ]);
             $maj = $lang['autoupdate_tableau_installoff'] . "<br><br>";
         }
         return $maj;
@@ -171,13 +190,19 @@ function tableau($tableau, string $type = "maj")
  */
 function check_ogspy_version_bcopy($mod_folder)
 {
-    global $server_config;
+    global $server_config, $log;
     // verification sur le fichier .txt
     $filename = 'mod/autoupdate/tmp/' . $mod_folder . '/version.txt';
 
     // On récupère les données du fichier version.txt
 
     if (!file_exists($filename)) {
+        $log->error("Module version.txt file missing", [
+            'module' => $mod_folder,
+            'expected_file' => $filename,
+            'action' => 'check_ogspy_version_bcopy',
+            'message' => "Version file version.txt not found in temporary directory for module {$mod_folder}"
+        ]);
         return false;
     }
     $file = file($filename);
@@ -187,11 +212,23 @@ function check_ogspy_version_bcopy($mod_folder)
     if (isset($file[3])) {
         $mod_required_ogspy = trim($file[3]);
         if (version_compare($mod_required_ogspy, $server_config["version"]) > 0) {
-            log_("mod_erreur_txt_version", $mod_folder);
+            $log->error("Insufficient OGSpy version for module", [
+                'module' => $mod_folder,
+                'required_version' => $mod_required_ogspy,
+                'current_version' => $server_config["version"],
+                'action' => 'check_ogspy_version_bcopy',
+                'message' => "Module {$mod_folder} requires OGSpy version {$mod_required_ogspy} minimum, but current version is {$server_config['version']}"
+            ]);
             return false;
         }
     } else {
-        log_("mod_erreur_txt_warning", $mod_folder);
+        $log->warning("Invalid or incomplete module version.txt file", [
+            'module' => $mod_folder,
+            'file' => $filename,
+            'issue' => 'missing_line_3_version',
+            'action' => 'check_ogspy_version_bcopy',
+            'message' => "Version.txt file for module {$mod_folder} does not contain required OGSpy minimum version on line 3"
+        ]);
         return false;
     }
     return true;
