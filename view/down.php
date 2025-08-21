@@ -16,7 +16,7 @@ if (!defined('IN_SPYOGAME')) {
 }
 require_once("views/page_header.php");
 
-if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+if ($user_data['admin'] == 1 || $user_data['coadmin'] == 1) {
 
     // Récupérer la liste des modules installés
     $sql = "SELECT title,root,version from " . TABLE_MOD;
@@ -47,7 +47,7 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         <tr>
             <th><?php echo $lang['autoupdate_tableau_namemod']; ?></th>
             <th><?php echo $lang['autoupdate_tableau_descmod']; ?></th>
-            <?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
+            <?php if ($user_data['admin'] == 1 || $user_data['coadmin'] == 1) {
                 echo '<th>' . $lang['autoupdate_tableau_action'] . '</th>';
             }
             ?>
@@ -98,12 +98,4 @@ if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) {
         } else {
             die($lang['autoupdate_MaJ_rights']);
         }
-?>
-<br>
-<div style="text-align: center">
-    AutoUpdate <?= $lang['autoupdate_version'] . ' ' . versionmod(); ?><br>
-    <?= $lang['autoupdate_createdby'] . ' Jibus ' . $lang['autoupdate_and'] . ' Bartheleway' ?>
-</div>
-<?php
-require_once("views/page_tail.php");
 ?>
