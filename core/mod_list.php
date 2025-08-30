@@ -14,10 +14,17 @@ function getRepositorylist()
 {
 
     $mod_list = array();
+
+    if (!is_dir('./mod/autoupdate/tmp')) {
+        mkdir('./mod/autoupdate/tmp', 0750, true);
+    }
+
     $repoListFilename = './mod/autoupdate/tmp/repo_list.json';
 
+    $lastRepoList = intval(mod_get_option('LAST_REPO_LIST'));
+    $cycleMaj = intval(mod_get_option('CYCLEMAJ'));
 
-    if (time() > (mod_get_option('LAST_REPO_LIST') + mod_get_option('CYCLEMAJ') * 3600)) {
+    if (time() > ($lastRepoList + $cycleMaj * 3600)) {
         $mod_data = github_Request("https://api.github.com/orgs/ogsteam/repos?per_page=100");
         file_put_contents($repoListFilename, $mod_data);
         mod_set_option('LAST_REPO_LIST', time());
@@ -53,7 +60,7 @@ function getRepositorylist()
                 'resource_uri' => $mod["resource_uri"],
                 'owner' => $mod["owner"]
             );
-        } elseif (preg_match("/^ogspy$/", $mod["nom"])) {
+        } elseif ($mod["nom"] == "ogspy") {
             $mod_list[] = array(
                 'nom' => $mod["nom"],
                 'description' => $mod["description"],
