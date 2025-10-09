@@ -1,4 +1,4 @@
 autoupdate
-3.2.5
+3.2.6
 autoupdate,AutoUpdate,autoupdate,autoupdate,autoupdate.php,1,1
 4.0.0

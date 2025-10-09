@@ -90,15 +90,47 @@ if ($user_data['admin'] == 1) {
                 $Config_Model->update_one(0, "log_phperror");
                 generate_config_cache();
 
-                chdir('./install'); //Passage dans le répertoire d'installation
-                $pub_verbose = false; //Paramétrage de la mise à jour
+                // Utilisation du système moderne de mise à jour d'OGSpy
                 echo "\t" . '<tr>' . "\n";
-                require_once("version.php");
-                require_once("upgrade_to_latest.php"); // Mise à jour...
+                echo "\t\t" . '<td>Démarrage de la mise à jour automatique...</td>' . "\n";
                 echo "\t" . '</tr>' . "\n";
-                chdir('..'); // Retour au répertoire par défaut.
-                //Supression du répertoire Install
-                rrmdir("./install");
+                
+                try {
+                    // Chargement des classes modernes d'OGSpy
+                    require_once('./install/MigrationManager.php');
+                    require_once('./install/AutoUpgradeManager.php');
+                    require_once('./install/version.php');
+                    
+                    // Utilisation du logger global d'OGSpy
+                    global $log, $db, $table_prefix;
+                    
+                    // Création du gestionnaire de mise à jour automatique
+                    $autoUpgradeManager = new AutoUpgradeManager($db, $log, $table_prefix);
+                    
+                    // Exécution de la mise à jour
+                    $result = $autoUpgradeManager->performUpgrade();
+                    
+                    echo "\t" . '<tr>' . "\n";
+                    if ($result['success']) {
+                        echo "\t\t" . '<td style="color: green;">✓ ' . $lang['autoupdate_MaJ_uptodateok'] . '</td>' . "\n";
+                        if (!empty($result['migrations_applied'])) {
+                            echo "\t" . '</tr>' . "\n";
+                            echo "\t" . '<tr>' . "\n";
+                            echo "\t\t" . '<td>Migrations appliquées: ' . implode(', ', $result['migrations_applied']) . '</td>' . "\n";
+                        }
+                    } else {
+                        echo "\t\t" . '<td style="color: red;">❌ Erreur: ' . htmlspecialchars($result['error']) . '</td>' . "\n";
+                    }
+                    echo "\t" . '</tr>' . "\n";
+                    
+                } catch (Exception $e) {
+                    echo "\t" . '<tr>' . "\n";
+                    echo "\t\t" . '<td style="color: red;">❌ Erreur lors de la mise à jour: ' . htmlspecialchars($e->getMessage()) . '</td>' . "\n";
+                    echo "\t" . '</tr>' . "\n";
+                }
+                
+                // Note: Le répertoire install/ n'est plus supprimé car il contient
+                // les classes modernes de gestion des migrations (MigrationManager, AutoUpgradeManager)
 
                 echo "\t" . '<tr>' . "\n";
                 echo "\t\t" . '<td>' . $lang['autoupdate_MaJ_unzipok'] . '</td>' . "\n";
