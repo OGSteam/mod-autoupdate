@@ -108,18 +108,18 @@ if ($user_data['admin'] == 1) {
                     $autoUpgradeManager = new AutoUpgradeManager($db, $log, $table_prefix);
                     
                     // Exécution de la mise à jour
-                    $result = $autoUpgradeManager->performUpgrade();
+                    $result = $autoUpgradeManager->checkAndUpgrade();
                     
                     echo "\t" . '<tr>' . "\n";
-                    if ($result['success']) {
+                    if ($result['status'] === 'success') {
                         echo "\t\t" . '<td style="color: green;">✓ ' . $lang['autoupdate_MaJ_uptodateok'] . '</td>' . "\n";
-                        if (!empty($result['migrations_applied'])) {
+                        if (!empty($result['migrations_count'])) {
                             echo "\t" . '</tr>' . "\n";
                             echo "\t" . '<tr>' . "\n";
-                            echo "\t\t" . '<td>Migrations appliquées: ' . implode(', ', $result['migrations_applied']) . '</td>' . "\n";
+                            echo "\t\t" . '<td>Migrations appliquées: ' . (int)$result['migrations_count'] . '</td>' . "\n";
                         }
                     } else {
-                        echo "\t\t" . '<td style="color: red;">❌ Erreur: ' . htmlspecialchars($result['error']) . '</td>' . "\n";
+                        echo "\t\t" . '<td style="color: red;">❌ Erreur: ' . htmlspecialchars($result['message'] ?? 'Erreur inconnue') . '</td>' . "\n";
                     }
                     echo "\t" . '</tr>' . "\n";
                     
